@@ -4,7 +4,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 
 // Pages
-import Home from "./pages";
+//import Home from "./pages";
+import Maintenance from "./pages/Maintenance";
 import LandingPage from "./pages/LandingPage";
 
 // Styles
@@ -17,7 +18,7 @@ root.render(
   <React.StrictMode>
     <Router>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Maintenance />} />
         <Route path="/concept" element={<LandingPage />} />
         {/*<Route path="*" element={<ErrorPage />} />*/}
       </Routes>
