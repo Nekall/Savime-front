@@ -1,0 +1,68 @@
+.__newsletter {
+    background-color: $secondary-bg;
+    border-radius: 8px;
+    margin: 35px 5%;
+    padding: 80px 80px;
+
+    h3{
+        font-size: 30px;
+        margin: 15px 0;
+    }
+
+    h5{
+        font-size: 26px;
+        font-weight: initial;
+        margin: 15px 0;
+    }
+
+    p{
+        margin: 15px 0;
+    }
+
+    .__input{
+        background-color: $primary-bg;
+        width: 455px;
+        border-radius: 6px;
+        padding: 4px;
+        margin: 40px auto 20px auto;
+
+        span{
+            color: $blue-color;
+        }
+
+        span{
+            padding-left: 15px;
+        }
+
+        input[type=email]{
+            padding-left: 30px;
+            outline: none;
+            width: 300px;
+            height: 40px;
+            font-size: 20px;
+            background-color: transparent;
+            border: none;
+            color: #ffffff;
+
+            &:placeholder-shown{
+                color: #ffffff;
+            }
+        }
+
+
+        input[type=submit]{
+            height: 40px;
+            width: 80px;
+            font-size: 20px;
+            color: #ffffff;
+            background-color: $blue-color;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+
+            &:hover{
+                opacity: 0.7;
+            }
+        }
+    }
+}

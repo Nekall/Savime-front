@@ -1,5 +1,5 @@
 // Components
-import Navbar from "../components/Navbar";
+import Navbar from "../components/LandingPage/Navbar";
 
 const Home = () => <div>
     <Navbar />

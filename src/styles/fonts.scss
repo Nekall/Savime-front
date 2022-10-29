@@ -1,9 +1,7 @@
 @font-face {
-    font-family: "Lobster";
-    src: font-files("../assets/fonts/Lobster.ttf") format("truetype");
-}
-
-@font-face {
-    font-family: "Raleway";
-    src: font-files("../assets/fonts/Raleway.ttf") format("truetype");
+    font-family: "FiraSans";
+    src: font-files("../assets/fonts/FiraSans.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
 }
