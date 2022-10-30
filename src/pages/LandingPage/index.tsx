@@ -25,7 +25,7 @@ const LandingPage = () => {
     );
 
     if (document.title === "Savime") {
-      document.title = "Time-saver for teams & companies ";
+      document.title = "Time-saver for teams & companies";
     } else {
       document.title = "Savime";
     }
