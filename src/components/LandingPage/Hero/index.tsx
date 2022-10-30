@@ -1,21 +1,25 @@
-// Assets
-import hero from "../../../assets/images/landingPage/helena-lopes-unsplash.jpg";
-
 // Styles
 import styles from "./styles.module.scss";
 
-const Footer = () => {
+interface Props {
+  image: string;
+  alt: string;
+  button: string;
+  title: Array<string>;
+}
+
+const Hero = ({ image, alt, button, title }: Props) => {
   return (
     <div className={styles.__hero}>
       <div className={styles.__image}>
-        <img src={hero} alt="" />
-        <h1>The time-saver <span>for teams & companies</span></h1>
+        <img src={image} alt={alt} />
+        <h1>{title[0]}<span>{title[1]}</span></h1>
       </div>
       <div className={styles.__button}>
-          <div><button>CallToAction</button></div>
+          <div><button>{button}</button></div>
         </div>
     </div>
   );
 };
 
-export default Footer;
+export default Hero;

@@ -1,22 +1,22 @@
-// Assets
-//import github from "../../assets/images/icon/github.svg";
-
 // Styles
 import styles from "./styles.module.scss";
 
-const Newsletter = () => {
+interface Props {
+  title: string;
+  lead: string; 
+  content: string;
+  anchor?: string;
+}
+
+const Newsletter = ({ title, lead, content, anchor }: Props) => {
   return (
-    <div className={styles.__newsletter}>
-      <h3>Fusce qui nulla</h3>
+    <div id={anchor} className={styles.__newsletter}>
+      <h3>{title}</h3>
       <h5>
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Numquam quis
-        facere accusantium itaque, dignissimos ipsam amet cumque nobis iste
-        possimus dolore.
+        {lead}
       </h5>
       <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut aspernatur
-        ad voluptates suscipit eaque libero omnis et repudiandae exercitationem.
-        Eos quas accusantium dicta a culpa.
+        {content}
       </p>
       <div className={styles.__input}>
         <span>@ |</span>
