@@ -4,7 +4,9 @@ const Dashboard = () => {
     .then((data) => console.log(data))
     .catch((err) => console.error(err));
 
-  return <>DASHBOARD</>;
+  return (
+    <>DASHBOARD</>
+  );
 };
 
 export default Dashboard;

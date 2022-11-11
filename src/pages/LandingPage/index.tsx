@@ -2,11 +2,11 @@ import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 // Components
-import Navbar from "../../components/LandingPage/Navbar";
-import Footer from "../../components/LandingPage/Footer";
-import Newsletter from "../../components/LandingPage/Newsletter";
-import Banner from "../../components/LandingPage/Banner";
-import Hero from "../../components/LandingPage/Hero";
+import Navbar from "../../components/_LandingPage/Navbar";
+import Footer from "../../components/_LandingPage/Footer";
+import Newsletter from "../../components/_LandingPage/Newsletter";
+import Banner from "../../components/_LandingPage/Banner";
+import Hero from "../../components/_LandingPage/Hero";
 
 import banner1 from "../../assets/images/landingPage/brooke-cagle-unsplash.jpg";
 import banner2 from "../../assets/images/landingPage/john-schnobrich-unsplash.jpg";
