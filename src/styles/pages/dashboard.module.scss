@@ -1,0 +1,47 @@
+.__dashboard {
+    display: grid;
+    grid-template-columns: 0.5fr 1.5fr;
+    grid-template-rows: 0.2fr 1.8fr;
+    gap: 0px 0px;
+    grid-template-areas:
+        "header header"
+        "side_menu view";
+    height: 100vh;
+
+    .__header {
+        grid-area: header;
+        border: solid 1px red;
+    }
+
+    .__side_menu {
+        grid-area: side_menu;
+        border: solid 1px blue;
+    }
+
+    .__view {
+        grid-area: view;
+        border: solid 1px green;
+        overflow: scroll;
+        padding-right: 40px;
+
+        .__content{
+            //border: solid 1px white;
+            border-radius: 70px 70px 0 0;
+            height: 100vh;
+            background-color: $secondary-bg;
+            padding: 40px;
+
+            .__rounded{
+                background-color: $primary-bg;
+                height: 80px;
+                display: block;
+                position: -webkit-sticky;
+                position: sticky;
+                margin: -40px;
+                //z-index: 50;
+                top: 0;
+                clip-path: polygon(0 0, 0 100%, 10% 0, 90% 0, 100% 100%, 100% 0);
+            }
+        }
+    }
+}
