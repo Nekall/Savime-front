@@ -25,7 +25,7 @@ const Dashboard = () => {
       <section className={styles.__view}>
         <div className={styles.__content}>
           <span className={styles.__rounded}></span>
-          <h3>VIEW</h3>
+          <h3>...Content...</h3>
         </div>
       </section>
     </div>

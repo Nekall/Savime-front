@@ -1,0 +1,43 @@
+.__input {
+    .__icon {
+        display: inline-block;
+        margin-right: -40px;
+        color: $blue-color;
+        position: relative;
+        opacity: 0.6;
+
+        &.__green{
+            filter: invert(53%) sepia(25%) saturate(728%) hue-rotate(54deg) brightness(97%) contrast(90%); // #6a994e
+        }
+
+        &.__red{
+            filter: invert(13%) sepia(95%) saturate(6937%) hue-rotate(346deg) brightness(85%) contrast(100%); // #d90429
+        }
+    }
+
+    .__field {
+        background-color: $primary-bg;
+        color: #fff;
+        border: none;
+        border-radius: 6px;
+        padding: 10px 0 10px 50px;
+        margin: 10px 0;
+        width: 300px;
+        height: 30px;
+        font-size: 18px;
+        outline: none;
+    }
+
+    .__submit {
+        background-color: $blue-color;
+        color: #fff;
+        font-weight: bold;
+        border: none;
+        padding: 8px 28px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 18px;
+        margin: 10px 0;
+    }
+
+}

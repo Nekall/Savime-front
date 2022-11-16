@@ -1,3 +1,14 @@
+// Styles
+import styles from "../../styles/pages/forgotPassword.module.scss";
+
+// Assets
+import avatar from "../../assets/images/icon/avatar.svg";
+
+// Components
+import Input from "../../components/Input";
+import Link from "../../components/Link";
+import Wrapper from "../../components/Wrapper";
+
 const ForgotPassword = () => {
   fetch(``)
     .then((response) => response.json())
@@ -5,12 +16,16 @@ const ForgotPassword = () => {
     .catch((err) => console.error(err));
 
   return (
-    <div>
-      <div>
-        <input type="text" placeholder="email@email.com" />
-        <button>Demande de réinitialisation de mon mot de passe</button>
-        <a href="/">Accueil</a>
-      </div>
+    <div className={styles.__forgot_password}>
+      <Wrapper position={"center"}>
+        <img className={styles.__avatar} src={avatar} alt="avatar" />
+        <Input type={"email"} placeholder={"email@email.com"} />
+        <Input
+          type={"submit"}
+          value={"Demande de réinitialisation de mon mot de passe"}
+        />
+        <Link name={"Retour à l'accueil"} target={"/"} />
+      </Wrapper>
     </div>
   );
 };
