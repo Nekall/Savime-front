@@ -13,6 +13,8 @@ interface Props {
   required?: boolean;
   placeholder?: string;
   value?: string;
+  onClick?: () => void;
+  onChange?: any;
 }
 
 const Input = ({
@@ -22,6 +24,8 @@ const Input = ({
   required,
   placeholder,
   value,
+  onClick,
+  onChange,
 }: Props) => {
   return (
     <div className={styles.__input}>
@@ -32,6 +36,8 @@ const Input = ({
         type={type}
         placeholder={placeholder}
         value={value}
+        onClick={onClick}
+        onChange={onChange}
       />
     </div>
   );
