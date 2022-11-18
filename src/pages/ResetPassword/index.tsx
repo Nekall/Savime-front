@@ -5,9 +5,10 @@ import styles from "../../styles/pages/resetPassword.module.scss";
 import avatar from "../../assets/images/icon/avatar.svg";
 
 // Components
+import Wrapper from "../../components/Wrapper";
+import Header from "../../components/Header";
 import Input from "../../components/Input";
 import Link from "../../components/Link";
-import Wrapper from "../../components/Wrapper";
 
 const ResetPassword = () => {
   fetch(``)
@@ -17,6 +18,7 @@ const ResetPassword = () => {
 
   return (
     <div className={styles.__reset_password}>
+      <Header />
       <Wrapper position={"center"}>
         <img className={styles.__avatar} src={avatar} alt="avatar" />
         <Input type={"password"} placeholder={"Nouveau mot de passe"} />

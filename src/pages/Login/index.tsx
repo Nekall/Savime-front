@@ -8,14 +8,13 @@ import styles from "../../styles/pages/login.module.scss";
 import avatar from "../../assets/images/icon/avatar.svg";
 
 // Components
+import Wrapper from "../../components/Wrapper";
+import Header from "../../components/Header";
 import Input from "../../components/Input";
 import Link from "../../components/Link";
-import Wrapper from "../../components/Wrapper";
 
 // Helpers
 import { loginValidators } from "../../helpers/validators";
-
-console.log(process.env.REACT_APP_BACKEND_URL);
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -78,6 +77,7 @@ const Login = () => {
 
   return (
     <div className={styles.__login}>
+      <Header />
       <Wrapper position={"right"}>
         <img className={styles.__avatar} src={avatar} alt="avatar" />
         <Input

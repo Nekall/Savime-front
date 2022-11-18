@@ -3,6 +3,7 @@ import { toast } from 'react-toastify';
 
 // Components
 import Wrapper from "../../components/Wrapper";
+import Header from "../../components/Header";
 import Input from "../../components/Input";
 import Link from "../../components/Link";
 
@@ -88,6 +89,7 @@ const Signup = () => {
 
   return (
     <div className={styles.__signup}>
+      <Header />
       <Wrapper position={"left"}>
         <img className={styles.__avatar} src={avatar} alt="avatar" />
         <Input
