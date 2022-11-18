@@ -5,6 +5,7 @@
         color: $blue-color;
         position: relative;
         opacity: 0.6;
+        filter: invert(58%) sepia(42%) saturate(5919%) hue-rotate(210deg) brightness(100%) contrast(94%); // #6781f7
 
         &.__green{
             filter: invert(53%) sepia(25%) saturate(728%) hue-rotate(54deg) brightness(97%) contrast(90%); // #6a994e
