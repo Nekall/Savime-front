@@ -6,6 +6,8 @@ import envelope from "../../assets/images/icon/envelope.svg";
 import lock from "../../assets/images/icon/lock.svg";
 
 interface Props {
+  error?: any;
+  success?: any;
   type: string;
   label?: string;
   minlength?: number;
@@ -20,6 +22,8 @@ interface Props {
 }
 
 const Input = ({
+  error,
+  success,
   type,
   minlength,
   maxlength,
@@ -33,8 +37,8 @@ const Input = ({
 }: Props) => {
   return (
     <div className={styles.__input}>
-      { type !== "submit" && (
-        <div className={`${styles.__icon}`}>
+      {type !== "submit" && (
+        <div className={`${styles.__icon} ${error ? styles.__red : ""}`}>
           <img
             src={
               icon

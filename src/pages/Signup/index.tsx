@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { toast } from 'react-toastify';
+import { useNavigate } from "react-router-dom";
 
 // Components
 import Wrapper from "../../components/Wrapper";
@@ -22,17 +23,27 @@ const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [errors, setErrors] = useState({
+    noErrors: false,
+    firstname: "",
+    lastname: "",
+    email: "",
+    password: "",
+  });
+  const navigateTo = useNavigate();
+
 
   const signup = () => {
-    if (
+    setErrors(
       signUpValidators({
-        firstname: "firstName",
-        lastname: "lastName",
+        firstname,
+        lastname,
         email,
         password,
         confirmPassword,
-      }).noErrors
-    ) {
+      })
+    );
+    if (errors.noErrors) {
       fetch(`${process.env.REACT_APP_BACKEND_URL}/employees`, {
         method: "POST",
         headers: {
@@ -50,7 +61,6 @@ const Signup = () => {
         .then((data) => {
           console.log(data);
           if (data.success) {
-            // redirect to login
             toast.success('Votre compte a bien été créé !', {
               position: "bottom-center",
               autoClose: 4000,
@@ -60,6 +70,7 @@ const Signup = () => {
               draggable: true,
               theme: "dark",
               });
+              navigateTo('/connexion')
             }else{
               toast.error(data.message, {
                 position: "bottom-center",
@@ -93,6 +104,7 @@ const Signup = () => {
       <Wrapper position={"left"}>
         <img className={styles.__avatar} src={avatar} alt="avatar" />
         <Input
+          error={errors.noErrors && errors.firstname ? false : errors.firstname}
           icon={avatar}
           alt={"avatar"}
           type={"text"}
@@ -101,6 +113,7 @@ const Signup = () => {
           onChange={(e: any) => setFirstname(e.currentTarget.value)}
         />
         <Input
+          error={errors.noErrors && errors.lastname ? false : errors.lastname}
           icon={avatar}
           alt={"avatar"}
           type={"text"}
@@ -109,18 +122,21 @@ const Signup = () => {
           onChange={(e: any) => setLastname(e.currentTarget.value)}
         />
         <Input
+          error={errors.noErrors && errors.email ? false : errors.email}
           type={"email"}
           placeholder={"email@email.com"}
           value={email}
           onChange={(e: any) => setEmail(e.currentTarget.value)}
         />
         <Input
+          error={errors.noErrors && errors.password ? false : errors.password}
           type={"password"}
           placeholder={"Mot de passe"}
           value={password}
           onChange={(e: any) => setPassword(e.currentTarget.value)}
         />
         <Input
+          error={errors.noErrors && errors.password ? false : errors.password}
           type={"password"}
           placeholder={"Confirmation du mot de passe"}
           value={confirmPassword}

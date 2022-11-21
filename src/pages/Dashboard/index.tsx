@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+
 // Components
 import MiniProfile from "../../components/MiniProfile";
 import SideMenu from "../../components/SideMenu";
@@ -7,10 +9,20 @@ import Navbar from "../../components/Navbar";
 import styles from "../../styles/pages/dashboard.module.scss";
 
 const Dashboard = () => {
-  fetch(``)
+  const [employee, setEmployee] = useState();
+
+  const getUserData = () => {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/employees/10`)
     .then((response) => response.json())
-    .then((data) => console.log(data))
+    .then((data) => setEmployee(data.employee))
     .catch((err) => console.error(err));
+  }
+
+  useEffect(() => {
+    //getUserData();
+  }, []);
+
+  console.log(employee);
 
   return (
     <div className={styles.__dashboard}>

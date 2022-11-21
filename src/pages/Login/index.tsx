@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { toast } from 'react-toastify';
+import { useNavigate } from "react-router-dom";
 
 // Styles
 import styles from "../../styles/pages/login.module.scss";
@@ -20,10 +21,16 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [checked, setChecked] = useState(false);
+  const [errors, setErrors] = useState({
+    noErrors: false,
+    email: "",
+    password: "",
+  });
+  const navigateTo = useNavigate();
 
   const login = () => {
-    console.log(loginValidators({ email, password }));
-    if (loginValidators({ email, password }).noErrors) {
+    setErrors(loginValidators({ email, password }));
+    if (errors.noErrors) {
       fetch(`${process.env.REACT_APP_BACKEND_URL}/${checked? "managers" : "employees"}/login`, {
         method: "POST",
         headers: {
@@ -37,7 +44,7 @@ const Login = () => {
           if (data.success) {
           // localStorage.setItem("token", data.token);
           // redux store
-          toast.success('Vous êtes connecter !', {
+          toast.success('Vous êtes connecté !', {
             position: "bottom-center",
             autoClose: 4000,
             hideProgressBar: false,
@@ -46,6 +53,7 @@ const Login = () => {
             draggable: true,
             theme: "dark",
             });
+            navigateTo('/tableau-de-bord')
           }else{
             toast.error(data.message, {
               position: "bottom-center",
@@ -73,7 +81,8 @@ const Login = () => {
     }
   };
 
-  console.log(checked);
+  console.log('OUT', errors)
+
 
   return (
     <div className={styles.__login}>
@@ -81,12 +90,14 @@ const Login = () => {
       <Wrapper position={"right"}>
         <img className={styles.__avatar} src={avatar} alt="avatar" />
         <Input
+          error={errors.noErrors && errors.email ? false : errors.email}
           type={"email"}
           placeholder={"email@email.com"}
           value={email}
           onChange={(e: any) => setEmail(e.currentTarget.value)}
         />
         <Input
+          error={errors.noErrors && errors.password ? false : errors.password}
           type={"password"}
           placeholder={"Mot de passe"}
           value={password}
