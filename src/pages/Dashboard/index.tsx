@@ -22,8 +22,6 @@ const Dashboard = () => {
     //getUserData();
   }, []);
 
-  console.log(employee);
-
   return (
     <div className={styles.__dashboard}>
       <section className={styles.__header}>

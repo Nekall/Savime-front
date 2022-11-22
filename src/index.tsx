@@ -31,7 +31,7 @@ root.render(
         <Route path="/inscription" element={<Signup />} />
         <Route path="/tableau-de-bord" element={<Dashboard />} />
         <Route path="/mot-de-passe-oublie" element={<ForgotPassword />} />
-        <Route path="/reinitialisation-mot-de-passe" element={<ResetPassword />} />
+        <Route path="/reinitialisation-mot-de-passe/:token" element={<ResetPassword />} />
         {/*<Route path="*" element={<ErrorPage />} />*/}
       </Routes>
     </Router>

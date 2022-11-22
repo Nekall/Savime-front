@@ -40,7 +40,7 @@ const Login = () => {
       })
         .then((response) => response.json())
         .then((data) => {
-          console.log(data);
+          // console.log(data);
           if (data.success) {
           // localStorage.setItem("token", data.token);
           // redux store
@@ -80,9 +80,6 @@ const Login = () => {
         });
     }
   };
-
-  console.log('OUT', errors)
-
 
   return (
     <div className={styles.__login}>
