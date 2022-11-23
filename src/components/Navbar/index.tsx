@@ -1,3 +1,5 @@
+import { useNavigate } from "react-router-dom";
+import { v4 as uuidv4 } from "uuid";
 import { useState } from "react";
 
 // Styles
@@ -13,16 +15,23 @@ import envelopeOpen from "../../assets/images/icon/envelope-open.svg";
 
 const Navbar = () => {
     const [envelopeState, setEnvelopeState] = useState(envelopeClosed);
+    const navigateTo = useNavigate();
 
     return(
         <div className={styles.__navbar}>
             <img className={styles.__logo} src={logo} alt="logo " />
             <div className={styles.__menu}>
-                <a href="#">Lorem ipsum</a>
-                <a href="#">Dolor sit</a>
-                <a href="#">Sit dolores</a>
-                <a href="#">Adipisicing amet</a>
-                <a href="#">Dignissimos</a>
+                {[
+                    { target: "#", name: "Lorem ipsum" },
+                    { target: "#", name: "Dolor sit" },
+                    { target: "#", name: "Sit dolores" },
+                    { target: "#", name: "Adipisicing amet" },
+                    { target: "#", name: "Dignissimos" },
+                ].map((link)=>{
+                    return(
+                        <a key={uuidv4()} href={link.target} >{link.name}</a>
+                    )
+                })}
             </div>
             <div className={styles.__shortcut}>
                 <button className={styles.__chat} onClick={()=>{console.log("Chat")}}><img src={chat} alt="chat" /></button>
@@ -30,7 +39,7 @@ const Navbar = () => {
                 <button className={styles.__gear} onClick={()=>{console.log("Settings")}}><img src={gear} alt="gear" /></button>
             </div>
             <div className={styles.__disconnect}>
-                <button onClick={()=>{console.log("Logout")}}>Déconnexion <img src={exit} alt="logout" /></button>
+                <button onClick={()=>{navigateTo("/connexion")}}>Déconnexion <img src={exit} alt="logout" /></button>
             </div>
         </div>
     )
