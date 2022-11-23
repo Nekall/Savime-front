@@ -44,7 +44,7 @@ const Login = () => {
           if (data.success) {
           // localStorage.setItem("token", data.token);
           // redux store
-          toast.success('Vous êtes connecté !', {
+          toast.success("Vous êtes connecté !", {
             position: "bottom-center",
             autoClose: 4000,
             hideProgressBar: false,
@@ -68,7 +68,7 @@ const Login = () => {
         })
         .catch((err) => {
           console.error(err)
-          toast.error('Une erreur est survenue...', {
+          toast.error("Une erreur est survenue. Contactez support@savime.tech", {
             position: "bottom-center",
             autoClose: 4000,
             hideProgressBar: false,

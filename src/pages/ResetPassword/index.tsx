@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 
 // Styles
 import styles from "../../styles/pages/resetPassword.module.scss";
@@ -17,6 +18,7 @@ const ResetPassword = () => {
   const { token } = useParams();
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const navigateTo = useNavigate();
 
   const resetPassword = () => {
     fetch(
@@ -33,8 +35,43 @@ const ResetPassword = () => {
       }
     )
       .then((response) => response.json())
-      .then((data) => console.log(data))
-      .catch((err) => console.error(err));
+      .then((data) => {
+        console.log(data);
+        if (data.success) {
+          toast.success("Votre mot de passe a été reinitialisé avec succès !", {
+            position: "bottom-center",
+            autoClose: 4000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            theme: "dark",
+          });
+          navigateTo("/connexion");
+        } else {
+          toast.error(data.message, {
+            position: "bottom-center",
+            autoClose: 4000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            theme: "dark",
+          });
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+        toast.error("Une erreur est survenue. Contactez support@savime.tech", {
+          position: "bottom-center",
+          autoClose: 4000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          theme: "dark",
+        });
+      });
   };
 
   return (

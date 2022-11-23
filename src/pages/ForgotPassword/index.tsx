@@ -1,6 +1,6 @@
 import { useState } from "react";
-//import { toast } from 'react-toastify';
-//import { useNavigate } from "react-router-dom";
+import { toast } from 'react-toastify';
+import { useNavigate } from "react-router-dom";
 
 // Styles
 import styles from "../../styles/pages/forgotPassword.module.scss";
@@ -16,7 +16,7 @@ import Link from "../../components/Link";
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
-  //const [emailSend, setEmailSend] = useState("");
+  const navigateTo = useNavigate();
 
   const sendMail = () => {
     fetch(`${process.env.REACT_APP_BACKEND_URL}/employees/forgot-password`, {
@@ -29,10 +29,43 @@ const ForgotPassword = () => {
       }),
     })
     .then((response) => response.json())
-    .then((data) => { 
+    .then((data) => {
       console.log(data);
+      if (data.success) {
+        toast.success("Le mail de réinitialisation vous été envoyé !", {
+          position: "bottom-center",
+          autoClose: 4000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          theme: "dark",
+          });
+          navigateTo('/connexion')
+        }else{
+          toast.error(data.message, {
+            position: "bottom-center",
+            autoClose: 4000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            theme: "dark",
+            });
+        }
     })
-    .catch((err) => console.error(err));
+    .catch((err) => {
+      console.error(err)
+      toast.error("Une erreur est survenue. Contactez support@savime.tech", {
+        position: "bottom-center",
+        autoClose: 4000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "dark",
+        });
+    });
   };
 
   return (

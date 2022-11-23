@@ -60,7 +60,7 @@ const Signup = () => {
         .then((response) => response.json())
         .then((data) => {
           if (data.success) {
-            toast.success('Votre compte a bien été créé !', {
+            toast.success("Votre compte a bien été créé !", {
               position: "bottom-center",
               autoClose: 4000,
               hideProgressBar: false,
@@ -84,7 +84,7 @@ const Signup = () => {
         })
         .catch((err) => {
           console.error(err)
-          toast.error('Une erreur est survenue...', {
+          toast.error("Une erreur est survenue. Contactez support@savime.tech", {
             position: "bottom-center",
             autoClose: 4000,
             hideProgressBar: false,
