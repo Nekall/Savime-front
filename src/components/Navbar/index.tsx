@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import { useState } from "react";
+import { useSetRecoilState } from "recoil";
 
 // Styles
 import styles from "./styles.module.scss";
@@ -13,9 +14,28 @@ import exit from "../../assets/images/icon/exit.svg";
 import envelopeClosed from "../../assets/images/icon/envelope-closed.svg";
 import envelopeOpen from "../../assets/images/icon/envelope-open.svg";
 
+// Atoms
+import { tokenState, userDataState } from "../../atoms/user";
+
 const Navbar = () => {
     const [envelopeState, setEnvelopeState] = useState(envelopeClosed);
     const navigateTo = useNavigate();
+    const setUserData = useSetRecoilState(userDataState);
+    const setToken = useSetRecoilState(tokenState);
+
+    const disconnect = () => {
+        navigateTo("/connexion");
+        setUserData({
+            id: null,
+            firstname: null,
+            lastname: null,
+            email: null,
+            job: null,
+          });
+          setToken(null)
+        localStorage.removeItem("__svm_token");
+        localStorage.removeItem("__svm_user");
+    }
 
     return(
         <div className={styles.__navbar}>
@@ -39,7 +59,7 @@ const Navbar = () => {
                 <button className={styles.__gear} onClick={()=>{console.log("Settings")}}><img src={gear} alt="gear" /></button>
             </div>
             <div className={styles.__disconnect}>
-                <button onClick={()=>{navigateTo("/connexion")}}>Déconnexion <img src={exit} alt="logout" /></button>
+                <button onClick={()=>disconnect()}>Déconnexion <img src={exit} alt="logout" /></button>
             </div>
         </div>
     )

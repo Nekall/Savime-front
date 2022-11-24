@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { toast } from 'react-toastify';
 import { useNavigate } from "react-router-dom";
+import { useSetRecoilState } from "recoil";
 
 // Styles
 import styles from "../../styles/pages/login.module.scss";
@@ -17,6 +18,9 @@ import Link from "../../components/Link";
 // Helpers
 import { loginValidators } from "../../helpers/validators";
 
+// Atoms
+import { tokenState, userDataState } from "../../atoms/user";
+
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -27,6 +31,8 @@ const Login = () => {
     password: "",
   });
   const navigateTo = useNavigate();
+  const setUserData = useSetRecoilState(userDataState);
+  const setToken = useSetRecoilState(tokenState);
 
   const login = () => {
     setErrors(loginValidators({ email, password }));
@@ -40,10 +46,38 @@ const Login = () => {
       })
         .then((response) => response.json())
         .then((data) => {
-          // console.log(data);
+          console.log(data);
           if (data.success) {
-          // localStorage.setItem("token", data.token);
-          // redux store
+            const { token, data: user } = data;
+            const { verified } = user;
+
+            if(!verified){
+              return toast.info("Votre compte n'est pas vérifier.", {
+                position: "bottom-center",
+                autoClose: 8000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                theme: "dark",
+              });
+            }
+
+          const userObj = { "id": user.id, "firstname": user.firstname, "lastname": user.lastname, "email": user.email };
+
+          localStorage.setItem("__svm_token", token);
+          localStorage.setItem("__svm_user", JSON.stringify(userObj));
+
+          // recoil store
+          setUserData({
+            id: user.id,
+            firstname: user.firstname,
+            lastname: user.lastname,
+            email: user.email,
+            job: user.job,
+          });
+          setToken(token)
+
           toast.success("Vous êtes connecté !", {
             position: "bottom-center",
             autoClose: 4000,

@@ -1,3 +1,5 @@
+import { useNavigate } from "react-router-dom";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { useEffect, useState } from "react";
 
 // Components
@@ -8,19 +10,20 @@ import Navbar from "../../components/Navbar";
 // Styles
 import styles from "../../styles/pages/dashboard.module.scss";
 
+// Atoms
+import { tokenState, userDataState } from "../../atoms/user";
+
 const Dashboard = () => {
+  const navigateTo = useNavigate();
   const [employee, setEmployee] = useState();
+  const token = useRecoilValue(tokenState);
+  const [userData, setUserData] = useRecoilState(userDataState);
+  const { firstname, lastname, email, job } = userData;
+  console.log("userData", userData);
 
-  const getUserData = () => {
-    fetch(`${process.env.REACT_APP_BACKEND_URL}/employees/10`)
-    .then((response) => response.json())
-    .then((data) => setEmployee(data.employee))
-    .catch((err) => console.error(err));
+  if(!token){
+    navigateTo("/connexion"); // Replace by private route !
   }
-
-  useEffect(() => {
-    //getUserData();
-  }, []);
 
   return (
     <div className={styles.__dashboard}>
@@ -28,7 +31,7 @@ const Dashboard = () => {
         <Navbar />
       </section>
       <section className={styles.__side_menu}>
-        <MiniProfile />
+        <MiniProfile firstname={firstname} lastname={lastname} email={email} job={job} />
         <hr />
         <SideMenu />
       </section>

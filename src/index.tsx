@@ -1,8 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { RecoilRoot } from "recoil";
 
 // Pages
 //import Home from "./pages";
@@ -22,18 +23,23 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <ToastContainer />
-    <Router>
-      <Routes>
-        <Route path="/" element={<Maintenance />} />
-        <Route path="/concept" element={<LandingPage />} />
-        <Route path="/connexion" element={<Login />} />
-        <Route path="/inscription" element={<Signup />} />
-        <Route path="/tableau-de-bord" element={<Dashboard />} />
-        <Route path="/mot-de-passe-oublie" element={<ForgotPassword />} />
-        <Route path="/reinitialisation-mot-de-passe/:token" element={<ResetPassword />} />
-        {/*<Route path="*" element={<ErrorPage />} />*/}
-      </Routes>
-    </Router>
+    <RecoilRoot>
+      <ToastContainer />
+      <Router>
+        <Routes>
+          <Route path="/" element={<Maintenance />} />
+          <Route path="/concept" element={<LandingPage />} />
+          <Route path="/connexion" element={<Login />} />
+          <Route path="/inscription" element={<Signup />} />
+          <Route path="/tableau-de-bord" element={<Dashboard />} />
+          <Route path="/mot-de-passe-oublie" element={<ForgotPassword />} />
+          <Route
+            path="/reinitialisation-mot-de-passe/:token"
+            element={<ResetPassword />}
+          />
+          {/*<Route path="*" element={<ErrorPage />} />*/}
+        </Routes>
+      </Router>
+    </RecoilRoot>
   </React.StrictMode>
 );
