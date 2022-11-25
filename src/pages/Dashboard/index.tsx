@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useRecoilState, useRecoilValue } from "recoil";
-import { useEffect, useState } from "react";
+import { useRecoilValue } from "recoil";
 
 // Components
 import MiniProfile from "../../components/MiniProfile";
@@ -15,9 +14,8 @@ import { tokenState, userDataState } from "../../atoms/user";
 
 const Dashboard = () => {
   const navigateTo = useNavigate();
-  const [employee, setEmployee] = useState();
   const token = useRecoilValue(tokenState);
-  const [userData, setUserData] = useRecoilState(userDataState);
+  const userData = useRecoilValue(userDataState);
   const { firstname, lastname, email, job } = userData;
   console.log("userData", userData);
 

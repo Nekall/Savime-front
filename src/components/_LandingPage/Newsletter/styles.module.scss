@@ -50,7 +50,7 @@
         }
 
 
-        input[type=submit]{
+        .__send_button{
             height: 40px;
             width: 80px;
             font-size: 20px;
@@ -65,4 +65,36 @@
             }
         }
     }
+
+    .__paper_plane{
+        margin-bottom: -5px;
+        -webkit-animation: slide-out-right 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+        animation: slide-out-right 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+    }
 }
+
+@-webkit-keyframes slide-out-right {
+    0% {
+      -webkit-transform: translateX(-200px);
+              transform: translateX(-200px);
+      opacity: 1;
+    }
+    100% {
+      -webkit-transform: translateX(380px);
+              transform: translateX(380px);
+      opacity: 0;
+    }
+  }
+  @keyframes slide-out-right {
+    0% {
+      -webkit-transform: translateX(-200px);
+              transform: translateX(-200px);
+      opacity: 1;
+    }
+    100% {
+      -webkit-transform: translateX(380px);
+              transform: translateX(380px);
+      opacity: 0;
+    }
+  }
+  

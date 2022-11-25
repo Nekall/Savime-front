@@ -37,7 +37,7 @@ const Input = ({
 }: Props) => {
   return (
     <div className={styles.__input}>
-      {type !== "submit" && (
+      {type !== "submit" && type !== "textArea" && (
         <div className={`${styles.__icon} ${error ? styles.__red : ""}`}>
           <img
             src={
@@ -62,14 +62,21 @@ const Input = ({
           |
         </div>
       )}
-      <input
-        className={type === "submit" ? styles.__submit : styles.__field}
-        type={type}
-        placeholder={placeholder}
+      {type === "textArea" ? (
+        <textarea placeholder={placeholder}
         value={value}
-        onClick={onClick}
         onChange={onChange}
-      />
+        ></textarea>
+      ) : (
+        <input
+          className={type === "submit" ? styles.__submit : styles.__field}
+          type={type}
+          placeholder={placeholder}
+          value={value}
+          onClick={onClick}
+          onChange={onChange}
+        />
+      )}
     </div>
   );
 };
