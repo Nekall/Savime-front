@@ -19,7 +19,8 @@ const Dashboard = () => {
   const { firstname, lastname, email, job } = userData;
   console.log("userData", userData);
 
-  if(!token){
+  console.log("TOKEN", token);
+  if(token === null){
     navigateTo("/connexion"); // Replace by private route !
   }
 
