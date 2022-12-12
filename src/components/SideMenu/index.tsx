@@ -1,3 +1,5 @@
+import React, { useState } from 'react';
+import Calendar from 'react-calendar';
 import { SetStateAction } from "react";
 import { v4 as uuidv4 } from "uuid";
 
@@ -10,17 +12,28 @@ import paperPlane from "../../assets/images/icon/paper-plane.svg";
 
 // Styles
 import styles from "./styles.module.scss";
+import 'react-calendar/dist/Calendar.css';
 
 interface Props {
   setCurrentPage: SetStateAction<any>;
 }
 
 const SideMenu = ({ setCurrentPage }: Props) => {
+  const [value, onChange] = useState(new Date());
+
+  const renderCalendar = () => {
+    return (
+      <div>
+        <Calendar onChange={onChange} value={value} />
+      </div>
+    );
+  };
+
   const links = [
     { icon: home, alt: "home", target: "Voluptas", name: "Voluptas" },
     { icon: card, alt: "card", target: "Adipisicing", name: "Adipisicing" },
     { icon: paperPlane, alt: "paper plane", target: "Repudiandae", name: "Repudiandae" },
-    { icon: calendar, alt: "calendar", target: "Quibusdam", name: "Quibusdam" },
+    { icon: calendar, alt: "calendar", target: renderCalendar, name: "Quibusdam" },
     { icon: archive, alt: "archive", target: "Consectetur", name: "Consectetur" },
   ];
 
