@@ -19,56 +19,71 @@ const Newsletter = ({ title, lead, content, anchor }: Props) => {
   const [isSend, setIsSend] = useState(false);
 
   const sendMail = () => {
-    setIsSend(true);
-    fetch(`${process.env.REACT_APP_BACKEND_URL}/newsletters`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email,
-      }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.success) {
-          setEmail("");
-          setIsSend(false);
-          toast.success(data.message, {
-            position: "bottom-center",
-            autoClose: 4000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            theme: "dark",
-          });
-        } else {
-          setIsSend(false);
-          toast.error(data.message, {
-            position: "bottom-center",
-            autoClose: 4000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            theme: "dark",
-          });
-        }
-      })
-      .catch((err) => {
-        setIsSend(false);
-        console.error(err);
-        toast.error("Une erreur est survenue. Contactez support@savime.tech", {
-          position: "bottom-center",
-          autoClose: 4000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          theme: "dark",
-        });
+    if (email === "") {
+      toast.info("Veuillez renseigner votre email.", {
+        position: "bottom-center",
+        autoClose: 8000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
       });
+    } else {
+      setIsSend(true);
+      fetch(`${process.env.REACT_APP_BACKEND_URL}/newsletters`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+        }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.success) {
+            setEmail("");
+            setIsSend(false);
+            toast.success(data.message, {
+              position: "bottom-center",
+              autoClose: 4000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              theme: "dark",
+            });
+          } else {
+            setIsSend(false);
+            toast.error(data.message, {
+              position: "bottom-center",
+              autoClose: 4000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              theme: "dark",
+            });
+          }
+        })
+        .catch((err) => {
+          setIsSend(false);
+          console.error(err);
+          toast.error(
+            "Une erreur est survenue. Contactez support@savime.tech",
+            {
+              position: "bottom-center",
+              autoClose: 4000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              theme: "dark",
+            }
+          );
+        });
+    }
   };
 
   return (

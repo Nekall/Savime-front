@@ -1,3 +1,4 @@
+import { SetStateAction } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 // Assets
@@ -10,21 +11,25 @@ import paperPlane from "../../assets/images/icon/paper-plane.svg";
 // Styles
 import styles from "./styles.module.scss";
 
-const SideMenu = () => {
+interface Props {
+  setCurrentPage: SetStateAction<any>;
+}
+
+const SideMenu = ({ setCurrentPage }: Props) => {
   const links = [
-    { icon: home, alt: "home", target: "#", name: "Voluptas" },
-    { icon: card, alt: "card", target: "#", name: "Adipisicing" },
-    { icon: paperPlane, alt: "paper plane", target: "#", name: "Repudiandae" },
-    { icon: calendar, alt: "calendar", target: "#", name: "Quibusdam" },
-    { icon: archive, alt: "archive", target: "#", name: "Consectetur" },
+    { icon: home, alt: "home", target: "Voluptas", name: "Voluptas" },
+    { icon: card, alt: "card", target: "Adipisicing", name: "Adipisicing" },
+    { icon: paperPlane, alt: "paper plane", target: "Repudiandae", name: "Repudiandae" },
+    { icon: calendar, alt: "calendar", target: "Quibusdam", name: "Quibusdam" },
+    { icon: archive, alt: "archive", target: "Consectetur", name: "Consectetur" },
   ];
 
   return (
     <div className={styles.__slide_menu}>
       {links.map(({ icon, alt, target, name }) => (
-        <a key={uuidv4()} className={styles.__link} href={target}>
+        <button key={uuidv4()} className={styles.__buttons} onClick={()=>setCurrentPage(target)}>
           <img src={icon} alt={alt} /> {name}
-        </a>
+        </button>
       ))}
     </div>
   );

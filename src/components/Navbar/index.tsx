@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
 import { toast } from "react-toastify";
 import { v4 as uuidv4 } from "uuid";
-import { useState } from "react";
+import { SetStateAction, useState } from "react";
 
 // Styles
 import styles from "./styles.module.scss";
@@ -18,21 +18,33 @@ import envelopeOpen from "../../assets/images/icon/envelope-open.svg";
 // Atoms
 import { tokenState, userDataState } from "../../atoms/user";
 
-const Navbar = () => {
+interface Props {
+    setCurrentPage: SetStateAction<any>;
+}
+
+const Navbar = ({ setCurrentPage }: Props) => {
     const [envelopeState, setEnvelopeState] = useState(envelopeClosed);
     const navigateTo = useNavigate();
     const setUserData = useSetRecoilState(userDataState);
     const setToken = useSetRecoilState(tokenState);
     
-const sendMail = () => {
+
+const openChat = () => {
+    // open chat page ?
+    setCurrentPage("Chat");
+}
+
+const openContactInfos = () => {
     setEnvelopeState(envelopeOpen)
     //open modal for send mail ? 
     //or move to "mails" page ?
+    setCurrentPage("Mails");
 }
 
 const openSettings = () => {
     console.log("Settings");
     // open settings page
+    setCurrentPage("Settings");
 }
 
     const disconnect = () => {
@@ -75,8 +87,8 @@ const openSettings = () => {
                 })}
             </div>
             <div className={styles.__shortcut}>
-                <button className={styles.__chat} onClick={()=>{console.log("Chat")}}><img src={chat} alt="chat" /></button>
-                <button className={styles.__envelope} onClick={() => sendMail()}><img src={envelopeState} alt="envelope" /></button>
+                <button className={styles.__chat} onClick={()=> openChat()}><img src={chat} alt="chat" /></button>
+                <button className={styles.__envelope} onClick={() => openContactInfos()}><img src={envelopeState} alt="envelope" /></button>
                 <button className={styles.__gear} onClick={()=>{openSettings()}}><img src={gear} alt="gear" /></button>
             </div>
             <div className={styles.__disconnect}>

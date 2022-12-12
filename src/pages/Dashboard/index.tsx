@@ -11,6 +11,7 @@ import styles from "../../styles/pages/dashboard.module.scss";
 
 // Atoms
 import { tokenState, userDataState } from "../../atoms/user";
+import { useState } from "react";
 
 const Dashboard = () => {
   const navigateTo = useNavigate();
@@ -18,6 +19,7 @@ const Dashboard = () => {
   const userData = useRecoilValue(userDataState);
   const { firstname, lastname, email, job } = userData;
   console.log("userData", userData);
+  const [currentPage, setCurrentPage] = useState();
 
   console.log("TOKEN", token);
   if(token === null){
@@ -27,17 +29,17 @@ const Dashboard = () => {
   return (
     <div className={styles.__dashboard}>
       <section className={styles.__header}>
-        <Navbar />
+        <Navbar setCurrentPage={setCurrentPage}/>
       </section>
       <section className={styles.__side_menu}>
         <MiniProfile firstname={firstname} lastname={lastname} email={email} job={job} />
         <hr />
-        <SideMenu />
+        <SideMenu setCurrentPage={setCurrentPage} />
       </section>
       <section className={styles.__view}>
         <div className={styles.__content}>
           <span className={styles.__rounded}></span>
-          <h3>...Content...</h3>
+          {currentPage}
         </div>
       </section>
     </div>
