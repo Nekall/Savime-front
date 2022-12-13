@@ -46,7 +46,6 @@ const Login = () => {
       })
         .then((response) => response.json())
         .then((data) => {
-          console.log(data);
           if (data.success) {
             const { token, data: user } = data;
             const { verified } = user;

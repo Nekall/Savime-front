@@ -36,7 +36,6 @@ const ResetPassword = () => {
     )
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         if (data.success) {
           toast.success("Votre mot de passe a été reinitialisé avec succès !", {
             position: "bottom-center",

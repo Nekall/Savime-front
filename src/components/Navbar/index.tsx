@@ -4,6 +4,9 @@ import { toast } from "react-toastify";
 import { v4 as uuidv4 } from "uuid";
 import { SetStateAction, useState } from "react";
 
+// Components
+import Settings from "../Settings";
+
 // Styles
 import styles from "./styles.module.scss";
 
@@ -42,9 +45,8 @@ const openContactInfos = () => {
 }
 
 const openSettings = () => {
-    console.log("Settings");
     // open settings page
-    setCurrentPage("Settings");
+    setCurrentPage(Settings);
 }
 
     const disconnect = () => {

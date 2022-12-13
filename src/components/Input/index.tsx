@@ -14,7 +14,7 @@ interface Props {
   maxlength?: number;
   required?: boolean;
   placeholder?: string;
-  value?: string;
+  value?: any;
   onClick?: () => void;
   onChange?: any;
   icon?: string;

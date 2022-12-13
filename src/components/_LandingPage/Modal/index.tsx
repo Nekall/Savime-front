@@ -53,7 +53,6 @@ const Modal = ({ setModalIsOpen }: ModalProps) => {
         .then((response) => response.json())
         .then((data) => {
           if (data.success) {
-            console.log(data);
             toast.success(data.message, {
               position: "bottom-center",
               autoClose: 4000,
