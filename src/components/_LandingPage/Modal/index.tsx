@@ -10,6 +10,7 @@ import styles from "./styles.module.scss";
 // Assets
 import cross from "../../../assets/images/icon/cross.svg";
 import avatar from "../../../assets/images/icon/avatar.svg";
+import envelope from "../../../assets/images/icon/envelope.svg";
 
 interface ModalProps {
   setModalIsOpen: (value: boolean) => void;
@@ -121,6 +122,7 @@ const Modal = ({ setModalIsOpen }: ModalProps) => {
           onChange={(e: any) => setLastname(e.currentTarget.value)}
         />
         <Input
+          icon={envelope}
           type={"email"}
           placeholder={"email@email.com"}
           value={email}

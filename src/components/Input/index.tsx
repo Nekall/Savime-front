@@ -1,10 +1,6 @@
 // Styles
 import styles from "./styles.module.scss";
 
-// Assets
-import envelope from "../../assets/images/icon/envelope.svg";
-import lock from "../../assets/images/icon/lock.svg";
-
 interface Props {
   error?: any;
   success?: any;
@@ -40,26 +36,10 @@ const Input = ({
       {type !== "submit" && type !== "textArea" && (
         <div className={`${styles.__icon} ${error ? styles.__red : ""}`}>
           <img
-            src={
-              icon
-                ? icon
-                : type === "email"
-                ? envelope
-                : type === "password"
-                ? lock
-                : ""
-            }
-            alt={
-              alt
-                ? alt
-                : type === "email"
-                ? "enveloppe"
-                : type === "password"
-                ? "cadenas"
-                : ""
-            }
+            src={icon}
+            alt={alt}
           />{" "}
-          |
+          {icon && <>|</>}
         </div>
       )}
       {type === "textArea" ? (

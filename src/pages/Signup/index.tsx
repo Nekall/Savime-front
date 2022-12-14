@@ -10,6 +10,8 @@ import Link from "../../components/Link";
 
 // Assets
 import avatar from "../../assets/images/icon/avatar.svg";
+import envelope from "../../assets/images/icon/envelope.svg";
+import lock from "../../assets/images/icon/lock.svg";
 
 // Styles
 import styles from "../../styles/pages/signup.module.scss";
@@ -122,6 +124,7 @@ const Signup = () => {
         />
         <Input
           error={errors.noErrors && errors.email ? false : errors.email}
+          icon={envelope}
           type={"email"}
           placeholder={"email@email.com"}
           value={email}
@@ -129,6 +132,7 @@ const Signup = () => {
         />
         <Input
           error={errors.noErrors && errors.password ? false : errors.password}
+          icon={lock}
           type={"password"}
           placeholder={"Mot de passe"}
           value={password}
@@ -136,6 +140,7 @@ const Signup = () => {
         />
         <Input
           error={errors.noErrors && errors.password ? false : errors.password}
+          icon={lock}
           type={"password"}
           placeholder={"Confirmation du mot de passe"}
           value={confirmPassword}

@@ -7,6 +7,7 @@ import styles from "../../styles/pages/resetPassword.module.scss";
 
 // Assets
 import avatar from "../../assets/images/icon/avatar.svg";
+import lock from "../../assets/images/icon/lock.svg";
 
 // Components
 import Wrapper from "../../components/Wrapper";
@@ -79,11 +80,13 @@ const ResetPassword = () => {
       <Wrapper position={"center"}>
         <img className={styles.__avatar} src={avatar} alt="avatar" />
         <Input
+          icon={lock}
           type={"password"}
           placeholder={"Nouveau mot de passe"}
           onChange={(e: any) => setPassword(e.currentTarget.value)}
         />
         <Input
+          icon={lock}
           type={"password"}
           placeholder={"Confirmation du mot de passe"}
           onChange={(e: any) => setConfirmPassword(e.currentTarget.value)}

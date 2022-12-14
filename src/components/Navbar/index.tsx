@@ -46,7 +46,7 @@ const openContactInfos = () => {
 
 const openSettings = () => {
     // open settings page
-    setCurrentPage(Settings);
+    setCurrentPage(<Settings />);
 }
 
     const disconnect = () => {
