@@ -11,7 +11,7 @@ interface Props {
   required?: boolean;
   placeholder?: string;
   value?: any;
-  onClick?: () => void;
+  onClick?: () => void | any;
   onChange?: any;
   icon?: string;
   alt?: string;

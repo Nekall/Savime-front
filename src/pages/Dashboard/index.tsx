@@ -6,6 +6,7 @@ import { useRecoilValue } from "recoil";
 import MiniProfile from "../../components/MiniProfile";
 import SideMenu from "../../components/SideMenu";
 import Navbar from "../../components/Navbar";
+import Home from "../../components/Home";
 
 // Styles
 import styles from "../../styles/pages/dashboard.module.scss";
@@ -18,7 +19,7 @@ const Dashboard = () => {
   const token = useRecoilValue(tokenState);
   const userData = useRecoilValue(userDataState);
   const { firstname, lastname, email, job } = userData;
-  const [currentPage, setCurrentPage] = useState();
+  const [currentPage, setCurrentPage] = useState(<Home />);
 
   if(token === null){
     navigateTo("/connexion"); // Replace by private route !

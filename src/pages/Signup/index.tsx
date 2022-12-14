@@ -17,7 +17,7 @@ import lock from "../../assets/images/icon/lock.svg";
 import styles from "../../styles/pages/signup.module.scss";
 
 // Helpers
-import { signUpValidators } from "../../helpers/validators";
+//import { signUpValidators } from "../../helpers/validators";
 
 const Signup = () => {
   const [firstname, setFirstname] = useState("");
@@ -36,6 +36,7 @@ const Signup = () => {
 
 
   const signup = () => {
+    /*
     setErrors(
       signUpValidators({
         firstname,
@@ -45,7 +46,8 @@ const Signup = () => {
         confirmPassword,
       })
     );
-    if (errors.noErrors) {
+    */
+    //if (errors.noErrors) {
       fetch(`${process.env.REACT_APP_BACKEND_URL}/employees`, {
         method: "POST",
         headers: {
@@ -96,7 +98,7 @@ const Signup = () => {
             theme: "dark",
             });
         });
-    }
+    //}
   };
 
   return (

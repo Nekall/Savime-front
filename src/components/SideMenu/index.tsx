@@ -3,12 +3,15 @@ import Calendar from 'react-calendar';
 import { SetStateAction } from "react";
 import { v4 as uuidv4 } from "uuid";
 
+// Components
+import CompanyInfo from '../CompanyInfo';
+import Home from '../Home';
+
 // Assets
 import home from "../../assets/images/icon/home.svg";
 import card from "../../assets/images/icon/card.svg";
 import calendar from "../../assets/images/icon/calendar.svg";
 import archive from "../../assets/images/icon/archive.svg";
-import paperPlane from "../../assets/images/icon/paper-plane.svg";
 
 // Styles
 import styles from "./styles.module.scss";
@@ -21,25 +24,20 @@ interface Props {
 const SideMenu = ({ setCurrentPage }: Props) => {
   const [value, onChange] = useState(new Date());
 
-  const renderCalendar = () => {
-    return (
-      <div>
-        <Calendar onChange={onChange} value={value} />
-      </div>
-    );
-  };
+  const renderCalendar = () => <Calendar onChange={onChange} value={value} />
+;
 
-  const links = [
-    { icon: home, alt: "home", target: "Voluptas", name: "Voluptas" },
-    { icon: card, alt: "card", target: "Adipisicing", name: "Adipisicing" },
-    { icon: paperPlane, alt: "paper plane", target: "Repudiandae", name: "Repudiandae" },
-    { icon: calendar, alt: "calendar", target: renderCalendar, name: "Quibusdam" },
-    { icon: archive, alt: "archive", target: "Consectetur", name: "Consectetur" },
+  const btns = [
+    { icon: home, alt: "home", target: <Home /> , name: "Accueil" },
+    { icon: card, alt: "card", target: <CompanyInfo />, name: "Informations" },
+    //{ icon: paperPlane, alt: "paper plane", target: "Repudiandae", name: "Repudiandae" },
+    { icon: calendar, alt: "calendar", target: renderCalendar, name: "Calendrier" },
+    { icon: archive, alt: "archive", target: "Documents (Génération | Téléchargements)", name: "Documents" },
   ];
 
   return (
     <div className={styles.__slide_menu}>
-      {links.map(({ icon, alt, target, name }) => (
+      {btns.map(({ icon, alt, target, name }) => (
         <button key={uuidv4()} className={styles.__buttons} onClick={()=>setCurrentPage(target)}>
           <img src={icon} alt={alt} /> {name}
         </button>

@@ -9,6 +9,13 @@
         margin: 0 25px;
     }
 
+    .__company_name {
+        font-weight: bold;
+        position: absolute;
+        top: 68px;
+        left: 75px;
+    }
+
     .__menu {
         a {
             color: #ffffff;
@@ -33,22 +40,23 @@
             transition: transform 0.8s cubic-bezier(.68, -0.55, .27, 1.55);
 
             &:hover {
-                transform: rotate(2turn);
+                transform: rotate(0.2turn);
             }
         }
 
         .__envelope {
             &:hover {
-                animation: bounce 1.5s ease;
+                animation: wriggle 1.5s ease;
             }
         }
 
+        /*
         .__chat {
             &:hover {
-                animation: chat 1.5s ease;
+                animation: wriggle 1.5s ease;
             }
         }
-
+*/
     }
 
     .__disconnect {
@@ -74,7 +82,7 @@
     }
 }
 
-@keyframes chat {
+@keyframes wriggle {
     30% {
         transform: scale(1.1);
     }

@@ -18,7 +18,7 @@ import Input from "../../components/Input";
 import Link from "../../components/Link";
 
 // Helpers
-import { loginValidators } from "../../helpers/validators";
+//import { loginValidators } from "../../helpers/validators";
 
 // Atoms
 import { tokenState, userDataState } from "../../atoms/user";
@@ -37,8 +37,8 @@ const Login = () => {
   const setToken = useSetRecoilState(tokenState);
 
   const login = () => {
-    setErrors(loginValidators({ email, password }));
-    if (errors.noErrors) {
+    //setErrors(loginValidators({ email, password }));
+    //if (errors.noErrors) {
       fetch(
         `${process.env.REACT_APP_BACKEND_URL}/${
           checked ? "managers" : "employees"
@@ -126,7 +126,7 @@ const Login = () => {
             }
           );
         });
-    }
+    //}
   };
 
   return (
