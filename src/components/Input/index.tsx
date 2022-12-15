@@ -2,13 +2,11 @@
 import styles from "./styles.module.scss";
 
 interface Props {
-  error?: any;
-  success?: any;
+  error?: string;
   type: string;
   label?: string;
   minlength?: number;
   maxlength?: number;
-  required?: boolean;
   placeholder?: string;
   value?: any;
   onClick?: () => void | any;
@@ -19,11 +17,9 @@ interface Props {
 
 const Input = ({
   error,
-  success,
   type,
   minlength,
   maxlength,
-  required,
   placeholder,
   value,
   onClick,
@@ -57,6 +53,7 @@ const Input = ({
           onChange={onChange}
         />
       )}
+      {error && <div className={styles.__error}>{error}</div>}
     </div>
   );
 };

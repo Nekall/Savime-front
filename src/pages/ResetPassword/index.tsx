@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 
@@ -21,7 +21,8 @@ const ResetPassword = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const navigateTo = useNavigate();
 
-  const resetPassword = () => {
+  const resetPassword = (e: FormEvent<HTMLFormElement>) => {
+    e?.preventDefault();
     fetch(
       `${process.env.REACT_APP_BACKEND_URL}/employees/reset-password/${token}`,
       {
@@ -79,24 +80,22 @@ const ResetPassword = () => {
       <Header />
       <Wrapper position={"center"}>
         <img className={styles.__avatar} src={avatar} alt="avatar" />
-        <Input
-          icon={lock}
-          type={"password"}
-          placeholder={"Nouveau mot de passe"}
-          onChange={(e: any) => setPassword(e.currentTarget.value)}
-        />
-        <Input
-          icon={lock}
-          type={"password"}
-          placeholder={"Confirmation du mot de passe"}
-          onChange={(e: any) => setConfirmPassword(e.currentTarget.value)}
-        />
-        <Input
-          onClick={() => resetPassword()}
-          type={"submit"}
-          value={"Réinitialiser mon mot de passe"}
-        />
-        <Link name={"Retour à l'accueil"} target={"/"} />
+        <form onClick={(e) => resetPassword(e)}>
+          <Input
+            icon={lock}
+            type={"password"}
+            placeholder={"Nouveau mot de passe"}
+            onChange={(e: any) => setPassword(e.currentTarget.value)}
+          />
+          <Input
+            icon={lock}
+            type={"password"}
+            placeholder={"Confirmation du mot de passe"}
+            onChange={(e: any) => setConfirmPassword(e.currentTarget.value)}
+          />
+          <Input type={"submit"} value={"Réinitialiser mon mot de passe"} />
+          <Link name={"Retour à l'accueil"} target={"/"} />
+        </form>
       </Wrapper>
     </div>
   );

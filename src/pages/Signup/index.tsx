@@ -1,5 +1,6 @@
-import { useState } from "react";
-import { toast } from 'react-toastify';
+import validator from "validator";
+import { FormEvent, useState } from "react";
+import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 // Components
@@ -16,38 +17,37 @@ import lock from "../../assets/images/icon/lock.svg";
 // Styles
 import styles from "../../styles/pages/signup.module.scss";
 
-// Helpers
-//import { signUpValidators } from "../../helpers/validators";
-
 const Signup = () => {
   const [firstname, setFirstname] = useState("");
+  const [firstnameError, setFirstnameError] = useState("");
   const [lastname, setLastname] = useState("");
+  const [lastnameError, setLastnameError] = useState("");
   const [email, setEmail] = useState("");
+  const [emailError, setEmailError] = useState("");
   const [password, setPassword] = useState("");
+  const [passwordError, setPasswordError] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [errors, setErrors] = useState({
-    noErrors: false,
-    firstname: "",
-    lastname: "",
-    email: "",
-    password: "",
-  });
+  const [confirmPasswordError, setConfirmPasswordError] = useState("");
   const navigateTo = useNavigate();
 
+  const signup = (e: FormEvent<HTMLFormElement>) => {
+    e?.preventDefault();
+    setFirstnameError(validator.isEmpty(firstname)? "Prénom obligatoire." : validator.isLength(firstname, { min: 2, max: 20 }) ? "" : "Le prénom doit contenir entre 2 et 20 caractères.");
+    setLastnameError(validator.isEmpty(lastname)? "Nom obligatoire." : validator.isLength(lastname, { min: 2, max: 20 }) ? "" : "Le nom doit contenir entre 2 et 20 caractères.");
+    setEmailError(validator.isEmpty(email) ? "Adresse mail obligatoire" :validator.isEmail(email) ? "" : "Le format de l'email est incorrect.");
+    setPasswordError(validator.isEmpty(password) ? "Mot de passe obligatoire." : validator.isStrongPassword(password) ? "" : "Le mot de passe doit contenir au moins 8 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial.");
+    setConfirmPasswordError(validator.isEmpty(confirmPassword) ? "Confirmation du mot de passe obligatoire" : validator.equals(password, confirmPassword) ? "" : "Les mots de passe ne correspondent pas.");
 
-  const signup = () => {
-    /*
-    setErrors(
-      signUpValidators({
-        firstname,
-        lastname,
-        email,
-        password,
-        confirmPassword,
-      })
+    console.log("#########","\n",
+    firstnameError,"\n",
+    lastnameError,"\n",
+    emailError,"\n",
+    passwordError,"\n",
+    confirmPasswordError,"\n"
     );
-    */
-    //if (errors.noErrors) {
+    console.log(firstname !== "" && lastname !== "" && email !== "" && password !== "" && confirmPassword !== "" && firstnameError === "" && lastnameError === "" && emailError === "" && passwordError === "" && confirmPasswordError === "");
+
+    if (firstname !== "" && lastname !== "" && email !== "" && password !== "" && confirmPassword !== "" && firstnameError === "" && lastnameError === "" && emailError === "" && passwordError === "" && confirmPasswordError === "") {
       fetch(`${process.env.REACT_APP_BACKEND_URL}/employees`, {
         method: "POST",
         headers: {
@@ -72,33 +72,36 @@ const Signup = () => {
               pauseOnHover: true,
               draggable: true,
               theme: "dark",
-              });
-              navigateTo('/connexion')
-            }else{
-              toast.error(data.message, {
-                position: "bottom-center",
-                autoClose: 4000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                theme: "dark",
-                });
-            }
+            });
+            //navigateTo("/connexion");
+          } else {
+            toast.error(data.message, {
+              position: "bottom-center",
+              autoClose: 4000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              theme: "dark",
+            });
+          }
         })
         .catch((err) => {
-          console.error(err)
-          toast.error("Une erreur est survenue. Contactez support@savime.tech", {
-            position: "bottom-center",
-            autoClose: 4000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            theme: "dark",
-            });
+          console.error(err);
+          toast.error(
+            "Une erreur est survenue. Contactez support@savime.tech",
+            {
+              position: "bottom-center",
+              autoClose: 4000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              theme: "dark",
+            }
+          );
         });
-    //}
+    }
   };
 
   return (
@@ -106,8 +109,9 @@ const Signup = () => {
       <Header />
       <Wrapper position={"left"}>
         <img className={styles.__avatar} src={avatar} alt="avatar" />
+        <form onSubmit={(e) => signup(e)} >
         <Input
-          error={errors.noErrors && errors.firstname ? false : errors.firstname}
+          error={firstnameError}
           icon={avatar}
           alt={"avatar"}
           type={"text"}
@@ -116,7 +120,7 @@ const Signup = () => {
           onChange={(e: any) => setFirstname(e.currentTarget.value)}
         />
         <Input
-          error={errors.noErrors && errors.lastname ? false : errors.lastname}
+          error={lastnameError}
           icon={avatar}
           alt={"avatar"}
           type={"text"}
@@ -125,7 +129,7 @@ const Signup = () => {
           onChange={(e: any) => setLastname(e.currentTarget.value)}
         />
         <Input
-          error={errors.noErrors && errors.email ? false : errors.email}
+          error={emailError}
           icon={envelope}
           type={"email"}
           placeholder={"email@email.com"}
@@ -133,7 +137,7 @@ const Signup = () => {
           onChange={(e: any) => setEmail(e.currentTarget.value)}
         />
         <Input
-          error={errors.noErrors && errors.password ? false : errors.password}
+          error={passwordError}
           icon={lock}
           type={"password"}
           placeholder={"Mot de passe"}
@@ -141,15 +145,16 @@ const Signup = () => {
           onChange={(e: any) => setPassword(e.currentTarget.value)}
         />
         <Input
-          error={errors.noErrors && errors.password ? false : errors.password}
+          error={confirmPasswordError}
           icon={lock}
           type={"password"}
           placeholder={"Confirmation du mot de passe"}
           value={confirmPassword}
           onChange={(e: any) => setConfirmPassword(e.currentTarget.value)}
         />
-        <Input onClick={() => signup()} type={"submit"} value={"Inscription"} />
+        <Input type={"submit"} value={"Inscription"} />
         <Link name={"J'ai déjà un compte !"} target={"/connexion"} />
+        </form>
       </Wrapper>
     </div>
   );

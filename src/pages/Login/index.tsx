@@ -1,4 +1,5 @@
-import { useState } from "react";
+import validator from "validator";
+import { FormEvent, useState } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
@@ -17,28 +18,35 @@ import Header from "../../components/Header";
 import Input from "../../components/Input";
 import Link from "../../components/Link";
 
-// Helpers
-//import { loginValidators } from "../../helpers/validators";
-
 // Atoms
 import { tokenState, userDataState } from "../../atoms/user";
 
 const Login = () => {
   const [email, setEmail] = useState("");
+  const [emailError, setEmailError] = useState("");
   const [password, setPassword] = useState("");
+  const [passwordError, setPasswordError] = useState("");
   const [checked, setChecked] = useState(false);
-  const [errors, setErrors] = useState({
-    noErrors: false,
-    email: "",
-    password: "",
-  });
   const navigateTo = useNavigate();
   const setUserData = useSetRecoilState(userDataState);
   const setToken = useSetRecoilState(tokenState);
 
-  const login = () => {
-    //setErrors(loginValidators({ email, password }));
-    //if (errors.noErrors) {
+  const login = (e: FormEvent<HTMLFormElement>) => {
+    e?.preventDefault();
+    setEmailError(
+      validator.isEmpty(email)
+        ? "L'adresse mail ne peut pas être vide"
+        : validator.isEmail(email)
+        ? ""
+        : "Le format de l'email est incorrect."
+    );
+    setPasswordError(
+      !validator.isEmpty(password)
+        ? ""
+        : "Le mot de passe ne peut pas être vide."
+    );
+
+    if (email !== "" && password !== "" && validator.isEmail(email)) {
       fetch(
         `${process.env.REACT_APP_BACKEND_URL}/${
           checked ? "managers" : "employees"
@@ -126,7 +134,7 @@ const Login = () => {
             }
           );
         });
-    //}
+    }
   };
 
   return (
@@ -134,9 +142,10 @@ const Login = () => {
       <Header />
       <Wrapper position={"right"}>
         <img className={styles.__avatar} src={avatar} alt="avatar" />
+        <form onSubmit={(e) => login(e)} >
         <Input
           icon={envelope}
-          error={errors.noErrors && errors.email ? false : errors.email}
+          error={emailError}
           type={"email"}
           placeholder={"email@email.com"}
           value={email}
@@ -144,7 +153,7 @@ const Login = () => {
         />
         <Input
           icon={lock}
-          error={errors.noErrors && errors.password ? false : errors.password}
+          error={passwordError}
           type={"password"}
           placeholder={"Mot de passe"}
           value={password}
@@ -160,12 +169,13 @@ const Login = () => {
           />
           <label htmlFor="switch"></label>
         </div>
-        <Input onClick={() => login()} type={"submit"} value={"Connexion"} />
+        <Input type={"submit"} value={"Connexion"} />
         <Link name={"Pas encore de compte ?"} target={"/inscription"} />
         <Link
           name={"J'ai perdu mon mot de passe"}
           target={"/mot-de-passe-oublie"}
         />
+        </form>
       </Wrapper>
     </div>
   );

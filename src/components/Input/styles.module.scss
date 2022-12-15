@@ -7,10 +7,6 @@
         opacity: 0.6;
         filter: invert(58%) sepia(42%) saturate(5919%) hue-rotate(210deg) brightness(100%) contrast(94%); // #6781f7
 
-        &.__green{
-            filter: invert(53%) sepia(25%) saturate(728%) hue-rotate(54deg) brightness(97%) contrast(90%); // #6a994e
-        }
-
         &.__red{
             filter: invert(13%) sepia(95%) saturate(6937%) hue-rotate(346deg) brightness(85%) contrast(100%); // #d90429
         }
@@ -53,6 +49,13 @@
         height: 150px;
         font-size: 18px;
         outline: none;
+    }
+
+    .__error{
+        color: #a61530;
+        font-size: 14px;
+        padding-top: 8px;
+        margin-top: -16px;
     }
 
 }
