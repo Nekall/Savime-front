@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { toast } from 'react-toastify';
+import { FormEvent, useState } from "react";
+import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 // Styles
@@ -18,30 +18,31 @@ const ForgotPassword = () => {
   const [email, setEmail] = useState("");
   const navigateTo = useNavigate();
 
-  const sendMail = () => {
+  const sendMail = (e: FormEvent<HTMLFormElement>) => {
+    e?.preventDefault();
     fetch(`${process.env.REACT_APP_BACKEND_URL}/employees/forgot-password`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        email
+        email,
       }),
     })
-    .then((response) => response.json())
-    .then((data) => {
-      if (data.success) {
-        toast.success("Le mail de réinitialisation vous été envoyé !", {
-          position: "bottom-center",
-          autoClose: 4000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          theme: "dark",
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          toast.success("Le mail de réinitialisation vous été envoyé !", {
+            position: "bottom-center",
+            autoClose: 4000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            theme: "dark",
           });
-          navigateTo('/connexion')
-        }else{
+          navigateTo("/connexion");
+        } else {
           toast.error(data.message, {
             position: "bottom-center",
             autoClose: 4000,
@@ -50,21 +51,21 @@ const ForgotPassword = () => {
             pauseOnHover: true,
             draggable: true,
             theme: "dark",
-            });
+          });
         }
-    })
-    .catch((err) => {
-      console.error(err)
-      toast.error("Une erreur est survenue. Contactez support@savime.tech", {
-        position: "bottom-center",
-        autoClose: 4000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        theme: "dark",
+      })
+      .catch((err) => {
+        console.error(err);
+        toast.error("Une erreur est survenue. Contactez support@savime.tech", {
+          position: "bottom-center",
+          autoClose: 4000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          theme: "dark",
         });
-    });
+      });
   };
 
   return (
@@ -72,21 +73,22 @@ const ForgotPassword = () => {
       <Header />
       <Wrapper position={"center"}>
         <img className={styles.__avatar} src={avatar} alt="avatar" />
-        <Input
-        type={"email"}
-        placeholder={"email@email.com"}
-        //error={errors.noErrors && errors.firstname ? false : errors.firstname}
-        icon={avatar}
-        alt={"avatar"}
-        value={email}
-        onChange={(e: any) => setEmail(e.currentTarget.value)}
-        />
-        <Input
-          type={"submit"}
-          value={"Demande de réinitialisation de mon mot de passe"}
-          onClick={() => sendMail()}
-        />
-        <Link name={"Retour à l'accueil"} target={"/"} />
+        <form onSubmit={(e) => sendMail(e)}>
+          <Input
+            type={"email"}
+            placeholder={"email@email.com"}
+            icon={avatar}
+            alt={"avatar"}
+            value={email}
+            onChange={(e: any) => setEmail(e.currentTarget.value)}
+            required
+          />
+          <Input
+            type={"submit"}
+            value={"Demande de réinitialisation de mon mot de passe"}
+          />
+          <Link name={"Retour à l'accueil"} target={"/"} />
+        </form>
       </Wrapper>
     </div>
   );

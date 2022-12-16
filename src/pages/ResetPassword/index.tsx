@@ -80,19 +80,32 @@ const ResetPassword = () => {
       <Header />
       <Wrapper position={"center"}>
         <img className={styles.__avatar} src={avatar} alt="avatar" />
-        <form onClick={(e) => resetPassword(e)}>
+        <form onSubmit={(e) => resetPassword(e)}>
           <Input
             icon={lock}
             type={"password"}
             placeholder={"Nouveau mot de passe"}
             onChange={(e: any) => setPassword(e.currentTarget.value)}
+            pattern={
+              "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$"
+            }
+            required
           />
           <Input
             icon={lock}
             type={"password"}
             placeholder={"Confirmation du mot de passe"}
             onChange={(e: any) => setConfirmPassword(e.currentTarget.value)}
+            pattern={
+              "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$"
+            }
+            required
           />
+          <p className={styles.__pwd_details}>
+            ⓘ *Le mot de passe doit contenir au moins 8 caractères,
+            <br /> une majuscule, une minuscule, un chiffre et un caractère
+            spécial.
+          </p>
           <Input type={"submit"} value={"Réinitialiser mon mot de passe"} />
           <Link name={"Retour à l'accueil"} target={"/"} />
         </form>

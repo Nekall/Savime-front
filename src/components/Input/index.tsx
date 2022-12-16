@@ -13,6 +13,8 @@ interface Props {
   onChange?: any;
   icon?: string;
   alt?: string;
+  required?: boolean;
+  pattern?: string;
 }
 
 const Input = ({
@@ -26,7 +28,11 @@ const Input = ({
   onChange,
   icon,
   alt,
+  required,
+  pattern,
 }: Props) => {
+  minlength = minlength ? minlength : 0;
+  maxlength = maxlength ? maxlength : 100;
   return (
     <div className={styles.__input}>
       {type !== "submit" && type !== "textArea" && (
@@ -51,6 +57,10 @@ const Input = ({
           value={value}
           onClick={onClick}
           onChange={onChange}
+          required={required}
+          minLength={minlength}
+          maxLength={maxlength}
+          pattern={pattern}
         />
       )}
       {error && <div className={styles.__error}>{error}</div>}
