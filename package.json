@@ -22,6 +22,7 @@
     "uuid": "^9.0.0"
   },
   "scripts": {
+    "maintenance" : "REACT_APP_MAINTENANCE=true craco start",
     "start": "craco start",
     "build": "craco build"
   },

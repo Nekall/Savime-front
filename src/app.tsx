@@ -17,9 +17,16 @@ import LandingPage from "./pages/LandingPage";
 import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import Home from "./pages/Home";
+import Error from "./pages/Error";
 
 // Atoms
 import { tokenState } from "./atoms/user";
+
+// Env
+const { REACT_APP_MAINTENANCE } = process.env;
+const maintenanceMode = REACT_APP_MAINTENANCE? JSON.parse(REACT_APP_MAINTENANCE) : false;
+console.log("REACT_APP_MAINTENANCE", maintenanceMode);
 
 const App = () => {
     const token = useRecoilValue(tokenState);
@@ -42,7 +49,7 @@ const App = () => {
       <ToastContainer />
       <Router>
         <Routes>
-          <Route path="/" element={<Maintenance />} />
+          <Route path="/" element={maintenanceMode? <Maintenance /> : <Home />} />
           <Route path="/concept" element={<LandingPage />} />
           <Route path="/connexion" element={<Login />} />
           <Route path="/inscription" element={<Signup />} />
@@ -59,7 +66,7 @@ const App = () => {
             path="/reinitialisation-mot-de-passe/:token"
             element={<ResetPassword />}
           />
-          {/*<Route path="*" element={<ErrorPage />} />*/}
+          <Route path="*" element={<Error />} />
         </Routes>
       </Router>
     </>

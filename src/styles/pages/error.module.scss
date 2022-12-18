@@ -1,0 +1,17 @@
+.__error {
+    display: grid;
+
+    .__container {
+        margin: 5% auto 0 auto;
+        text-align: center;
+
+        h1 {
+            font-size: 30px;
+            color: #cbcbcb;
+        }
+
+        a {
+            color: $white-color;
+        }
+    }
+}

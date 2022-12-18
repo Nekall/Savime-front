@@ -24,7 +24,7 @@ const Maintenance = () => {
       return () => clearInterval(refreshTitleInterval);
     }, [refreshTitle]);
   return (
-    <section className={styles.__maintenance_page}>
+    <section className={styles.__maintenance}>
       <div>
         <img className={styles.__logo} src={logo} alt="logo savime" />
         <hr />

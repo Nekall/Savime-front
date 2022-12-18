@@ -1,9 +1,112 @@
-.__home_page{
+.__home {
     display: flex;
     justify-content: center;
     align-items: center;
 
-    .__logo{
-        height: 100px;
+    div {
+        text-align: center;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+
+        p {
+            color: #ffffff;
+            text-transform: uppercase;
+            font-weight: bold;
+            opacity: 0.4;
+            animation: 3s arrivedFromLeft;
+        }
+
+        hr {
+            color: #ffffff;
+            opacity: 0.4;
+            animation: 3s arrivedFromRight;
+        }
+
+        .__logo {
+            height: 100px;
+            animation: 2s appearance;
+        }
+
+        a{
+            display: inline-block;
+            height: 15px;
+            width: 100px;
+            text-decoration: none;
+            cursor: pointer;
+            color: $white-color;
+            font-weight: bold;
+            background-color: $blue-color;
+            padding: 10px 10px;
+            border-radius: 5px;
+            transition: 0.4s;
+            animation: 3s arrivedFromBottom;
+            margin-right: 5px;
+
+            &:hover {
+                opacity: 0.8;
+            }
+        }
     }
+
+    @keyframes appearance {
+        from {
+            opacity: 0;
+            transform: translateY(-50%);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0%);
+        }
+    }
+
+    @keyframes arrivedFromRight {
+        0% {
+            opacity: 0;
+            transform: translateX(50%);
+        }
+
+        90% {
+            opacity: 0.4;
+            transform: translateX(-10%);
+        }
+
+        100% {
+            opacity: 0.4;
+            transform: translateX(0%);
+        }
+    }
+
+
+    @keyframes arrivedFromLeft {
+        0% {
+            opacity: 0;
+            transform: translateX(-50%);
+        }
+
+        90% {
+            opacity: 0.4;
+            transform: translateX(10%);
+        }
+
+        100% {
+            opacity: 0.4;
+            transform: translateX(0%);
+        }
+    }
+
+    @keyframes arrivedFromBottom {
+        from {
+            opacity: 0;
+            transform: translateY(100%);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0%);
+        }
+    }
+
 }
