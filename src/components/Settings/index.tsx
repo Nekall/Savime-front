@@ -1,5 +1,5 @@
 import { useRecoilState } from "recoil";
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 
 // Components
 import Input from "../Input";
@@ -17,8 +17,8 @@ import lock from "../../assets/images/icon/lock.svg";
 import { userDataState } from "../../atoms/user";
 
 const Settings = () => {
-  const dataUser = useRecoilState(userDataState)
-  console.log("dataUser", dataUser)
+  const dataUser = useRecoilState(userDataState);
+  console.log("dataUser", dataUser);
 
   const [firstname, setFirstname] = useState(dataUser[0].firstname);
   const [lastname, setLastname] = useState(dataUser[0].lastname);
@@ -28,17 +28,23 @@ const Settings = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  const updateData = () => {
+  const updateData = (e: FormEvent<HTMLFormElement>) => {
     console.log("update data");
     // fetch update user
 
-    if(firstname) console.log("e")
-  }
+    if (firstname) console.log("e");
+  };
+
+  const updatePassword = (e: FormEvent<HTMLFormElement>) => {
+    console.log("update password");
+    // fetch update password
+  };
 
   return (
     <div className={styles.__settings}>
       <h1>Settings</h1>
-      <Input
+      <form onSubmit={(e) => updateData(e)}>
+        <Input
           icon={avatar}
           type={"text"}
           placeholder={"Prénom"}
@@ -66,32 +72,33 @@ const Settings = () => {
           value={job}
           onChange={(e: any) => setJob(e.currentTarget.value)}
         />
-        <Input onClick={() => updateData()} type={"submit"} value={"Sauvegarder"} />
-        <br />
-        <section className={styles.__danger_zone}>
-          <hr />
-          <h2>Danger Zone</h2>
-
-          <h3>Changement de mot de passe :</h3>
-        <Input
-          icon={lock}
-          type={"text"}
-          placeholder={"Mot de passe"}
-          value={password}
-          onChange={(e: any) => setPassword(e.currentTarget.value)}
-        />
-        <Input
-          icon={lock}
-          type={"text"}
-          placeholder={"Confirmation du mot de passe"}
-          value={confirmPassword}
-          onChange={(e: any) => setConfirmPassword(e.currentTarget.value)}
-        />
-        <Input onClick={() => updateData()} type={"submit"} value={"Sauvegarder"} />
-        </section>
+        <Input type={"submit"} value={"Sauvegarder"} />
+      </form>
+      <br />
+      <section className={styles.__danger_zone}>
+        <hr />
+        <h2>Danger Zone</h2>
+        <h3>Changement de mot de passe :</h3>
+        <form onSubmit={(e) => updatePassword(e)}>
+          <Input
+            icon={lock}
+            type={"text"}
+            placeholder={"Mot de passe"}
+            value={password}
+            onChange={(e: any) => setPassword(e.currentTarget.value)}
+          />
+          <Input
+            icon={lock}
+            type={"text"}
+            placeholder={"Confirmation du mot de passe"}
+            value={confirmPassword}
+            onChange={(e: any) => setConfirmPassword(e.currentTarget.value)}
+          />
+          <Input type={"submit"} value={"Sauvegarder"} />
+        </form>
+      </section>
     </div>
   );
-
-}
+};
 
 export default Settings;

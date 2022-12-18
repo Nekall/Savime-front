@@ -6,6 +6,7 @@ import { v4 as uuidv4 } from "uuid";
 // Components
 import CompanyInfo from '../CompanyInfo';
 import Home from '../Home';
+import Documents from '../Documents';
 
 // Assets
 import home from "../../assets/images/icon/home.svg";
@@ -32,7 +33,7 @@ const SideMenu = ({ setCurrentPage }: Props) => {
     { icon: card, alt: "card", target: <CompanyInfo />, name: "Informations" },
     //{ icon: paperPlane, alt: "paper plane", target: "Repudiandae", name: "Repudiandae" },
     { icon: calendar, alt: "calendar", target: renderCalendar, name: "Calendrier" },
-    { icon: archive, alt: "archive", target: "Documents (Génération | Téléchargements)", name: "Documents" },
+    { icon: archive, alt: "archive", target: Documents, name: "Documents" },
   ];
 
   return (
