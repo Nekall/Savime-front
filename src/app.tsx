@@ -14,22 +14,25 @@ import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
 import Maintenance from "./pages/Maintenance";
 import LandingPage from "./pages/LandingPage";
+import AdminPanel from "./pages/AdminPanel";
 import Dashboard from "./pages/Dashboard";
-import Login from "./pages/Login";
 import Signup from "./pages/Signup";
-import Home from "./pages/Home";
+import Login from "./pages/Login";
 import Error from "./pages/Error";
+import Admin from "./pages/Admin";
+import Home from "./pages/Home";
 
 // Atoms
 import { tokenState } from "./atoms/user";
 
 // Env
 const { REACT_APP_MAINTENANCE } = process.env;
-const maintenanceMode = REACT_APP_MAINTENANCE? JSON.parse(REACT_APP_MAINTENANCE) : false;
-console.log("REACT_APP_MAINTENANCE", maintenanceMode);
+const maintenanceMode = REACT_APP_MAINTENANCE
+  ? JSON.parse(REACT_APP_MAINTENANCE)
+  : false;
 
 const App = () => {
-    const token = useRecoilValue(tokenState);
+  const token = useRecoilValue(tokenState);
 
   interface AppProps {
     token: any;
@@ -40,16 +43,19 @@ const App = () => {
     if (!token) {
       return <Navigate to="/connexion" replace />;
     }
+
     return children;
   };
-
 
   return (
     <>
       <ToastContainer />
       <Router>
         <Routes>
-          <Route path="/" element={maintenanceMode? <Maintenance /> : <Home />} />
+          <Route
+            path="/"
+            element={maintenanceMode ? <Maintenance /> : <Home />}
+          />
           <Route path="/concept" element={<LandingPage />} />
           <Route path="/connexion" element={<Login />} />
           <Route path="/inscription" element={<Signup />} />
@@ -66,6 +72,8 @@ const App = () => {
             path="/reinitialisation-mot-de-passe/:token"
             element={<ResetPassword />}
           />
+          <Route path="/admin" element={<Admin />} />
+          <Route path="/panneau-administrateur" element={<AdminPanel />} />
           <Route path="*" element={<Error />} />
         </Routes>
       </Router>
