@@ -4,17 +4,11 @@ import { toast } from "react-toastify";
 import { SetStateAction } from "react";
 import { v4 as uuidv4 } from "uuid";
 
-// Components
-import Settings from "../Settings";
-
 // Styles
 import styles from "./styles.module.scss";
 
 // Assets
-import envelopeClosed from "../../assets/images/icon/envelope-closed.svg";
-import openInNewTab from "../../assets/images/icon/open-in-new-tab.svg";
 import logo from "../../assets/images/logo/logo-full-transparent.png";
-import gear from "../../assets/images/icon/gear.svg";
 import exit from "../../assets/images/icon/exit.svg";
 //import chat from "../../assets/images/icon/chat.svg";
 
@@ -23,24 +17,21 @@ import { tokenState, userDataState } from "../../atoms/user";
 
 interface Props {
   setCurrentPage: SetStateAction<any>;
+  links?: Array<any>;
+  shortcuts?: any;
 }
 
-const Navbar = ({ setCurrentPage }: Props) => {
+const Navbar = ({ setCurrentPage, links, shortcuts }: Props) => {
   const navigateTo = useNavigate();
   const setUserData = useSetRecoilState(userDataState);
   const setToken = useSetRecoilState(tokenState);
   const companyName = "CompanyName";
 
-  const openContactInfos = () => {
-    setCurrentPage(
-      "Possibilité d'envoyer un mail à l'entreprise (Dropdown mails)"
-    );
-  };
-
   const disconnect = () => {
     navigateTo("/connexion");
     setUserData({
       id: null,
+      role: null,
       firstname: null,
       lastname: null,
       email: null,
@@ -67,22 +58,7 @@ const Navbar = ({ setCurrentPage }: Props) => {
         <span className={styles.__company_name}>⨉ {companyName}</span>
       )}
       <div className={styles.__menu}>
-        {[
-          { target: "#", name: "Lorem ipsum", newTab: false },
-          { target: "#", name: "Dolor sit", newTab: false },
-          { target: "#", name: "Sit dolores", newTab: false },
-          { target: "#", name: "Adipisicing amet", newTab: false },
-          {
-            target:
-              "https://www.service-public.fr/particuliers/vosdroits/F34474",
-            name: (
-              <>
-                CSE <img src={openInNewTab} alt={"Open in new tab"} />
-              </>
-            ),
-            newTab: true,
-          },
-        ].map((link) => {
+        {links && links.map((link: any) => {
           return (
             <a
               key={uuidv4()}
@@ -99,18 +75,7 @@ const Navbar = ({ setCurrentPage }: Props) => {
         {/*<button className={styles.__chat} onClick={() => setCurrentPage("Chat")}>
           <img src={chat} alt="chat" />
     </button>*/}
-        <button
-          className={styles.__envelope}
-          onClick={() => openContactInfos()}
-        >
-          <img src={envelopeClosed} alt="envelope" />
-        </button>
-        <button
-          className={styles.__gear}
-          onClick={() => setCurrentPage(<Settings />)}
-        >
-          <img src={gear} alt="gear" />
-        </button>
+        {shortcuts && shortcuts}
       </div>
       <div className={styles.__disconnect}>
         <button onClick={() => disconnect()}>

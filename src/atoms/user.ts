@@ -4,6 +4,7 @@ const { persistAtom } = recoilPersist()
 
 type UserDataState = {
   id: number | null;
+  role: string | null;
   firstname: string | null;
   lastname: string | null;
   email: string | null;
@@ -14,6 +15,7 @@ export const userDataState = atom<UserDataState>({
   key: "userDataState",
   default: {
     id: null,
+    role: null,
     firstname: null,
     lastname: null,
     email: null,

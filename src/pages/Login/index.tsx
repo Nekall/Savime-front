@@ -51,12 +51,9 @@ const Login = () => {
         if (data.success) {
           const { token, data: user } = data;
           const { verified } = user;
-
           const role =  decodeJwt(token).role;
-          console.log('ROLE', role);
-          // Check role and redirect to the right dashboard
 
-          if (!verified) {
+          if (!verified && role !== "Manager") {  
             return toast.info("Votre compte n'est pas vérifier.", {
               position: "bottom-center",
               autoClose: 8000,
@@ -70,6 +67,7 @@ const Login = () => {
 
           const userObj = {
             id: user.id,
+            role: role,
             firstname: user.firstname,
             lastname: user.lastname,
             email: user.email,
@@ -81,6 +79,7 @@ const Login = () => {
           // recoil store
           setUserData({
             id: user.id,
+            role: role,
             firstname: user.firstname,
             lastname: user.lastname,
             email: user.email,
