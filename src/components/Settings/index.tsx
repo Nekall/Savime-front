@@ -18,27 +18,45 @@ import { userDataState } from "../../atoms/user";
 
 const Settings = () => {
   const dataUser = useRecoilState(userDataState);
-  console.log("dataUser", dataUser);
+  //console.log("dataUser", dataUser);
 
   const [firstname, setFirstname] = useState(dataUser[0].firstname);
   const [lastname, setLastname] = useState(dataUser[0].lastname);
   const [email, setEmail] = useState(dataUser[0].email);
   const [job, setJob] = useState(dataUser[0].job);
+  const [profilePicture, setProfilePicture] = useState() //dataUser[0].profilePicture
 
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
+  const reader = new FileReader();
+
   const updateData = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     console.log("update data");
-    // fetch update user
 
     if (firstname) console.log("e");
   };
 
   const updatePassword = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
     console.log("update password");
     // fetch update password
   };
+
+  const processProfilePicture = (e: any) => {
+    const input = e.target;
+    const file = input.files[0];
+
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = function() {
+      const base64 = reader.result;
+      console.log(base64);
+      //save base64 to state
+    }
+  }
 
   return (
     <div className={styles.__settings}>
@@ -71,6 +89,12 @@ const Settings = () => {
           placeholder={"Métier"}
           value={job}
           onChange={(e: any) => setJob(e.currentTarget.value)}
+        />
+        <Input
+          icon={rocket}
+          type={"file"}
+          value={profilePicture}
+          onChange={(e: any) => processProfilePicture(e)}
         />
         <Input type={"submit"} value={"Sauvegarder"} />
       </form>
