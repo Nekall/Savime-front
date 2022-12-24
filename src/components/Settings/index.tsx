@@ -29,8 +29,6 @@ const Settings = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  const reader = new FileReader();
-
   const updateData = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log("update data");

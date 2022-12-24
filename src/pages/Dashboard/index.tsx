@@ -26,7 +26,7 @@ import gear from "../../assets/images/icon/gear.svg";
 
 const Dashboard = () => {
   const userData = useRecoilValue(userDataState);
-  const { role, firstname, lastname, email, job } = userData;
+  const { role, firstname, lastname, email, job, profilePicture } = userData;
   const [currentPage, setCurrentPage] = useState<any>(<Home />);
   const openContactInfos = () => {
     setCurrentPage(
@@ -98,6 +98,7 @@ const Dashboard = () => {
           lastname={lastname}
           email={email}
           job={job}
+          profilePicture={profilePicture}
         />
         <hr />
         <SideMenu setCurrentPage={setCurrentPage} />

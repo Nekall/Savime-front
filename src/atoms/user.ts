@@ -9,6 +9,7 @@ type UserDataState = {
   lastname: string | null;
   email: string | null;
   job: string | null;
+  profilePicture: string | null;
 };
 
 export const userDataState = atom<UserDataState>({
@@ -20,6 +21,7 @@ export const userDataState = atom<UserDataState>({
     lastname: null,
     email: null,
     job: null,
+    profilePicture: null
   },
   effects_UNSTABLE: [persistAtom],
 });

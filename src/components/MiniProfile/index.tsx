@@ -6,12 +6,17 @@ interface MiniProfileProps {
   lastname: string | null;
   email: string | null;
   job: string | null;
+  profilePicture: string | null;
 }
 
-const MiniProfile = ({ firstname, lastname, email, job }: MiniProfileProps ) => {
+const MiniProfile = ({ firstname, lastname, email, job, profilePicture }: MiniProfileProps ) => {
   return (
     <div className={styles.__mini_profile}>
-      <div className={styles.__profile_picture}></div>
+      {profilePicture && <img 
+      className={styles.__profile_picture}
+      src={profilePicture}
+      alt="profile" 
+      />}
       <p className={styles.__names}>{`${firstname} ${lastname}`}</p>
       <p className={styles.__adress_mail}>{email}</p>
       <p className={styles.__adress_mail}>{job}</p>

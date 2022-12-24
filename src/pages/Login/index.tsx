@@ -75,7 +75,7 @@ const Login = () => {
 
           localStorage.setItem("__svm_token", token);
           localStorage.setItem("__svm_user", JSON.stringify(userObj));
-
+          console.log(user);
           // recoil store
           setUserData({
             id: user.id,
@@ -84,6 +84,7 @@ const Login = () => {
             lastname: user.lastname,
             email: user.email,
             job: user.job,
+            profilePicture: user.profilePicture,
           });
           setToken(token);
 
