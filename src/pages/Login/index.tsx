@@ -65,20 +65,11 @@ const Login = () => {
             });
           }
 
-          const userObj = {
-            id: user.id,
-            role: role,
-            firstname: user.firstname,
-            lastname: user.lastname,
-            email: user.email,
-          };
-
           localStorage.setItem("__svm_token", token);
-          localStorage.setItem("__svm_user", JSON.stringify(userObj));
           console.log(user);
           // recoil store
           setUserData({
-            id: user.id,
+            id: user.employee_id || user.manager_id,
             role: role,
             firstname: user.firstname,
             lastname: user.lastname,

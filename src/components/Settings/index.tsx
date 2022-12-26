@@ -1,5 +1,6 @@
 import { useRecoilState } from "recoil";
 import { FormEvent, useState } from "react";
+import { toast } from "react-toastify";
 
 // Components
 import Input from "../Input";
@@ -16,15 +17,17 @@ import lock from "../../assets/images/icon/lock.svg";
 // Atoms
 import { userDataState } from "../../atoms/user";
 
-const Settings = () => {
-  const dataUser = useRecoilState(userDataState);
-  //console.log("dataUser", dataUser);
+// Helpers
+import resizeImage from "../../helpers/resizeImage";
 
-  const [firstname, setFirstname] = useState(dataUser[0].firstname);
-  const [lastname, setLastname] = useState(dataUser[0].lastname);
-  const [email, setEmail] = useState(dataUser[0].email);
-  const [job, setJob] = useState(dataUser[0].job);
-  const [profilePicture, setProfilePicture] = useState() //dataUser[0].profilePicture
+const Settings = () => {
+  const [dataUser, setDateUser] = useRecoilState(userDataState);
+  console.log(dataUser);
+  const [firstname, setFirstname] = useState(dataUser.firstname);
+  const [lastname, setLastname] = useState(dataUser.lastname);
+  const [email, setEmail] = useState(dataUser.email);
+  const [job, setJob] = useState(dataUser.job);
+  const [profilePicture, setProfilePicture] = useState(dataUser.profilePicture)
 
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -33,7 +36,39 @@ const Settings = () => {
     e.preventDefault();
     console.log("update data");
 
-    if (firstname) console.log("e");
+    fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/employees/${dataUser.id}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          firstname,
+          lastname,
+          email,
+          job,
+          profilePicture,
+        }),
+      }
+    )
+      .then((response) => response.json())
+      .then((data) => {
+
+        console.log("data", data);
+        if (data.success) {
+          //success
+          setDateUser({
+            id: dataUser.id,
+            role: dataUser.role,
+            firstname: firstname,
+            lastname: lastname,
+            email: email,
+            job: job,
+            profilePicture: profilePicture
+          })
+        }
+      });
   };
 
   const updatePassword = (e: FormEvent<HTMLFormElement>) => {
@@ -46,14 +81,33 @@ const Settings = () => {
   const processProfilePicture = (e: any) => {
     const input = e.target;
     const file = input.files[0];
-
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = function() {
-      const base64 = reader.result;
-      console.log(base64);
-      //save base64 to state
+    
+    if(!file.type.includes("image")){
+      // make controle of size ?
+      e.target.value = null;
+      return toast.error("Seule les images sont acceptées.", {
+        position: "bottom-center",
+        autoClose: 4000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "dark",
+      });
+    }else {
+    //console.log(file);
+    //const resizedPP = resizeImage(file);
+    //console.log(resizedPP);
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = function() {
+        const base64PP = reader.result;
+        //const resizedPP = resizeImageBase64(base64PP);
+        //console.log(base64PP);
+        setProfilePicture(base64PP)
+      }
     }
+
   }
 
   return (
@@ -91,7 +145,6 @@ const Settings = () => {
         <Input
           icon={rocket}
           type={"file"}
-          value={profilePicture}
           onChange={(e: any) => processProfilePicture(e)}
         />
         <Input type={"submit"} value={"Sauvegarder"} />

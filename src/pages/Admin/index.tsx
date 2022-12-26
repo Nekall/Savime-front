@@ -40,16 +40,7 @@ const Admin = () => {
       .then((data) => {
         if (data.success) {
           const { token, data: user } = data;
-
-          const userObj = {
-            id: user.id,
-            firstname: user.firstname,
-            lastname: user.lastname,
-            email: user.email,
-          };
-
           localStorage.setItem("__svm_token", token);
-          localStorage.setItem("__svm_user", JSON.stringify(userObj));
 
           // recoil store ADMIN
           /*

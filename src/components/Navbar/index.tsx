@@ -40,7 +40,6 @@ const Navbar = ({ setCurrentPage, links, shortcuts }: Props) => {
     });
     setToken(null);
     localStorage.removeItem("__svm_token");
-    localStorage.removeItem("__svm_user");
     toast.success("Vous êtes déconnecté !", {
       position: "bottom-center",
       autoClose: 4000,

@@ -25,7 +25,6 @@ const useCheckJwt = () => {
             setIsAuth(data.success);
             if(!data.success) {
                 localStorage.removeItem("__svm_token");
-                localStorage.removeItem("__svm_user");
                 navigateTo("/connexion");
             }
         });

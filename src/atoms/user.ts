@@ -9,7 +9,7 @@ type UserDataState = {
   lastname: string | null;
   email: string | null;
   job: string | null;
-  profilePicture: string | null;
+  profilePicture: any;
 };
 
 export const userDataState = atom<UserDataState>({
