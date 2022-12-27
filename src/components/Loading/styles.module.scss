@@ -1,5 +1,17 @@
 .__loading{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+    position: absolute;
+    left: 45%;
+    top: 45%;
+
+    .__animation{
+        width: 100px;
+        height: 100px;
+        animation: breath 3s infinite;
+    }
+  }
+
+  @keyframes breath {
+    0%   { opacity:1; }
+    50%  { opacity:0.2; }
+    100% { opacity:1; }
+  }
