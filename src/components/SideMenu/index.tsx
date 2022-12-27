@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import Calendar from 'react-calendar';
+import React from 'react';
 import { SetStateAction } from "react";
 import { v4 as uuidv4 } from "uuid";
 
@@ -7,6 +6,7 @@ import { v4 as uuidv4 } from "uuid";
 import CompanyInfo from '../CompanyInfo';
 import Home from '../Home';
 import Documents from '../Documents';
+import Calendar from '../Calendar';
 
 // Assets
 import home from "../../assets/images/icon/home.svg";
@@ -23,16 +23,12 @@ interface Props {
 }
 
 const SideMenu = ({ setCurrentPage }: Props) => {
-  const [value, onChange] = useState(new Date());
-
-  const renderCalendar = () => <Calendar onChange={onChange} value={value} />
-;
 
   const btns = [
     { icon: home, alt: "home", target: <Home /> , name: "Accueil" },
     { icon: card, alt: "card", target: <CompanyInfo />, name: "Informations" },
     //{ icon: paperPlane, alt: "paper plane", target: "Repudiandae", name: "Repudiandae" },
-    { icon: calendar, alt: "calendar", target: renderCalendar, name: "Calendrier" },
+    { icon: calendar, alt: "calendar", target: <Calendar />, name: "Calendrier" },
     { icon: archive, alt: "archive", target: Documents, name: "Documents" },
   ];
 
