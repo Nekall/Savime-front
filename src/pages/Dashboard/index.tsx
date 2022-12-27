@@ -50,19 +50,19 @@ const Dashboard = () => {
     },
   ];
 
-  const employeeShortcuts = <>
-          <button
-          className={styles.__envelope}
-          onClick={() => openContactInfos()}
-        >
-          <img src={envelopeClosed} alt="envelope" />
-        </button>
-        <button
-          className={styles.__gear}
-          onClick={() => setCurrentPage(<Settings />)}
-        >
-          <img src={gear} alt="gear" />
-        </button></>
+  const employeeShortcuts = (
+    <div className={styles.__shortcut}>
+      <button className={styles.__envelope} onClick={() => openContactInfos()}>
+        <img src={envelopeClosed} alt="envelope" />
+      </button>
+      <button
+        className={styles.__gear}
+        onClick={() => setCurrentPage(<Settings />)}
+      >
+        <img src={gear} alt="gear" />
+      </button>
+    </div>
+  );
 
   if (useCheckJwt() === false) {
     return <Loading />;

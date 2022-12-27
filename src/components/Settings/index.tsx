@@ -22,7 +22,7 @@ import resizeImage from "../../helpers/resizeImage";
 
 const Settings = () => {
   const [dataUser, setDateUser] = useRecoilState(userDataState);
-  console.log(dataUser);
+
   const [firstname, setFirstname] = useState(dataUser.firstname);
   const [lastname, setLastname] = useState(dataUser.lastname);
   const [email, setEmail] = useState(dataUser.email);
@@ -34,8 +34,6 @@ const Settings = () => {
 
   const updateData = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("update data");
-
     fetch(
       `${process.env.REACT_APP_BACKEND_URL}/employees/${dataUser.id}`,
       {
@@ -95,16 +93,12 @@ const Settings = () => {
         theme: "dark",
       });
     }else {
-    //console.log(file);
-    //const resizedPP = resizeImage(file);
-    //console.log(resizedPP);
       const reader = new FileReader();
       reader.readAsDataURL(file);
-      reader.onload = function() {
+      reader.onload = async function() {
         const base64PP = reader.result;
-        //const resizedPP = resizeImageBase64(base64PP);
-        //console.log(base64PP);
-        setProfilePicture(base64PP)
+        //console.log(await resizeImage(base64PP));
+        setProfilePicture(await resizeImage(base64PP));
       }
     }
 
@@ -147,6 +141,9 @@ const Settings = () => {
           type={"file"}
           onChange={(e: any) => processProfilePicture(e)}
         />
+        <p className={styles.__img_details}>
+          ⓘ Il est conseillé d'utiliser une image carrée <br />si vous ne voulez pas subir une deformation de votre photo.
+        </p>
         <Input type={"submit"} value={"Sauvegarder"} />
       </form>
       <br />

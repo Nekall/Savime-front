@@ -53,7 +53,7 @@ const Navbar = ({ setCurrentPage, links, shortcuts }: Props) => {
 
   return (
     <div className={styles.__navbar}>
-      <img className={styles.__logo} src={logo} alt="logo " />
+      <img className={styles.__logo} src={logo} alt="logo" />
       {companyName && (
         <span className={styles.__company_name}>⨉ {companyName}</span>
       )}
@@ -71,12 +71,7 @@ const Navbar = ({ setCurrentPage, links, shortcuts }: Props) => {
           );
         })}
       </div>
-      <div className={styles.__shortcut}>
-        {/*<button className={styles.__chat} onClick={() => setCurrentPage("Chat")}>
-          <img src={chat} alt="chat" />
-    </button>*/}
-        {shortcuts && shortcuts}
-      </div>
+      {shortcuts && shortcuts}
       <div className={styles.__disconnect}>
         <button onClick={() => disconnect()}>
           Déconnexion <img src={exit} alt="logout" />

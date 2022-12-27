@@ -28,37 +28,6 @@
         }
     }
 
-    .__shortcut {
-        button {
-            cursor: pointer;
-            background-color: transparent;
-            border: none;
-            margin: 0 10px;
-        }
-
-        .__gear {
-            transition: transform 0.8s cubic-bezier(.68, -0.55, .27, 1.55);
-
-            &:hover {
-                transform: rotate(0.2turn);
-            }
-        }
-
-        .__envelope {
-            &:hover {
-                animation: wriggle 1.5s ease;
-            }
-        }
-
-        /*
-        .__chat {
-            &:hover {
-                animation: wriggle 1.5s ease;
-            }
-        }
-*/
-    }
-
     .__disconnect {
         button {
             cursor: pointer;
@@ -79,47 +48,5 @@
                 padding-left: 4px;
             }
         }
-    }
-}
-
-@keyframes wriggle {
-    30% {
-        transform: scale(1.1);
-    }
-
-    40%,
-    60% {
-        transform: rotate(-20deg) scale(1.1);
-    }
-
-    50% {
-        transform: rotate(20deg) scale(1.1);
-    }
-
-    70% {
-        transform: rotate(0deg) scale(1.1);
-    }
-
-    100% {
-        transform: scale(1);
-    }
-}
-
-@keyframes bounce {
-
-    0%,
-    20%,
-    50%,
-    80%,
-    100% {
-        transform: translateY(0);
-    }
-
-    40% {
-        transform: translateY(-15px);
-    }
-
-    60% {
-        transform: translateY(-5px);
     }
 }

@@ -1,32 +1,34 @@
-import Buffer from 'buffer';
+function resizeImage(base64Str, maxWidth = 180, maxHeight = 180) {
+  return new Promise((resolve) => {
+    let img = new Image()
+    img.src = base64Str
+    img.onload = () => {
+      let canvas = document.createElement('canvas')
+      const MAX_WIDTH = maxWidth
+      const MAX_HEIGHT = maxHeight
+      let width = img.width
+      let height = img.height
+/*
+      if (width > height) {
+        if (width > MAX_WIDTH) {
+          height *= MAX_WIDTH / width
+          width = MAX_WIDTH
+        }
+      } else {
+        if (height > MAX_HEIGHT) {
+          width *= MAX_HEIGHT / height
+          height = MAX_HEIGHT
+        }
+      }
+*/
+      canvas.width = 200
+      canvas.height = 200
 
-const resizeImage = (bufferFile) => {
-  // Vérifier si le fichier est une image en utilisant la propriété type de l'objet File ou de la chaîne data de l'objet Buffer
-  if (!bufferFile.type || !bufferFile.type.startsWith("image/")) {
-    console.error("Le fichier sélectionné n'est pas une image");
-    return;
-  }
-
-  // Créer un nouveau canvas et définir sa taille
-  let canvas = document.createElement("canvas");
-  canvas.width = 200;
-  canvas.height = 200;
-
-  // Charger le buffer image dans un élément image
-  let image = new Image();
-  image.src = bufferFile;
-
-  // Dessiner l'image sur le canvas en utilisant la méthode drawImage
-  let ctx = canvas.getContext("2d");
-  ctx.drawImage(image, 0, 0, 200, 200);
-
-  // Récupérer le nouveau buffer image du canvas sous forme de chaîne de caractères au format base64
-  let newBufferImage = canvas.toDataURL();
-
-  // Créer un nouveau buffer à partir de la chaîne de caractères au format base64
-  let imageBuffer = Buffer.from(newBufferImage, "base64");
-
-  return imageBuffer;
-};
+      let ctx = canvas.getContext('2d')
+      ctx.drawImage(img, 0, 0, width, height)
+      resolve(canvas.toDataURL())
+    }
+  })
+}
 
 export default resizeImage;
