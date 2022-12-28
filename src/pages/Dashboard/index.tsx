@@ -9,6 +9,9 @@ import Home from "../../components/Home";
 import Loading from "../../components/Loading";
 import Settings from "../../components/Settings";
 
+// Pages
+import Error from "../Error"
+
 // Styles
 import styles from "../../styles/pages/dashboard.module.scss";
 
@@ -85,32 +88,34 @@ const Dashboard = () => {
         </section>
       </div>
     );
+  }else if(role === "Employee"){
+    return (
+      <div className={styles.__dashboard}>
+        <section className={styles.__header}>
+          <Navbar setCurrentPage={setCurrentPage} links={employeeLinks} shortcuts={employeeShortcuts} />
+        </section>
+        <section className={styles.__side_menu}>
+          <MiniProfile
+            firstname={firstname}
+            lastname={lastname}
+            email={email}
+            job={job}
+            profilePicture={profilePicture}
+          />
+          <hr />
+          <SideMenu setCurrentPage={setCurrentPage} />
+        </section>
+        <section className={styles.__view}>
+          <div className={styles.__content}>
+            <span className={styles.__rounded}></span>
+            {currentPage}
+          </div>
+        </section>
+      </div>
+    );
   }
 
-  return (
-    <div className={styles.__dashboard}>
-      <section className={styles.__header}>
-        <Navbar setCurrentPage={setCurrentPage} links={employeeLinks} shortcuts={employeeShortcuts} />
-      </section>
-      <section className={styles.__side_menu}>
-        <MiniProfile
-          firstname={firstname}
-          lastname={lastname}
-          email={email}
-          job={job}
-          profilePicture={profilePicture}
-        />
-        <hr />
-        <SideMenu setCurrentPage={setCurrentPage} />
-      </section>
-      <section className={styles.__view}>
-        <div className={styles.__content}>
-          <span className={styles.__rounded}></span>
-          {currentPage}
-        </div>
-      </section>
-    </div>
-  );
+  return (<Error />)
 };
 
 export default Dashboard;

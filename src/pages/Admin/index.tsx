@@ -1,7 +1,7 @@
+import { useSetRecoilState } from "recoil";
 import { FormEvent, useState } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-//import { useSetRecoilState } from "recoil";
 
 // Styles
 import styles from "../../styles/pages/admin.module.scss";
@@ -17,14 +17,16 @@ import Header from "../../components/Header";
 import Input from "../../components/Input";
 
 // Atoms
-//import { tokenState, userDataState } from "../../atoms/user";
+import { tokenState, userDataState } from "../../atoms/user";
+import decodeJwt from "../../helpers/decodeJwt";
 
 const Admin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigateTo = useNavigate();
-  //const setUserData = useSetRecoilState(userDataState);
-  //const setToken = useSetRecoilState(tokenState);
+  const setToken = useSetRecoilState(tokenState);
+  const setUserData = useSetRecoilState(userDataState);
+
 
   const login = (e: FormEvent<HTMLFormElement>) => {
     e?.preventDefault();
@@ -39,20 +41,19 @@ const Admin = () => {
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
-          const { token, data: user } = data;
+          const { token } = data;
           localStorage.setItem("__svm_token", token);
-
-          // recoil store ADMIN
-          /*
+          const role =  decodeJwt(token).role;
           setUserData({
-            id: user.id,
-            firstname: user.firstname,
-            lastname: user.lastname,
-            email: user.email,
-            job: user.job,
+            id: null,
+            role: role,
+            firstname: null,
+            lastname: null,
+            email: null,
+            job: null,
+            profilePicture: null,
           });
           setToken(token);
-          */
           toast.success("Vous êtes connecté !", {
             position: "bottom-center",
             autoClose: 4000,
@@ -62,7 +63,7 @@ const Admin = () => {
             draggable: true,
             theme: "dark",
           });
-          navigateTo("/panneau-administrateur");
+          navigateTo("/admin/panneau-administrateur");
         } else {
           toast.error(data.message, {
             position: "bottom-center",

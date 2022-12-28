@@ -73,7 +73,14 @@ const App = () => {
             element={<ResetPassword />}
           />
           <Route path="/admin" element={<Admin />} />
-          <Route path="/panneau-administrateur" element={<AdminPanel />} />
+          <Route
+            path="/admin/panneau-administrateur"
+            element={
+              <ProtectedRoute token={token}>
+                <AdminPanel />
+              </ProtectedRoute>
+            }
+          />
           <Route path="*" element={<Error />} />
         </Routes>
       </Router>
