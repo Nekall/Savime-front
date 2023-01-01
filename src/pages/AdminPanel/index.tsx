@@ -20,7 +20,7 @@ import Loading from "../../components/Loading";
 import exit from "../../assets/images/icon/exit.svg";
 
 const AdminPanel = () => {
-  const [view, setView] = useState<any>(<Loading />);
+  const [view, setView] = useState<any>(null);
   const navigateTo = useNavigate();
   const setToken = useSetRecoilState(tokenState);
   const userData = useRecoilValue(userDataState);
@@ -53,19 +53,52 @@ const AdminPanel = () => {
     fetch(`${process.env.REACT_APP_BACKEND_URL}/${section}`)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data.data);
         if (data.data.length === 0) {
-          setView(data.message);
+          setView(<p className={styles.__message_no_data}>{data.message}</p>);
         } else {
           setView(
-            <>
-              {data.data.map((element: any) => {
-                for (const [key, value] of Object.entries(element)) {
-                  console.log(`${key}: ${value}`);
-                }
-                return element.toString();
-              })}
-            </>
+            <table>
+              <thead>
+                <tr>
+                  {Object.keys(data.data[0]).map((key: any) => {
+                    if (
+                      key !== "password" &&
+                      key !== "profilePicture" &&
+                      key !== "updatedAt" &&
+                      key !== "createdAt" &&
+                      key !== "verified" &&
+                      key !== "resetToken"
+                    ) {
+                      return <th>{key.toUpperCase()}</th>;
+                    } else {
+                      return null;
+                    }
+                  })}
+                </tr>
+              </thead>
+              <tbody>
+                {data.data.map((item: any) => {
+                  return (
+                    <tr>
+                      {Object.keys(item).map((key: any) => {
+                        if (
+                          key !== "password" &&
+                          key !== "profilePicture" &&
+                          key !== "updatedAt" &&
+                          key !== "createdAt" &&
+                          key !== "verified" &&
+                          key !== "resetToken"
+                        ) {
+                          return <td>{item[key]}</td>;
+                        } else {
+                          return null;
+                        }
+                      })}
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
           );
         }
       });
