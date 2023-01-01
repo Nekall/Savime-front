@@ -2,10 +2,13 @@ import { useState } from "react";
 import { useRecoilValue } from "recoil";
 
 // Components
+import CompanyInfo from '../../components/CompanyInfo';
+import Home from '../../components/Home';
+import Documents from '../../components/Documents';
+import Calendar from '../../components/Calendar';
 import MiniProfile from "../../components/MiniProfile";
 import SideMenu from "../../components/SideMenu";
 import Navbar from "../../components/Navbar";
-import Home from "../../components/Home";
 import Loading from "../../components/Loading";
 import Settings from "../../components/Settings";
 
@@ -25,7 +28,11 @@ import useCheckJwt from "../../hooks/checkJwt";
 import openInNewTab from "../../assets/images/icon/open-in-new-tab.svg";
 import envelopeClosed from "../../assets/images/icon/envelope-closed.svg";
 import gear from "../../assets/images/icon/gear.svg";
-
+import home from "../../assets/images/icon/home.svg";
+import card from "../../assets/images/icon/card.svg";
+import calendar from "../../assets/images/icon/calendar.svg";
+import archive from "../../assets/images/icon/archive.svg";
+import avatar from "../../assets/images/icon/avatar.svg";
 
 const Dashboard = () => {
   const userData = useRecoilValue(userDataState);
@@ -53,6 +60,20 @@ const Dashboard = () => {
     },
   ];
 
+  const employeesBtns = [
+    { icon: home, alt: "home", target: <Home /> , name: "Accueil" },
+    { icon: card, alt: "card", target: <CompanyInfo />, name: "Informations" },
+    { icon: calendar, alt: "calendar", target: <Calendar />, name: "Calendrier" },
+    { icon: archive, alt: "archive", target: Documents, name: "Documents" },
+  ];
+
+  const managersBtns = [
+    { icon: home, alt: "home", target: <>Home Manager</> , name: "Accueil" },
+    { icon: avatar, alt: "person", target: <>Listing des employé-es</>, name: "Employé-es" },
+    { icon: card, alt: "card", target: <>Company Info (view & edit)</>, name: "Informations" },
+    { icon: calendar, alt: "calendar", target: <>Calendrier complexe</>, name: "Calendrier" },
+  ];
+
   const employeeShortcuts = (
     <div className={styles.__shortcut}>
       <button className={styles.__envelope} onClick={() => openContactInfos()}>
@@ -78,12 +99,12 @@ const Dashboard = () => {
           <Navbar setCurrentPage={setCurrentPage} />
         </section>
         <section className={styles.__side_menu}>
-          <div>...</div>
+          <SideMenu btns={managersBtns} setCurrentPage={setCurrentPage} />
         </section>
         <section className={styles.__view}>
           <div className={styles.__content}>
             <span className={styles.__rounded}></span>
-            <h1>Dashboard Manager</h1>
+            {currentPage}
           </div>
         </section>
       </div>
@@ -103,7 +124,7 @@ const Dashboard = () => {
             profilePicture={profilePicture}
           />
           <hr />
-          <SideMenu setCurrentPage={setCurrentPage} />
+          <SideMenu btns={employeesBtns} setCurrentPage={setCurrentPage} />
         </section>
         <section className={styles.__view}>
           <div className={styles.__content}>

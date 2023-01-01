@@ -1,37 +1,16 @@
-import React from 'react';
 import { SetStateAction } from "react";
 import { v4 as uuidv4 } from "uuid";
-
-// Components
-import CompanyInfo from '../CompanyInfo';
-import Home from '../Home';
-import Documents from '../Documents';
-import Calendar from '../Calendar';
-
-// Assets
-import home from "../../assets/images/icon/home.svg";
-import card from "../../assets/images/icon/card.svg";
-import calendar from "../../assets/images/icon/calendar.svg";
-import archive from "../../assets/images/icon/archive.svg";
 
 // Styles
 import styles from "./styles.module.scss";
 import 'react-calendar/dist/Calendar.css';
 
 interface Props {
+  btns: Array<any>;
   setCurrentPage: SetStateAction<any>;
 }
 
-const SideMenu = ({ setCurrentPage }: Props) => {
-
-  const btns = [
-    { icon: home, alt: "home", target: <Home /> , name: "Accueil" },
-    { icon: card, alt: "card", target: <CompanyInfo />, name: "Informations" },
-    //{ icon: paperPlane, alt: "paper plane", target: "Repudiandae", name: "Repudiandae" },
-    { icon: calendar, alt: "calendar", target: <Calendar />, name: "Calendrier" },
-    { icon: archive, alt: "archive", target: Documents, name: "Documents" },
-  ];
-
+const SideMenu = ({ btns, setCurrentPage }: Props) => {
   return (
     <div className={styles.__slide_menu}>
       {btns.map(({ icon, alt, target, name }) => (
