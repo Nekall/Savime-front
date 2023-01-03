@@ -1,17 +1,10 @@
-.__loading{
-    position: absolute;
-    left: 45%;
-    top: 45%;
+.__loading {
+  position: absolute;
+  left: 45%;
+  top: 45%;
 
-    .__animation{
-        width: 100px;
-        height: 100px;
-        animation: breath 3s infinite;
-    }
+  .__animated_logo {
+    width: 125px;
+    height: 125px;
   }
-
-  @keyframes breath {
-    0%   { opacity:1; }
-    50%  { opacity:0.2; }
-    100% { opacity:1; }
-  }
+}
