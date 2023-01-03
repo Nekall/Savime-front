@@ -64,4 +64,77 @@
             }
         }
     }
+
+    @media only screen and (max-width: 1200px) {
+        margin: 10px 3%;
+        padding: 10px;
+        height: 450px;
+
+        .__button {
+            width: 180px;
+            background-color: transparent;
+            display: grid;
+            position: initial;
+            padding: 0;
+            border-radius: 0;
+            margin: -60px auto 0 auto;
+
+            div {
+                z-index: 100;
+                background-color: transparent;
+                width: auto;
+                height: auto;
+                border-radius: 6px 6px 0 0;
+                padding: 12px;
+
+                button {
+                    font-weight: bold;
+                    font-size: 14px;
+                    padding: 12px 20px;
+                }
+            }
+        }
+
+        .__image {
+            height: 450px;
+
+            img {
+                border-radius: 8px;
+                height: 100%;
+                width: 100%;
+                object-fit: cover;
+                mask-image: linear-gradient(90deg, rgba(255, 255, 255, 0.556), #000000cc 150px);
+            }
+
+            h1 {
+                font-weight: normal;
+                position: relative;
+                top: -125px;
+                font-size: 20px;
+                margin-left: 20px;
+
+                span {
+                    font-size: 15px;
+                    display: block;
+                    margin-left: 0px;
+                }
+            }
+        }
+    }
+
+    @media only screen and (max-width: 600px) {
+        height: 400px;
+
+        .__image {
+            height: 400px;
+        }
+    }
+
+    @media only screen and (max-width: 425px) {
+        height: 300px;
+
+        .__image {
+            height: 300px;
+        }
+    }
 }
