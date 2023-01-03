@@ -24,7 +24,7 @@ const LandingPage = () => {
   useEffect(() => {
     let refreshTitleInterval = setInterval(
       () => setRefreshTitle(!refreshTitle),
-      5000
+      1000000
     );
 
     if (document.title === "Savime") {
