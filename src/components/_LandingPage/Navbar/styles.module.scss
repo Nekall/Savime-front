@@ -39,4 +39,42 @@
             }
         }
     }
+
+
+    @media only screen and (max-width: 1200px){
+        nav {
+                ul {
+                    li {
+                margin: 0 20px;
+
+                        a {
+                            font-size: 16px;
+                        }
+                    }
+                }
+            }
+    }
+    @media only screen and (max-width: 650px){
+        nav {
+            ul {
+                li {
+                margin: 0 15px;
+
+                    a {
+                        font-size: 14px;
+                    }
+                }
+            }
+        }
+    }
+    @media only screen and (max-width: 580px){
+        nav {
+            display: none;
+        }
+
+        .__logo {
+            height: 35px;
+            margin: auto;
+        }
+    }
 }
