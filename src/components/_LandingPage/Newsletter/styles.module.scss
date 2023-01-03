@@ -72,6 +72,97 @@
         -webkit-animation: slide-out-right 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
         animation: slide-out-right 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
     }
+
+    @media only screen and (max-width: 1200px){
+        margin: 25px 3%;
+        padding: 20px;
+        text-align: center;
+    
+        h3{
+            font-size: 20px;
+            margin: 10px 0;
+        }
+    
+        h5{
+            font-size: 16px;
+            font-weight: initial;
+            margin: 10px 0;
+        }
+    
+        p{
+            font-size: 14px;
+            margin: 15px 0;
+        }
+    
+        .__input{
+            width: 265px;
+            border-radius: 6px;
+            padding: 4px;
+            margin: 20px auto 10px auto;
+
+            span{
+                padding-left: 12px;
+            }
+    
+            input[type=email]{
+                padding-left: 5px;
+                width: 140px;
+                height: 40px;
+                font-size: 14px;
+            }
+    
+            .__send_button{
+                height: 40px;
+                width: 80px;
+                font-size: 14px;
+            }
+        }
+    }
+    @media only screen and (max-width: 600px){
+        margin: 25px 3%;
+        padding: 20px;
+        text-align: center;
+    
+        h3{
+            font-size: 20px;
+            margin: 10px 0;
+        }
+    
+        h5{
+            font-size: 16px;
+            font-weight: initial;
+            margin: 10px 0;
+        }
+    
+        p{
+            font-size: 14px;
+            margin: 15px 0;
+        }
+    
+        .__input{
+            width: 265px;
+            border-radius: 6px;
+            padding: 4px;
+            margin: 20px auto 10px auto;
+
+            span{
+                padding-left: 12px;
+            }
+    
+            input[type=email]{
+                padding-left: 5px;
+                width: 140px;
+                height: 40px;
+                font-size: 14px;
+            }
+    
+            .__send_button{
+                height: 40px;
+                width: 80px;
+                font-size: 14px;
+            }
+        }
+    }
 }
 
 @-webkit-keyframes slide-out-right {
