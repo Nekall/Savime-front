@@ -3,7 +3,7 @@
     width: 100vw;
     display: inline-flex;
     justify-content: space-between;
-    height: 50px;
+    height: auto;
 
     .__watermark {
         width: 100%;
@@ -50,6 +50,45 @@
                         width: 20px;
                         height: 20px;
                         filter: invert(72%) sepia(67%) saturate(6424%) hue-rotate(211deg) brightness(101%) contrast(94%);
+                    }
+                }
+            }
+        }
+    }
+
+    @media only screen and (max-width: 425px) {
+        height: auto;
+
+        .__watermark {
+            p {
+                font-weight: normal;
+                font-size: 12px;
+
+                span {
+                    font-size: 14px;
+                }
+
+                .__logo {
+                    height: 16px;
+                }
+            }
+        }
+
+        .__social_media {
+            margin: auto 2px auto 0;
+
+            ul {
+                li {
+                    a {
+                        margin: 4px;
+                        padding: 3px;
+                        width: 18px;
+                        height: 18px;
+
+                        img {
+                            width: 18px;
+                            height: 18px;
+                        }
                     }
                 }
             }
