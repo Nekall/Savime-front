@@ -7,7 +7,7 @@
         opacity: 0.6;
         filter: invert(58%) sepia(42%) saturate(5919%) hue-rotate(210deg) brightness(100%) contrast(94%); // #6781f7
 
-        &.__red{
+        &.__red {
             filter: invert(13%) sepia(95%) saturate(6937%) hue-rotate(346deg) brightness(85%) contrast(100%); // #d90429
         }
     }
@@ -37,7 +37,7 @@
         margin: 10px 0;
     }
 
-    textarea{
+    textarea {
         resize: none;
         background-color: $primary-bg;
         color: #fff;
@@ -51,11 +51,29 @@
         outline: none;
     }
 
-    .__error{
+    .__error {
         color: #a61530;
         font-size: 14px;
         padding-top: 8px;
         margin-top: -16px;
     }
 
+    @media only screen and (max-width: 600px) {
+
+        .__icon {
+            margin-right: -45px;
+        }
+
+
+        .__field {
+            width: 210px !important;
+            height: 25px;
+            font-size: 16px;
+        }
+        
+        .__submit {
+            padding: 8px 20px;
+            font-size: 16px;
+        }
+    }
 }
