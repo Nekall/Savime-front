@@ -14,4 +14,22 @@
             color: $white-color;
         }
     }
+
+    @media only screen and (max-width: 1000px) {
+        height: 100vh;
+        align-items: center;
+
+        .__container {
+            margin: 0;
+
+            img{
+                width: 100%;
+            }
+
+            h1 {
+                font-size: 20px;
+            }
+
+        }
+    }
 }
