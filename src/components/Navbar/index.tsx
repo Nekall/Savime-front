@@ -25,7 +25,7 @@ const Navbar = ({ setCurrentPage, links, shortcuts }: Props) => {
   const navigateTo = useNavigate();
   const setUserData = useSetRecoilState(userDataState);
   const setToken = useSetRecoilState(tokenState);
-  const companyName = "CompanyName";
+  const companyName = process.env.REACT_APP_COMPANY_NAME;
 
   const disconnect = () => {
     navigateTo("/connexion");

@@ -32,6 +32,7 @@ Votre application est prête à être déployée !
 
 Pour exécuter ce projet, vous devrez ajouter les variables d'environnement suivantes à votre fichier .env
 
+`REACT_APP_COMPANY_NAME`
 `REACT_APP_BACKEND_URL`
 `REACT_APP_FRONTEND_URL`
 `REACT_APP_MAINTENANCE`
