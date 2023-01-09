@@ -24,16 +24,19 @@ const Home = () => {
     <div className={styles.__home}>
       <h1>{`Bonjour ${firstname}`},</h1>
       <div className={styles.__multi_sections}>
-      <WelcomeBanner />
-      <Calendar
-        className={styles.__calendar}
-        locale={"fr-FR"}
-        onChange={onChange}
-        value={value}
-      />
-      <UsefulInfo />
-      <QuickContact />
-      <News />
+        <div>
+          <WelcomeBanner />
+          <br />
+          <UsefulInfo />
+        </div>
+        <Calendar
+          className={styles.__calendar}
+          locale={"fr-FR"}
+          onChange={onChange}
+          value={value}
+        />
+        <News />
+        <QuickContact />
       </div>
     </div>
   );

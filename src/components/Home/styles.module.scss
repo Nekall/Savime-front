@@ -1,16 +1,18 @@
 .__home {
 
-    .__multi_sections{
-        display: grid; 
-        grid-auto-columns: 1fr; 
-        grid-template-columns: 1.3fr 0.7fr; 
-        grid-template-rows: 1fr 1fr; 
-        gap: 40px 40px; 
+    .__multi_sections {
+        display: grid;
+        grid-auto-columns: 1fr;
+        grid-template-columns: 1.3fr 0.7fr;
+        grid-template-rows: 1fr 1fr;
+        gap: 40px 40px;
+        grid-auto-flow: dense;
     }
 
-    .__calendar{
+    .__calendar {
         border-radius: 8px;
         width: 100% !important;
         min-height: 350px;
+        color: #000000;
     }
 }

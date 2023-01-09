@@ -8,9 +8,9 @@ const Calendar = () => {
   const [value, onChange] = useState(new Date());
 
   return (
-    <div className={styles.__calendar}>
-      <ReactCalendar locale={"fr-FR"} onChange={onChange} value={value} />
-    </div>
+    //<div className={styles.__calendar}>
+      <ReactCalendar className={styles.__calendar} locale={"fr-FR"} onChange={onChange} value={value} />
+    //</div>
   );
 };
 
