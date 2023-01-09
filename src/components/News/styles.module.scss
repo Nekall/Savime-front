@@ -1,24 +1,32 @@
-.__news{
+.__news {
     background-color: $light-blue-color;
     border-radius: 8px;
     padding: 10px;
     min-width: 400px;
 
-    ul{
+    p {
+        display: block;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    ul {
         list-style: none;
         padding: 0;
         margin: 0;
-        li{
+
+        li {
             margin-top: 15px;
             margin-left: 5px;
         }
     }
 
-    .__date{
+    .__date {
         font-size: 12px;
     }
 
-    .__more_articles{
+    .__more_articles {
         cursor: pointer;
         font-weight: bold;
         display: grid;

@@ -39,7 +39,7 @@ import paperPlane from "../../assets/images/icon/paper-plane.svg";
 const Dashboard = () => {
   const userData = useRecoilValue(userDataState);
   const { role, firstname, lastname, email, job, profilePicture } = userData;
-  const [currentPage, setCurrentPage] = useState<any>(role === "employee" ? <Home /> : <>Home Manager</>);
+  const [currentPage, setCurrentPage] = useState<any>(role === "Employee" ? <Home /> : <>Home Manager</>);
   const openContactInfos = () => {
     setCurrentPage(
       "Possibilité d'envoyer un mail à l'entreprise (Dropdown mails)"
