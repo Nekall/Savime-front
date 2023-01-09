@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 // Assets
 import plus from "../../assets/images/icon/plus.svg"
+import trash from "../../assets/images/icon/trash.svg"
 
 // Styles
 import styles from "./styles.module.scss";
@@ -73,6 +74,7 @@ const News = ({ editMode }: NewsProps) => {
       {news.map(({ new_id, title, content }: any) => (
           <li key={`new-${new_id}`}>
             <h3>{title}</h3>
+            <button><img src={trash} alt="poubelle" /></button>
             <p>{content}</p>
           </li>
         ))}
