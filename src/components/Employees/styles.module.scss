@@ -1,0 +1,18 @@
+.__employees {
+    tr {
+        cursor: default;
+
+        &:hover {
+            background-color: $primary-bg;
+            border: 1px solid $primary-bg;
+        }
+
+        td {
+            padding: 5px 10px;
+
+            &:last-child {
+                cursor: pointer;
+            }
+        }
+    }
+}

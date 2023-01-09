@@ -1,20 +1,50 @@
+import { useEffect, useState } from "react";
+
 // Styles
 import styles from "./styles.module.scss";
 
-const News = () => {
-    return (
-        <div className={styles.__news}>
-        <h2>Actualités internes</h2>
-        <ul>
-            <li>Lorem ipsum dulor sit amet, consectetur adipiscing elit. <span className={styles.__date}>(01/23/4567)</span></li>
-            <li>Quisque rhoncus tortor pharetra, vehicula enim eget, congue orci. <span className={styles.__date}>(01/23/4567)</span></li>
-            <li>Etiam porta nisl vitae augue sagittis dapibus. <span className={styles.__date}>(01/23/4567)</span></li>
-            <li>Nullam ut ante ultricies enim accumsan sagittis non fermentum elit. <span className={styles.__date}>(01/23/4567)</span></li>
-            <li>Sed vitae sapien nec est mullis hendrerit. <span className={styles.__date}>(01/23/4567)</span></li>
-        </ul>
-        <button className={styles.__more_articles}>Plus d'articles...</button>
-        </div>
-    );
-    };
+interface NewsProps {
+  editMode?: boolean;
+}
+
+const News = ({ editMode }: NewsProps) => {
+  const [news, setNews] = useState<any>([]);
+
+  useEffect(() => {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/news`)
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          setNews(data.data);
+        }
+      });
+  }, []);
+
+  return editMode ? (
+    <>
+      <h2>Actualités internes</h2>
+      <p>Edit Mode</p>
+      {news.map(({ new_id, title, content }: any) => (
+          <li key={`new-${new_id}`}>
+            <h3>{title}</h3>
+            <p>{content}</p>
+          </li>
+        ))}
+    </>
+  ) : (
+    <div className={styles.__news}>
+      <h2>Actualités internes</h2>
+      <ul>
+        {news.map(({ new_id, title, content }: any) => (
+          <li key={`new-${new_id}`}>
+            <h3>{title}</h3>
+            <p>{content}</p>
+          </li>
+        ))}
+      </ul>
+      <button className={styles.__more_articles}>Plus d'articles...</button>
+    </div>
+  );
+};
 
 export default News;

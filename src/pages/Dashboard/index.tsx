@@ -11,6 +11,8 @@ import SideMenu from "../../components/SideMenu";
 import Navbar from "../../components/Navbar";
 import Loading from "../../components/Loading";
 import Settings from "../../components/Settings";
+import News from "../../components/News";
+import Employees from "../../components/Employees";
 
 // Pages
 import Error from "../Error"
@@ -32,12 +34,12 @@ import home from "../../assets/images/icon/home.svg";
 import card from "../../assets/images/icon/card.svg";
 import calendar from "../../assets/images/icon/calendar.svg";
 import archive from "../../assets/images/icon/archive.svg";
-import avatar from "../../assets/images/icon/avatar.svg";
+import paperPlane from "../../assets/images/icon/paper-plane.svg";
 
 const Dashboard = () => {
   const userData = useRecoilValue(userDataState);
   const { role, firstname, lastname, email, job, profilePicture } = userData;
-  const [currentPage, setCurrentPage] = useState<any>(<Home />);
+  const [currentPage, setCurrentPage] = useState<any>(role === "employee" ? <Home /> : <>Home Manager</>);
   const openContactInfos = () => {
     setCurrentPage(
       "Possibilité d'envoyer un mail à l'entreprise (Dropdown mails)"
@@ -69,9 +71,10 @@ const Dashboard = () => {
 
   const managersBtns = [
     { icon: home, alt: "home", target: <>Home Manager</> , name: "Accueil" },
-    { icon: avatar, alt: "person", target: <>Listing des employé-es</>, name: "Employé-es" },
-    { icon: card, alt: "card", target: <>Company Info (view & edit)</>, name: "Informations" },
-    { icon: calendar, alt: "calendar", target: <>Calendrier complexe</>, name: "Calendrier" },
+    { icon: card, alt: "person", target: <Employees />, name: "Employé-es" },
+    { icon: paperPlane, alt: "paper plane", target: <News editMode />, name: "Actualités" },
+    { icon: card, alt: "card", target: <CompanyInfo editMode />, name: "Informations" },
+    { icon: calendar, alt: "calendar", target: <Calendar />, name: "Calendrier" },
   ];
 
   const employeeShortcuts = (

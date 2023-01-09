@@ -82,12 +82,10 @@ const AdminPanel = () => {
                     <tr>
                       {Object.keys(item).map((key: any) => {
                         if (
-                          key !== "password" &&
                           key !== "profilePicture" &&
                           key !== "updatedAt" &&
                           key !== "createdAt" &&
-                          key !== "verified" &&
-                          key !== "resetToken"
+                          key !== "verified"
                         ) {
                           return <td>{item[key]}</td>;
                         } else {
