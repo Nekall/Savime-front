@@ -11,7 +11,6 @@ import styles from "./styles.module.scss";
 const Documents = () => {
   const userData = useRecoilValue(userDataState);
   const { id } = userData;
-  console.log("ID ::", id);
   const [documents, setDocuments] = useState([]);
   const [attestation, setAttestation] = useState<any>(undefined);
   const [contract, setContract] = useState(undefined);
@@ -44,11 +43,6 @@ const Documents = () => {
         }
       });
   }, [id]);
-
-  console.log("D O C S ::", documents);
-  console.log("A T T E S T A T I O N ::", attestation);
-  console.log("C O N T R A C T ::", contract);
-  console.log("P A Y S L I P ::", payslip);
 
   return (
     <div className={styles.__documents}>
