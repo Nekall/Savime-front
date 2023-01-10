@@ -1,5 +1,10 @@
-.__quick_contact{
+.__quick_contact {
     background-color: $dark-blue-color;
     border-radius: 8px;
     padding: 10px;
+
+    ul {
+        height: 300px;
+        overflow-y: scroll;
+    }
 }

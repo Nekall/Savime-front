@@ -1,29 +1,35 @@
+import { useEffect, useState } from "react";
+
 // Styles
 import styles from "./styles.module.scss";
 
 const QuickContact = () => {
+  const [managers, setManagers] = useState<any>([]);
+
+  useEffect(() => {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/managers`)
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          setManagers(data.data);
+        }
+      });
+  }, []);
+
+  console.log(managers);
+
   return (
     <div className={styles.__quick_contact}>
       <h2>Contact rapide</h2>
       <ul>
-        <li>
-          <h3>Mr AZERTYUIOP</h3>
-          <a href="mailto:test@savime.tech">test@savime.tech</a>
-          <br />
-          <a href="tel:+0987654321">000987654321</a>
-        </li>
-        <li>
-          <h3>Mr AZERTYUIOP</h3>
-          <a href="mailto:test@savime.tech">test@savime.tech</a>
-          <br />
-          <a href="tel:+0987654321">000987654321</a>
-        </li>
-        <li>
-          <h3>Mr AZERTYUIOP</h3>
-          <a href="mailto:test@savime.tech">test@savime.tech</a>
-          <br />
-          <a href="tel:+0987654321">000987654321</a>
-        </li>
+        {managers.map(({ firstname, lastname, email, phone }: any) => (
+          <li>
+            <h3>{`${firstname} ${lastname}`}</h3>
+            <a href={`mailto:${email}`}>{email}</a>
+            <br />
+            <a href={`tel:+${phone}`}>{phone}</a>
+          </li>
+        ))}
       </ul>
     </div>
   );
