@@ -13,6 +13,7 @@ import Loading from "../../components/Loading";
 import Settings from "../../components/Settings";
 import News from "../../components/News";
 import Employees from "../../components/Employees";
+import Contact from "../../components/Contact";
 
 // Pages
 import Error from "../Error"
@@ -40,11 +41,6 @@ const Dashboard = () => {
   const userData = useRecoilValue(userDataState);
   const { role, firstname, lastname, email, job, profilePicture } = userData;
   const [currentPage, setCurrentPage] = useState<any>(role === "Employee" ? <Home /> : <>Home Manager</>);
-  const openContactInfos = () => {
-    setCurrentPage(
-      "Possibilité d'envoyer un mail à l'entreprise (Dropdown mails)"
-    );
-  };
 
   const employeeLinks = [
     { target: "#", name: "Lorem ipsum", newTab: false },
@@ -79,7 +75,7 @@ const Dashboard = () => {
 
   const employeeShortcuts = (
     <div className={styles.__shortcut}>
-      <button className={styles.__envelope} onClick={() => openContactInfos()}>
+      <button className={styles.__envelope} onClick={() => setCurrentPage(<Contact />)}>
         <img src={envelopeClosed} alt="envelope" />
       </button>
       <button
