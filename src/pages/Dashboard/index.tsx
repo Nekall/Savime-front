@@ -66,7 +66,7 @@ const Dashboard = () => {
     { icon: home, alt: "home", target: <Home /> , name: "Accueil" },
     { icon: card, alt: "card", target: <CompanyInfo />, name: "Informations" },
     { icon: calendar, alt: "calendar", target: <Calendar />, name: "Calendrier" },
-    { icon: archive, alt: "archive", target: Documents, name: "Documents" },
+    { icon: archive, alt: "archive", target: <Documents />, name: "Documents" },
   ];
 
   const managersBtns = [
