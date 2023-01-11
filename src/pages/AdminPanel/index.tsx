@@ -164,6 +164,21 @@ const AdminPanel = () => {
 
   const updateElement = (e: any) => {
     e.preventDefault();
+
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/${section}/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(currentElement),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          setModalEdit(false);
+          setRefresh(!refresh);
+        }
+      });
   };
 
   const deleteElement = (id: number) => {
@@ -213,7 +228,6 @@ const AdminPanel = () => {
           <div className={styles.__container}>{view}</div>
         </div>
       </div>
-
       {modalEdit && currentElement && (
         <Modal>
           <div className={styles.__edit_modal}>
@@ -233,21 +247,38 @@ const AdminPanel = () => {
                       <br />
                     </>
                   ) : (
-                    index !== 0 && element[0] !== "createdAt" && element[0] !== "updatedAt" && (
-                      <>
-                        <label htmlFor={`${element[0]}`}>{element[0]}</label>
-                        {element[0] !== "content" ? (
-                          <input
-                            id={element[0]}
-                            type="text"
-                            value={element[1]}
-                          />
-                        ) : (
-                          <textarea id={`${element[0]}`} value={element[1]} />
-                        )}
-                        <br />
-                      </>
-                    )
+                    index !== 0 &&
+                      element[0] !== "createdAt" &&
+                      element[0] !== "updatedAt" && (
+                        <>
+                          <label htmlFor={`${element[0]}`}>{element[0]}</label>
+                          {element[0] !== "content" ? (
+                            <input
+                              id={element[0]}
+                              type="text"
+                              value={element[1]}
+                              onChange={(e) => {
+                                setCurrentElement({
+                                  ...currentElement,
+                                  [element[0]]: e.target.value,
+                                });
+                              }}
+                            />
+                          ) : (
+                            <textarea
+                              id={`${element[0]}`}
+                              value={element[1]}
+                              onChange={(e) => {
+                                setCurrentElement({
+                                  ...currentElement,
+                                  [element[0]]: e.target.value,
+                                });
+                              }}
+                            />
+                          )}
+                          <br />
+                        </>
+                      )
                   );
                 }
               )}
