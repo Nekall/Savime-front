@@ -5,10 +5,11 @@
         margin: 0;
     }
 
-    .__logout_btn{
+    .__logout_btn {
         position: absolute;
         top: 0;
         right: 0;
+
         button {
             cursor: pointer;
             background-color: transparent;
@@ -45,7 +46,7 @@
             margin: 10px;
             border-radius: 8px;
 
-            button{
+            button {
                 width: 100%;
                 height: 50px;
                 font-size: 18px;
@@ -58,7 +59,7 @@
                 border-bottom: 2px solid $primary-bg;
                 transition: 0.2s;
 
-                &:hover{
+                &:hover {
                     background-color: $primary-bg;
                 }
             }
@@ -73,14 +74,14 @@
         }
     }
 
-    table{
+    table {
         width: 100%;
         border-collapse: collapse;
         border-spacing: 0;
         border: 1px solid $primary-bg;
         margin: 10px 0;
 
-        th{
+        th {
             background-color: $primary-bg;
             color: $white-color;
             padding: 10px;
@@ -88,19 +89,23 @@
             cursor: default;
         }
 
-        td{
-            padding: 10px;
-            border-bottom: 1px solid $primary-bg;
+        tr {
             cursor: pointer;
 
-            &:hover{
+            &:hover {
                 background-color: $primary-bg;
                 color: $white-color;
             }
+
+            td {
+                padding: 10px;
+                border-bottom: 1px solid $primary-bg;
+            }
         }
+
     }
 
-    .__message_no_data{
+    .__message_no_data {
         text-align: center;
         margin-top: 50px;
     }

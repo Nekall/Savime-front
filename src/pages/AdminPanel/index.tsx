@@ -53,6 +53,7 @@ const AdminPanel = () => {
     fetch(`${process.env.REACT_APP_BACKEND_URL}/${section}`)
       .then((response) => response.json())
       .then((data) => {
+        console.log(data);
         if (data.data.length === 0) {
           setView(<p className={styles.__message_no_data}>{data.message}</p>);
         } else {
@@ -62,14 +63,20 @@ const AdminPanel = () => {
                 <tr>
                   {Object.keys(data.data[0]).map((key: any) => {
                     if (
-                      key !== "password" &&
                       key !== "profilePicture" &&
                       key !== "updatedAt" &&
                       key !== "createdAt" &&
-                      key !== "verified" &&
-                      key !== "resetToken"
+                      key !== "employee" &&
+                      key !== "document" &&
+                      key !== "verified"
                     ) {
-                      return <th>{key.toUpperCase()}</th>;
+                      return (
+                        <th>
+                          {key === "employee_id"
+                            ? "EMPLOYEE"
+                            : key.toUpperCase()}
+                        </th>
+                      );
                     } else {
                       return null;
                     }
@@ -85,9 +92,17 @@ const AdminPanel = () => {
                           key !== "profilePicture" &&
                           key !== "updatedAt" &&
                           key !== "createdAt" &&
+                          key !== "employee" &&
+                          key !== "document" &&
                           key !== "verified"
                         ) {
-                          return <td>{item[key]}</td>;
+                          return (
+                            <td>
+                              {key === "employee_id"
+                                ? `${item.employee.firstname} ${item.employee.lastname}`
+                                : item[key]}
+                            </td>
+                          );
                         } else {
                           return null;
                         }
