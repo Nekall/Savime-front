@@ -144,3 +144,23 @@
         }
     }
 }
+
+.__read_actuality{
+    text-align: left;
+    .__close {
+        float: right;
+        cursor: pointer;
+        padding-top: 4px;
+        background-color: transparent;
+        border: none;
+
+        img {
+            padding: 6px;
+            border-radius: 8px;
+        }
+
+        :hover {
+            background-color: $primary-bg;
+        }
+    }
+}

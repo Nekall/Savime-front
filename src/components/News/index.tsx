@@ -23,7 +23,9 @@ const News = ({ editMode }: NewsProps) => {
   const [newContent, setNewContent] = useState<string>("");
   const [modalAddNews, setModalAddNews] = useState<boolean>(false);
   const [modalEditNews, setModalEditNews] = useState<boolean>(false);
+  const [modalReadNews, setModalReadNews] = useState<boolean>(false);
   const [refresh, setRefresh] = useState<boolean>(false);
+  const [selectedNews, setSelectedNews] = useState<any>(null);
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_BACKEND_URL}/news`)
@@ -199,13 +201,39 @@ const News = ({ editMode }: NewsProps) => {
   ) : (
     <div className={styles.__news}>
       <h2>Actualités internes</h2>
+      {modalReadNews && (
+        <Modal>
+          <div className={styles.__read_actuality}>
+            <button
+              className={styles.__close}
+              onClick={() => setModalReadNews(false)}
+            >
+              <img src={cross} alt="Close" />
+            </button>
+            <br />
+            <h3>{selectedNews.title}</h3>
+            <p>
+              Publié le{" "}
+              {new Date(selectedNews.createdAt).toLocaleDateString("fr-FR")}
+            </p>
+            <div>{selectedNews.content}</div>
+          </div>
+        </Modal>
+      )}
       <ul>
         {news
           .slice(0)
           .reverse()
           .map(({ new_id, title, content, createdAt }: any) => (
             <li key={`new-${new_id}`}>
-              <button>
+              <button
+                onClick={() => {
+                  setSelectedNews(
+                    news.find((newItem: any) => newItem.new_id === new_id)
+                  );
+                  setModalReadNews(true);
+                }}
+              >
                 <h3>{title}</h3>
                 <p className={styles.__date}>
                   Publié le {new Date(createdAt).toLocaleDateString("fr-FR")}
