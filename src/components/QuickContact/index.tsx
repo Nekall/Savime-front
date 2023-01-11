@@ -26,7 +26,7 @@ const QuickContact = () => {
           <li>
             <h3>{`${firstname} ${lastname}`}</h3>
             <a href={`mailto:${email}`}>{email}</a>
-            <br />
+            
             <a href={`tel:+${phone}`}>{phone}</a>
           </li>
         ))}
