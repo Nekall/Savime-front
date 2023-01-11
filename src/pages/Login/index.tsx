@@ -54,7 +54,7 @@ const Login = () => {
           const role =  decodeJwt(token).role;
 
           if (!verified && role !== "Manager") {  
-            return toast.info("Votre compte n'est pas vérifier.", {
+            return toast.info("Votre compte n'est pas vérifié.", {
               position: "bottom-center",
               autoClose: 8000,
               hideProgressBar: false,
