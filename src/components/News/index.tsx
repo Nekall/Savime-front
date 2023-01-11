@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 
 // Assets
-import plus from "../../assets/images/icon/plus.svg"
-import trash from "../../assets/images/icon/trash.svg"
+import plus from "../../assets/images/icon/plus.svg";
+import trash from "../../assets/images/icon/trash.svg";
 
 // Styles
 import styles from "./styles.module.scss";
@@ -52,7 +52,7 @@ const News = ({ editMode }: NewsProps) => {
       <p>Edit Mode</p>
       {modal && (
         <div className={styles.__modal}>
-          <button onClick={()=>setModal(false)}>X</button>
+          <button onClick={() => setModal(false)}>X</button>
           <h3>Ajouter une actualité</h3>
           <input
             type="text"
@@ -67,30 +67,41 @@ const News = ({ editMode }: NewsProps) => {
             onChange={(e) => setNewContent(e.target.value)}
           />
           <br />
-          <button onClick={()=>addNews()}>Ajouter</button>
+          <button onClick={() => addNews()}>Ajouter</button>
         </div>
       )}
-      <button onClick={()=>setModal(!modal)}><img src={plus} alt="plus" /></button>
+      <button onClick={() => setModal(!modal)}>
+        <img src={plus} alt="plus" />
+      </button>
       {news.map(({ new_id, title, content }: any) => (
-          <li key={`new-${new_id}`}>
-            <h3>{title}</h3>
-            <button><img src={trash} alt="poubelle" /></button>
-            <p>{content}</p>
-          </li>
-        ))}
+        <li key={`new-${new_id}`}>
+          <h3>{title}</h3>
+          <button>
+            <img src={trash} alt="poubelle" />
+          </button>
+          <p>{content}</p>
+        </li>
+      ))}
     </>
   ) : (
     <div className={styles.__news}>
       <h2>Actualités internes</h2>
       <ul>
-        {news.map(({ new_id, title, content }: any) => (
-          <li key={`new-${new_id}`}>
-            <h3>{title}</h3>
-            <p>{content}</p>
-          </li>
-        ))}
+        {news
+          .slice(0)
+          .reverse()
+          .map(({ new_id, title, content, createdAt }: any) => (
+            <li key={`new-${new_id}`}>
+              <button>
+                <h3>{title}</h3>
+                <p>
+                  Publié le {new Date(createdAt).toLocaleDateString("fr-FR")}
+                </p>
+                <p>{content}</p>
+              </button>
+            </li>
+          ))}
       </ul>
-      <button className={styles.__more_articles}>Plus d'articles...</button>
     </div>
   );
 };
