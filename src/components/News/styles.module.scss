@@ -71,7 +71,7 @@
             top: 0;
             background-color: transparent;
 
-            
+
             img {
                 background-color: $primary-bg;
                 padding: 6px;
@@ -90,7 +90,7 @@
         border: none;
         background-color: transparent;
         float: right;
-        
+
         img {
             padding: 6px;
             border-radius: 8px;
@@ -145,8 +145,9 @@
     }
 }
 
-.__read_actuality{
+.__read_actuality {
     text-align: left;
+
     .__close {
         float: right;
         cursor: pointer;

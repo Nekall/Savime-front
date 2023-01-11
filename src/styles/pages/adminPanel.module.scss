@@ -71,6 +71,7 @@
             background-color: $secondary-bg;
             margin: 10px;
             border-radius: 8px;
+            overflow: scroll;
         }
     }
 
@@ -79,18 +80,45 @@
         border-collapse: collapse;
         border-spacing: 0;
         border: 1px solid $primary-bg;
-        margin: 10px 0;
+
+        thead {
+            position: -webkit-sticky;
+            position: sticky;
+            top: 0;
+        }
 
         th {
             background-color: $primary-bg;
             color: $white-color;
             padding: 10px;
             text-align: left;
-            cursor: default;
+        }
+
+        .__btn_edit {
+            width: 85px;
+
+            .__btn {
+                float: right;
+                cursor: pointer;
+                padding-top: 4px;
+                border: none;
+                top: 0;
+                background-color: transparent;
+
+
+                img {
+                    background-color: $primary-bg;
+                    padding: 6px;
+                    border-radius: 8px;
+                }
+
+                :hover {
+                    background-color: $secondary-bg;
+                }
+            }
         }
 
         tr {
-            cursor: pointer;
 
             &:hover {
                 background-color: $primary-bg;
@@ -100,6 +128,7 @@
             td {
                 padding: 10px;
                 border-bottom: 1px solid $primary-bg;
+                cursor: default;
             }
         }
 
@@ -108,5 +137,29 @@
     .__message_no_data {
         text-align: center;
         margin-top: 50px;
+    }
+}
+
+.__edit_modal {
+    //cursor: default;
+
+    .__close {
+        float: right;
+        cursor: pointer;
+        padding-top: 4px;
+        border: none;
+        top: 0;
+        background-color: transparent;
+
+
+        img {
+            background-color: $primary-bg;
+            padding: 6px;
+            border-radius: 8px;
+        }
+
+        :hover {
+            background-color: $secondary-bg;
+        }
     }
 }

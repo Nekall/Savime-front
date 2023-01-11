@@ -21,7 +21,7 @@ const CompanyInfo = ({ editMode }: CompanyInfoProps) => {
         }
       });
 
-    fetch(`${process.env.REACT_APP_BACKEND_URL}/company-information`)
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/company-informations`)
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
