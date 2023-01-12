@@ -37,21 +37,24 @@ const Input = ({
     <div className={styles.__input}>
       {type !== "submit" && type !== "textArea" && (
         <div className={`${styles.__icon} ${error ? styles.__red : ""}`}>
-          <img
-            src={icon}
-            alt={alt}
-          />{" "}
-          {icon && <>|</>}
+          <img src={icon} alt={alt} /> {icon && <>|</>}
         </div>
       )}
       {type === "textArea" ? (
-        <textarea placeholder={placeholder}
-        value={value}
-        onChange={onChange}
+        <textarea
+          placeholder={placeholder}
+          value={value}
+          onChange={onChange}
         ></textarea>
       ) : (
         <input
-          className={type === "submit" ? styles.__submit : styles.__field}
+          className={
+            type === "submit"
+              ? styles.__submit
+              : icon
+              ? styles.__field
+              : `${styles.__field} ${styles.__no_icon}`
+          }
           type={type}
           placeholder={placeholder}
           value={value}

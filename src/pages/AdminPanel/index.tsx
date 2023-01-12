@@ -16,6 +16,7 @@ import { tokenState, userDataState } from "../../atoms/user";
 // Components
 import Loading from "../../components/Loading";
 import Modal from "../../components/Modal";
+import Input from "../../components/Input";
 
 // Assets
 import exit from "../../assets/images/icon/exit.svg";
@@ -124,7 +125,6 @@ const AdminPanel = () => {
   };
 
   useEffect(() => {
-    //get data one for current section
     if (id !== 0) {
       fetch(`${process.env.REACT_APP_BACKEND_URL}/${section}/${id}`)
         .then((response) => response.json())
@@ -241,48 +241,43 @@ const AdminPanel = () => {
             <form onSubmit={(e) => updateElement(e)}>
               {Object.entries(currentElement).map(
                 (element: any, index: number) => {
-                  return element[0] === "profilePicture" ? (
-                    <>
-                      <img src={element[1]} alt="Profile pic" />
-                      <br />
-                    </>
-                  ) : (
+                  return (
                     index !== 0 &&
-                      element[0] !== "createdAt" &&
-                      element[0] !== "updatedAt" && (
-                        <>
-                          <label htmlFor={`${element[0]}`}>{element[0]}</label>
-                          {element[0] !== "content" ? (
-                            <input
-                              id={element[0]}
-                              type="text"
-                              value={element[1]}
-                              onChange={(e) => {
-                                setCurrentElement({
-                                  ...currentElement,
-                                  [element[0]]: e.target.value,
-                                });
-                              }}
-                            />
-                          ) : (
-                            <textarea
-                              id={`${element[0]}`}
-                              value={element[1]}
-                              onChange={(e) => {
-                                setCurrentElement({
-                                  ...currentElement,
-                                  [element[0]]: e.target.value,
-                                });
-                              }}
-                            />
-                          )}
-                          <br />
-                        </>
-                      )
+                    element[0] !== "profilePicture" &&
+                    element[0] !== "createdAt" &&
+                    element[0] !== "updatedAt" && (
+                      <div key={uuidv4()}>
+                        <label>{element[0]}</label>
+                        {element[0] !== "content" ? (
+                          <Input
+                            type="text"
+                            value={element[1]}
+                            onChange={(e: { target: { value: any } }) => {
+                              setCurrentElement({
+                                ...currentElement,
+                                [element[0]]: e.target.value,
+                              });
+                            }}
+                          />
+                        ) : (
+                          <Input
+                            type="textArea"
+                            value={element[1]}
+                            onChange={(e: { target: { value: any } }) => {
+                              setCurrentElement({
+                                ...currentElement,
+                                [element[0]]: e.target.value,
+                              });
+                            }}
+                          />
+                        )}
+                        <br />
+                      </div>
+                    )
                   );
                 }
               )}
-              <input type="submit" value="Sauvegarder" />
+              <Input type="submit" value="Sauvegarder" />
             </form>
           </div>
         </Modal>
