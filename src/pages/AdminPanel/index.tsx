@@ -249,7 +249,7 @@ const AdminPanel = () => {
                     element[0] !== "profilePicture" &&
                     element[0] !== "createdAt" &&
                     element[0] !== "updatedAt" && (
-                      <div key={uuidv4()}>
+                      <div key={element[0]}>
                         <label>{element[0]}</label>
                         {element[0] !== "content" ? (
                           <Input
