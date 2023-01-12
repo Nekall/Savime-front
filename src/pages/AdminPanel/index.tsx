@@ -167,7 +167,7 @@ const AdminPanel = () => {
     e.preventDefault();
 
     fetch(`${process.env.REACT_APP_BACKEND_URL}/${section}/${id}`, {
-      method: "PUT",
+      method: "PATCH",
       headers: {
         "Content-Type": "application/json",
       },

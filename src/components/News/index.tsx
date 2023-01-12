@@ -61,7 +61,7 @@ const News = ({ editMode }: NewsProps) => {
   const editNews = (e: any) => {
     e.preventDefault();
     fetch(`${process.env.REACT_APP_BACKEND_URL}/news/${id}`, {
-      method: "PUT",
+      method: "PATCH",
       headers: {
         "Content-Type": "application/json",
       },
