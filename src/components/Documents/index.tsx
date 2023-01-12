@@ -8,10 +8,14 @@ import { userDataState } from "../../atoms/user";
 // Styles
 import styles from "./styles.module.scss";
 
-const Documents = () => {
+interface DocumentsProps {
+  editMode?: boolean;
+}
+
+const Documents = ({ editMode }: DocumentsProps) => {
   const userData = useRecoilValue(userDataState);
   const { id } = userData;
-  const [documents, setDocuments] = useState([]);
+  //const [documents, setDocuments] = useState([]);
   const [attestation, setAttestation] = useState<any>(undefined);
   const [contract, setContract] = useState(undefined);
   const [payslip, setPayslip] = useState([]);
@@ -21,7 +25,7 @@ const Documents = () => {
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
-          setDocuments(data.data);
+          //setDocuments(data.data);
 
           setAttestation(
             data.data.find(
@@ -44,16 +48,22 @@ const Documents = () => {
       });
   }, [id]);
 
-  return (
+  return editMode ? (
+    <div className={styles.__documents}>
+      <p>Edit mode</p>
+    </div>
+  ) : (
     <div className={styles.__documents}>
       <h2>Attestation de travail</h2>
       <div>
         {attestation && <button>Actualisation*</button>}
         <button>Télécharger</button>
-        {attestation && <p>
-          *actualisation de la date de l'attestation. (Dernière actualisation :{" "}
-          {(new Date(attestation.createdAt)).toLocaleDateString('fr-FR')})
-        </p>}
+        {attestation && (
+          <p>
+            *actualisation de la date de l'attestation. (Dernière actualisation
+            : {new Date(attestation.createdAt).toLocaleDateString("fr-FR")})
+          </p>
+        )}
       </div>
       <h2>Contrat de travail</h2>
       {contract ? (
