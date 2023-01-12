@@ -1,14 +1,50 @@
 .__employees {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+
+    .__btn_verif {
+        width: 85px;
+
+        .__btn {
+            float: right;
+            cursor: pointer;
+            padding-top: 4px;
+            border: none;
+            top: 0;
+            background-color: transparent;
+
+            :hover {
+                background-color: $secondary-bg;
+            }
+
+            .__green_bg{
+                background-color: #348334;
+            }
+
+            .__red_bg{
+                background-color: #cd4747;
+            }
+
+            img {
+                padding: 6px;
+                border-radius: 8px;
+            }
+        }
+    }
+
     tr {
-        cursor: default;
 
         &:hover {
             background-color: $primary-bg;
-            border: 1px solid $primary-bg;
+            color: $white-color;
         }
 
         td {
-            padding: 5px 10px;
+            padding: 10px;
+            border-bottom: 1px solid $primary-bg;
+            cursor: default;
         }
     }
+
 }

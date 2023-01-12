@@ -46,7 +46,7 @@ Pour exécuter ce projet, vous devrez ajouter les variables d'environnement suiv
 
 ## Fonctionnalités
 
-- Tableau de bord Employé-es
+- Tableau de bord Employé·es
 - Tableau de bord Managers
 - Tableau de bord Admin
 - Calendrier

@@ -40,7 +40,7 @@ import paperPlane from "../../assets/images/icon/paper-plane.svg";
 const Dashboard = () => {
   const userData = useRecoilValue(userDataState);
   const { role, firstname, lastname, email, job, profilePicture } = userData;
-  const [currentPage, setCurrentPage] = useState<any>(role === "Employee" ? <Home /> : <>Home Manager</>);
+  const [currentPage, setCurrentPage] = useState<any>(<Home />);
 
   const employeeLinks = [
     { target: "#", name: "Lorem ipsum", newTab: false },
@@ -67,7 +67,7 @@ const Dashboard = () => {
 
   const managersBtns = [
     { icon: home, alt: "home", target: <Home /> , name: "Accueil" },
-    { icon: card, alt: "person", target: <Employees />, name: "Employé-es" },
+    { icon: card, alt: "person", target: <Employees />, name: "Employé·es" },
     { icon: paperPlane, alt: "paper plane", target: <News editMode />, name: "Actualités" },
     { icon: card, alt: "card", target: <CompanyInfo editMode />, name: "Informations" },
     { icon: calendar, alt: "calendar", target: <Calendar />, name: "Calendrier" },
