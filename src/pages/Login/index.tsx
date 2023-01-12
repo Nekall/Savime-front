@@ -66,7 +66,6 @@ const Login = () => {
           }
 
           localStorage.setItem("__svm_token", token);
-          console.log(user);
           // recoil store
           setUserData({
             id: user.employee_id || user.manager_id,

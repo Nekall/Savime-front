@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
+// Components
+import Input from "../../components/Input";
+
 // Styles
 import styles from "./styles.module.scss";
 
@@ -34,27 +37,28 @@ const CompanyInfo = ({ editMode }: CompanyInfoProps) => {
     <>
       <div className={styles.__company_info}>
         <h2>Informations générales de l'entreprise</h2>
-        <table>
-          <thead>
-            <tr>
-              <th colSpan={3}>Informations générales</th>
-            </tr>
-          </thead>
-          <tbody>
-            {compagnyInfo.map(({ name, value }: any) => {
-              return (
-                <tr key={uuidv4()}>
-                  <td>{name}</td>
-                  <td> : </td>
-                  <td>
-                    <input type="text" value={value}/>
-                    <input type="submit" value="✔" />
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+        {compagnyInfo.map(({ name, value }: any) => {
+          return (
+            <div key={name}>
+              <p>{name} :</p>
+              <Input
+                type="text"
+                value={value}
+                onChange={(e: { target: { value: any } }) => {
+                  setCompagnyInfo(
+                    compagnyInfo.map((item: { name: any; value: any }) => {
+                      if (item.name === name) {
+                        item.value = e.target.value;
+                      }
+                      return item;
+                    })
+                  );
+                }}
+              />
+            </div>
+          );
+        })}
+
         <br />
         {teamInfo.map(({ firstname, lastname, email, phone, service }: any) => {
           return (

@@ -52,8 +52,6 @@ const Settings = () => {
     )
       .then((response) => response.json())
       .then((data) => {
-
-        console.log("data", data);
         if (data.success) {
           //success
           setDateUser({

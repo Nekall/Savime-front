@@ -16,8 +16,6 @@ const QuickContact = () => {
       });
   }, []);
 
-  console.log(managers);
-
   return (
     <div className={styles.__quick_contact}>
       <h2>Contact rapide</h2>

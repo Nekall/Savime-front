@@ -21,8 +21,6 @@ const Home = () => {
   const role = useRecoilValue(userDataState).role;
   const [value, onChange] = useState(new Date());
 
-  console.log(role);
-
   return (
     <div className={styles.__home}>
       <h1>{`Bonjour ${firstname}`},</h1>

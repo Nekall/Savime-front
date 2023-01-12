@@ -23,7 +23,6 @@ const Employees = () => {
   }, [refresh]);
 
   const updateVerification = (employeeId: number) => {
-    console.log("updateVerification", employeeId);
     fetch(
       `${process.env.REACT_APP_BACKEND_URL}/employees/verified/${employeeId}`,
       {
@@ -33,7 +32,6 @@ const Employees = () => {
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
-          console.log("updateVerification", data);
           setRefresh(!refresh);
         }
       });
