@@ -26,7 +26,7 @@ const Employees = () => {
     fetch(
       `${process.env.REACT_APP_BACKEND_URL}/employees/verified/${employeeId}`,
       {
-        method: "PUT",
+        method: "PATCH",
       }
     )
       .then((response) => response.json())

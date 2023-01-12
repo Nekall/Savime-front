@@ -33,15 +33,34 @@ const CompanyInfo = ({ editMode }: CompanyInfoProps) => {
       });
   }, []);
 
+  const updateCompanyInfo = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/company-informations`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(compagnyInfo),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          console.log(data);
+        }
+      });
+  };
+
   return editMode ? (
     <>
       <div className={styles.__company_info}>
         <h2>Informations générales de l'entreprise</h2>
+        <form onSubmit={(e) => updateCompanyInfo(e)}>
         {compagnyInfo.map(({ name, value }: any) => {
           return (
-            <div key={name}>
-              <p>{name} :</p>
+            <div className={styles.__inputs} key={name}>
+              <div className={styles.__label}>{name} :</div>
               <Input
+                required
                 type="text"
                 value={value}
                 onChange={(e: { target: { value: any } }) => {
@@ -58,12 +77,13 @@ const CompanyInfo = ({ editMode }: CompanyInfoProps) => {
             </div>
           );
         })}
-
+        <Input type="submit" value="Sauvegarder" />
+        </form>
         <br />
+        <h3>Equipe RH</h3>
         {teamInfo.map(({ firstname, lastname, email, phone, service }: any) => {
           return (
             <div key={uuidv4()}>
-              <h3>Equipe RH</h3>
               <div>
                 <p>{firstname}</p>
                 <p>{lastname}</p>
@@ -99,10 +119,10 @@ const CompanyInfo = ({ editMode }: CompanyInfoProps) => {
         </tbody>
       </table>
       <br />
+      <h3>Equipe RH</h3>
       {teamInfo.map(({ firstname, lastname, email, phone, service }: any) => {
         return (
           <div key={uuidv4()}>
-            <h3>Equipe RH</h3>
             <div>
               <p>{firstname}</p>
               <p>{lastname}</p>

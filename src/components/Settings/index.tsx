@@ -37,7 +37,7 @@ const Settings = () => {
     fetch(
       `${process.env.REACT_APP_BACKEND_URL}/employees/${dataUser.id}`,
       {
-        method: "PUT",
+        method: "PATCH",
         headers: {
           "Content-Type": "application/json",
         },

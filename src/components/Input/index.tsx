@@ -35,7 +35,7 @@ const Input = ({
   maxlength = maxlength ? maxlength : 100;
   return (
     <div className={styles.__input}>
-      {type !== "submit" && type !== "textArea" && (
+      {type !== "submit" && type !== "textArea" && icon && (
         <div className={`${styles.__icon} ${error ? styles.__red : ""}`}>
           <img src={icon} alt={alt} /> {icon && <>|</>}
         </div>
