@@ -18,25 +18,36 @@ import styles from "./styles.module.scss";
 
 const Home = () => {
   const firstname = useRecoilValue(userDataState).firstname;
+  const role = useRecoilValue(userDataState).role;
   const [value, onChange] = useState(new Date());
+
+  console.log(role);
 
   return (
     <div className={styles.__home}>
       <h1>{`Bonjour ${firstname}`},</h1>
       <div className={styles.__multi_sections}>
-        <div>
-          <WelcomeBanner />
-          <br />
-          <UsefulInfo />
-        </div>
-        <Calendar
-          className={styles.__calendar}
-          locale={"fr-FR"}
-          onChange={onChange}
-          value={value}
-        />
-        <News />
-        <QuickContact />
+        {role === "Manager" ? (
+          <>
+          <p>A remplir d'infos rapide...</p>
+          </>
+        ) : (
+          <>
+            <div>
+              <WelcomeBanner />
+              <br />
+              <UsefulInfo />
+            </div>
+            <Calendar
+              className={styles.__calendar}
+              locale={"fr-FR"}
+              onChange={onChange}
+              value={value}
+            />
+            <News />
+            <QuickContact />
+          </>
+        )}
       </div>
     </div>
   );

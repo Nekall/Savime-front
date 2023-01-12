@@ -66,7 +66,7 @@ const Dashboard = () => {
   ];
 
   const managersBtns = [
-    { icon: home, alt: "home", target: <>Home Manager</> , name: "Accueil" },
+    { icon: home, alt: "home", target: <Home /> , name: "Accueil" },
     { icon: card, alt: "person", target: <Employees />, name: "Employé-es" },
     { icon: paperPlane, alt: "paper plane", target: <News editMode />, name: "Actualités" },
     { icon: card, alt: "card", target: <CompanyInfo editMode />, name: "Informations" },
