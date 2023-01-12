@@ -23,6 +23,7 @@ import exit from "../../assets/images/icon/exit.svg";
 import cross from "../../assets/images/icon/cross.svg";
 import trash from "../../assets/images/icon/trash.svg";
 import pen from "../../assets/images/icon/pen.svg";
+import logo from "../../assets/images/logo/logo-full-transparent.png";
 
 const AdminPanel = () => {
   const [view, setView] = useState<any>(null);
@@ -196,7 +197,9 @@ const AdminPanel = () => {
   return (
     <>
       <div className={styles.__admin_pannel}>
-        <h1>Panneau Administrateur</h1>
+        <h1>
+          <img src={logo} alt="logo savime" /> Panneau Administrateur
+        </h1>
         <div className={styles.__logout_btn}>
           <button onClick={() => logout()}>
             Déconnexion <img src={exit} alt="logout" />
