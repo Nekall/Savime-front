@@ -70,6 +70,7 @@ const Dashboard = () => {
     { icon: card, alt: "person", target: <Employees />, name: "Employé·es" },
     { icon: paperPlane, alt: "paper plane", target: <News editMode />, name: "Actualités" },
     { icon: card, alt: "card", target: <CompanyInfo editMode />, name: "Informations" },
+    { icon: archive, alt: "archive", target: <Documents editMode />, name: "Documents" },
     { icon: calendar, alt: "calendar", target: <Calendar />, name: "Calendrier" },
   ];
 
