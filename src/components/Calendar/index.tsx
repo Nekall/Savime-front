@@ -1,5 +1,5 @@
 import { useState } from "react";
-import {Calendar as ReactCalendar} from "react-calendar";
+import { Calendar as ReactCalendar } from "react-calendar";
 
 // Styles
 import styles from "./styles.module.scss";
@@ -8,9 +8,15 @@ const Calendar = () => {
   const [value, onChange] = useState(new Date());
 
   return (
-    //<div className={styles.__calendar}>
-      <ReactCalendar className={styles.__calendar} locale={"fr-FR"} onChange={onChange} value={value} />
-    //</div>
+    <>
+      <h2>Calendrier</h2>
+      <ReactCalendar
+        className={styles.__calendar}
+        locale={"fr-FR"}
+        onChange={onChange}
+        value={value}
+      />
+    </>
   );
 };
 
