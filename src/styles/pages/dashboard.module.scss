@@ -44,7 +44,7 @@
 
     .__view {
         grid-area: view;
-        overflow: scroll;
+        overflow-y: auto;
         padding-right: 40px;
 
         .__content {

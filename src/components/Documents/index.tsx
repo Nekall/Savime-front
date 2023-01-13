@@ -22,11 +22,15 @@ const Documents = ({ editMode }: DocumentsProps) => {
   const userData = useRecoilValue(userDataState);
   const { role, id } = userData;
   const [documents, setDocuments] = useState([]);
+  const [docId, setDocId] = useState(0);
+  const [newDocument, setNewDocument] = useState<any>(null);
   const [attestation, setAttestation] = useState<any>(undefined);
   const [contract, setContract] = useState<any>(undefined);
   const [payslip, setPayslip] = useState<any>([]);
   const [modalUpdate, setModalUpdate] = useState(false);
   const [refresh, setRefresh] = useState(false);
+  const [modalPreview, setModalPreview] = useState(false);
+  const [preview, setPreview] = useState("");
 
   useEffect(() => {
     fetch(
@@ -61,7 +65,34 @@ const Documents = ({ editMode }: DocumentsProps) => {
   }, [id, role, refresh]);
 
   const updateAttestation = () => {
+    // simply endpoint to update attestation (date)
     console.log("Update Attestation");
+  };
+
+  const updateDocument = (e: any, document_id: number) => {
+    e.preventDefault();
+
+    const reader = new FileReader();
+    reader.readAsDataURL(newDocument);
+    reader.onload = async function () {
+      fetch(`${process.env.REACT_APP_BACKEND_URL}/documents/${document_id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          document: reader.result,
+        }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+          if (data.success) {
+            setRefresh(!refresh);
+            setModalUpdate(false);
+          }
+        });
+    };
   };
 
   const downloadDocument = (document_id: number) => {
@@ -110,7 +141,6 @@ const Documents = ({ editMode }: DocumentsProps) => {
                       : "Contrat"}
                   </td>
                   <td>{name}</td>
-                  <td>{document_id}</td>
                   <td>
                     {employee && `${employee.firstname} ${employee.lastname}`}
                   </td>
@@ -118,6 +148,7 @@ const Documents = ({ editMode }: DocumentsProps) => {
                   <td>
                     <button
                       onClick={() => {
+                        setDocId(document_id);
                         setModalUpdate(true);
                       }}
                     >
@@ -131,6 +162,15 @@ const Documents = ({ editMode }: DocumentsProps) => {
                       onDoubleClick={() => deleteDocument(document_id)}
                     >
                       Supprimer
+                    </button>
+                    <button
+                      onClick={() => {
+                        setPreview(document);
+                        setDocId(document_id);
+                        setModalPreview(true);
+                      }}
+                    >
+                      Aperçu
                     </button>
                   </td>
                 </tr>
@@ -148,11 +188,31 @@ const Documents = ({ editMode }: DocumentsProps) => {
               <img src={cross} alt="Close" />
             </button>
             <h2>Mettre à jour le document</h2>
-            <form>
+            <form onSubmit={(e) => updateDocument(e, docId)}>
               <label htmlFor="document">Document</label>
-              <input type="file" name="document" id="document" />
-              <button type="submit">Mettre à jour</button>
+              <input
+                onChange={(e: any) => setNewDocument(e.target.files[0])}
+                type="file"
+                name="document"
+                id="document"
+                accept="application/pdf"
+              />
+              <input type="submit" value="Mettre à jour" />
             </form>
+          </div>
+        </Modal>
+      )}
+      {modalPreview && (
+        <Modal>
+          <div className={styles.__preview_document}>
+            <button
+              className={styles.__close}
+              onClick={() => setModalPreview(false)}
+            >
+              <img src={cross} alt="Close" />
+            </button>
+            <h2>Aperçu</h2>
+            <embed type="application/pdf" src={preview} />
           </div>
         </Modal>
       )}
