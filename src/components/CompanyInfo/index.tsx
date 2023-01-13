@@ -55,29 +55,29 @@ const CompanyInfo = ({ editMode }: CompanyInfoProps) => {
       <div className={styles.__company_info}>
         <h2>Informations générales de l'entreprise</h2>
         <form onSubmit={(e) => updateCompanyInfo(e)}>
-        {compagnyInfo.map(({ name, value }: any) => {
-          return (
-            <div className={styles.__inputs} key={name}>
-              <div className={styles.__label}>{name} :</div>
-              <Input
-                required
-                type="text"
-                value={value}
-                onChange={(e: { target: { value: any } }) => {
-                  setCompagnyInfo(
-                    compagnyInfo.map((item: { name: any; value: any }) => {
-                      if (item.name === name) {
-                        item.value = e.target.value;
-                      }
-                      return item;
-                    })
-                  );
-                }}
-              />
-            </div>
-          );
-        })}
-        <Input type="submit" value="Sauvegarder" />
+          {compagnyInfo.map(({ name, value }: any) => {
+            return (
+              <div className={styles.__inputs} key={name}>
+                <div className={styles.__label}>{name} :</div>
+                <Input
+                  required
+                  type="text"
+                  value={value}
+                  onChange={(e: { target: { value: any } }) => {
+                    setCompagnyInfo(
+                      compagnyInfo.map((item: { name: any; value: any }) => {
+                        if (item.name === name) {
+                          item.value = e.target.value;
+                        }
+                        return item;
+                      })
+                    );
+                  }}
+                />
+              </div>
+            );
+          })}
+          <Input type="submit" value="Sauvegarder" />
         </form>
         <br />
         <h3>Equipe RH</h3>
@@ -101,17 +101,11 @@ const CompanyInfo = ({ editMode }: CompanyInfoProps) => {
     <div className={styles.__company_info}>
       <h2>Informations générales de l'entreprise</h2>
       <table>
-        <thead>
-          <tr>
-            <th colSpan={2}>Informations générales</th>
-          </tr>
-        </thead>
         <tbody>
           {compagnyInfo.map(({ name, value }: any) => {
             return (
               <tr key={uuidv4()}>
                 <td>{name}</td>
-                <td> : </td>
                 <td>{value}</td>
               </tr>
             );
@@ -120,20 +114,19 @@ const CompanyInfo = ({ editMode }: CompanyInfoProps) => {
       </table>
       <br />
       <h3>Equipe RH</h3>
-      {teamInfo.map(({ firstname, lastname, email, phone, service }: any) => {
-        return (
-          <div key={uuidv4()}>
-            <div>
+      <div className={styles.__managers}>
+        {teamInfo.map(({ firstname, lastname, email, phone, service }: any) => {
+          return (
+            <div className={styles.__card} key={uuidv4()}>
               <p>{firstname}</p>
               <p>{lastname}</p>
               <p>{email}</p>
               <p>{phone}</p>
               <p>{service}</p>
             </div>
-            <br />
-          </div>
-        );
-      })}
+          );
+        })}
+      </div>
     </div>
   );
 };

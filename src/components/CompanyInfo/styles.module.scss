@@ -5,6 +5,46 @@
         .__label {
             margin-top: 10px;
         }
+    }
 
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        border-spacing: 0;
+    }
+
+    tr {
+
+        &:hover {
+            background-color: $primary-bg;
+            color: $white-color;
+        }
+
+        td {
+            padding: 10px;
+            border-bottom: 1px solid $primary-bg;
+            cursor: default;
+        }
+    }
+
+    .__managers {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        grid-gap: 10px;
+
+        .__card {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 10px;
+            background-color: $primary-bg;
+
+            .__name {
+                font-size: 20px;
+            }
+
+            .__email {
+                font-size: 15px;
+            }
+        }
     }
 }
