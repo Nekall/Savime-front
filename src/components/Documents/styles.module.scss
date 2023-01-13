@@ -1,3 +1,37 @@
 .__documents {
 
+    button{
+        cursor: pointer;
+        background-color: $blue-color;
+        color: #fff;
+        border: none;
+        padding: 8px 28px;
+        border-radius: 8px;
+        font-size: 16px;
+        margin: 10px 10px 10px 0;
+
+        &:hover{
+            opacity: 0.8;
+        }
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        border-spacing: 0;
+    }
+
+    tr {
+
+        &:hover {
+            background-color: $primary-bg;
+            color: $white-color;
+        }
+
+        td {
+            padding: 10px;
+            border-bottom: 1px solid $primary-bg;
+        }
+    }
+
 }
