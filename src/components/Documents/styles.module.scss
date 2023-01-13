@@ -19,18 +19,53 @@
         width: 100%;
         border-collapse: collapse;
         border-spacing: 0;
-    }
 
-    tr {
+        thead{
+            height: 50px;
 
-        &:hover {
-            background-color: $primary-bg;
-            color: $white-color;
+            tr {
+                background-color: $primary-bg;
+                color: $white-color;
+                text-align: left;
+
+                th{
+                    padding: 10px;
+                }
+            }
         }
 
-        td {
-            padding: 10px;
-            border-bottom: 1px solid $primary-bg;
+        tbody{
+            tr {
+
+                &:hover {
+                    background-color: $primary-bg;
+                    color: $white-color;
+                }
+        
+                td {
+                    padding: 10px;
+                    border-bottom: 1px solid $primary-bg;
+                }
+            }
+        }
+    }
+
+    .__update_document{
+        .__close {
+            float: right;
+            cursor: pointer;
+            padding-top: 4px;
+            background-color: transparent;
+            border: none;
+
+            img {
+                padding: 6px;
+                border-radius: 8px;
+            }
+
+            :hover {
+                background-color: $primary-bg;
+            }
         }
     }
 
