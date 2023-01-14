@@ -1,6 +1,6 @@
 .__documents {
 
-    button{
+    button {
         cursor: pointer;
         background-color: $blue-color;
         color: #fff;
@@ -10,7 +10,7 @@
         font-size: 16px;
         margin: 10px 10px 10px 0;
 
-        &:hover{
+        &:hover {
             opacity: 0.8;
         }
     }
@@ -20,7 +20,7 @@
         border-collapse: collapse;
         border-spacing: 0;
 
-        thead{
+        thead {
             height: 50px;
 
             tr {
@@ -28,20 +28,20 @@
                 color: $white-color;
                 text-align: left;
 
-                th{
+                th {
                     padding: 10px;
                 }
             }
         }
 
-        tbody{
+        tbody {
             tr {
 
                 &:hover {
                     background-color: $primary-bg;
                     color: $white-color;
                 }
-        
+
                 td {
                     padding: 10px;
                     border-bottom: 1px solid $primary-bg;
@@ -50,7 +50,7 @@
         }
     }
 
-    .__update_document{
+    .__update_document {
         .__close {
             float: right;
             cursor: pointer;
@@ -68,29 +68,28 @@
             }
         }
     }
+}
 
-    .__preview_document{
-        .__close {
-            float: right;
-            cursor: pointer;
-            padding-top: 4px;
-            background-color: transparent;
-            border: none;
+.__preview_document {
+    .__close {
+        float: right;
+        cursor: pointer;
+        padding-top: 4px;
+        background-color: transparent;
+        border: none;
 
-            img {
-                padding: 6px;
-                border-radius: 8px;
-            }
-
-            :hover {
-                background-color: $primary-bg;
-            }
+        img {
+            padding: 6px;
+            border-radius: 8px;
         }
 
-        embed{
-            width: 100%;
-            height: 500px;
+        :hover {
+            background-color: $primary-bg;
         }
     }
 
+    embed {
+        width: 100%;
+        height: 500px;
+    }
 }
