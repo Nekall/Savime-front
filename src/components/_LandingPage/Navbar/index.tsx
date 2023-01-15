@@ -14,13 +14,13 @@ const Navbar = ({ links }: Props) => {
       <img className={styles.__logo} src={logo} alt="logo savime" />
       <nav>
         <ul>
-        {links.map((link)=>{
-          return(
-            <li>
-              <a href={link.target}>{link.name}</a>
-            </li>
-          )
-        })}
+          {links.map((link) => {
+            return (
+              <li>
+                <a href={link.target}>{link.name}</a>
+              </li>
+            );
+          })}
         </ul>
       </nav>
     </div>

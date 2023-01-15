@@ -13,7 +13,7 @@ const Home = () => {
         <img className={styles.__logo} src={logo} alt="logo savime" />
         <hr />
         <p>Time-saver for teams & companies</p>
-        <Link to={"/concept"}>CONCEPT</Link>{" "}<Link to={"/connexion"}>DEMO</Link>
+        <Link to={"/concept"}>CONCEPT</Link> <Link to={"/connexion"}>DEMO</Link>
       </div>
     </section>
   );

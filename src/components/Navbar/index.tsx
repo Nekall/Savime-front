@@ -36,7 +36,7 @@ const Navbar = ({ setCurrentPage, links, shortcuts }: Props) => {
       lastname: null,
       email: null,
       job: null,
-      profilePicture: null
+      profilePicture: null,
     });
     setToken(null);
     localStorage.removeItem("__svm_token");
@@ -58,18 +58,19 @@ const Navbar = ({ setCurrentPage, links, shortcuts }: Props) => {
         <span className={styles.__company_name}>⨉ {companyName}</span>
       )}
       <div className={styles.__menu}>
-        {links && links.map((link: any) => {
-          return (
-            <a
-              key={uuidv4()}
-              href={link.target}
-              target={link.newTab ? "_blank" : "_self"}
-              rel="noopener noreferrer"
-            >
-              {link.name}
-            </a>
-          );
-        })}
+        {links &&
+          links.map((link: any) => {
+            return (
+              <a
+                key={uuidv4()}
+                href={link.target}
+                target={link.newTab ? "_blank" : "_self"}
+                rel="noopener noreferrer"
+              >
+                {link.name}
+              </a>
+            );
+          })}
       </div>
       {shortcuts && shortcuts}
       <div className={styles.__disconnect}>

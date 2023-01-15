@@ -7,22 +7,22 @@ import logo from "../../assets/images/logo/logo-full-transparent.png";
 import styles from "../../styles/pages/maintenance.module.scss";
 
 const Maintenance = () => {
-    const [refreshTitle, setRefreshTitle] = useState<boolean>(false);
+  const [refreshTitle, setRefreshTitle] = useState<boolean>(false);
 
-    useEffect(() => {
-      let refreshTitleInterval = setInterval(
-        () => setRefreshTitle(!refreshTitle),
-        3000
-      );
-  
-      if (document.title === "Savime | In Progress") {
-        document.title = "Savime";
-      } else {
-        document.title = "Savime | In Progress";
-      }
-  
-      return () => clearInterval(refreshTitleInterval);
-    }, [refreshTitle]);
+  useEffect(() => {
+    let refreshTitleInterval = setInterval(
+      () => setRefreshTitle(!refreshTitle),
+      3000
+    );
+
+    if (document.title === "Savime | In Progress") {
+      document.title = "Savime";
+    } else {
+      document.title = "Savime | In Progress";
+    }
+
+    return () => clearInterval(refreshTitleInterval);
+  }, [refreshTitle]);
   return (
     <section className={styles.__maintenance}>
       <div>

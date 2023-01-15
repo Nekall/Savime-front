@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import { v4 as uuidv4 } from "uuid";
 
 // Styles
@@ -13,7 +14,28 @@ const QuickContact = () => {
       .then((data) => {
         if (data.success) {
           setManagers(data.data);
+        } else {
+          toast.error("Impossible de récupérer la liste des membres RH.", {
+            position: "bottom-center",
+            autoClose: 4000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            theme: "dark",
+          });
         }
+      })
+      .catch((error) => {
+        toast.error("Une erreur est survenue. Contactez support@savime.tech", {
+          position: "bottom-center",
+          autoClose: 4000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          theme: "dark",
+        });
       });
   }, []);
 
@@ -25,7 +47,7 @@ const QuickContact = () => {
           <li key={uuidv4()}>
             <h3>{`${firstname} ${lastname}`}</h3>
             <a href={`mailto:${email}`}>{email}</a>
-            
+
             <a href={`tel:+${phone}`}>{phone}</a>
           </li>
         ))}

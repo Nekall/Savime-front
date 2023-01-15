@@ -51,9 +51,8 @@ const Login = () => {
         if (data.success) {
           const { token, data: user } = data;
           const { verified } = user;
-          const role =  decodeJwt(token).role;
-
-          if (!verified && role !== "Manager") {  
+          const role = decodeJwt(token).role;
+          if (!verified && role !== "Manager") {
             return toast.info("Votre compte n'est pas vérifié.", {
               position: "bottom-center",
               autoClose: 8000,
@@ -64,9 +63,7 @@ const Login = () => {
               theme: "dark",
             });
           }
-
           localStorage.setItem("__svm_token", token);
-          // recoil store
           setUserData({
             id: user.employee_id || user.manager_id,
             role: role,
@@ -77,7 +74,6 @@ const Login = () => {
             profilePicture: user.profilePicture,
           });
           setToken(token);
-
           toast.success("Vous êtes connecté !", {
             position: "bottom-center",
             autoClose: 4000,

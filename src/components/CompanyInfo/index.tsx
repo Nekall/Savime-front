@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import { v4 as uuidv4 } from "uuid";
 
 // Components
@@ -21,7 +22,28 @@ const CompanyInfo = ({ editMode }: CompanyInfoProps) => {
       .then((data) => {
         if (data.success) {
           setTeamInfo(data.data);
+        } else {
+          toast.error("Impossible de récupérer la liste des membres RH.", {
+            position: "bottom-center",
+            autoClose: 4000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            theme: "dark",
+          });
         }
+      })
+      .catch((err) => {
+        toast.error("Une erreur est survenue. Contactez support@savime.tech", {
+          position: "bottom-center",
+          autoClose: 4000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          theme: "dark",
+        });
       });
 
     fetch(`${process.env.REACT_APP_BACKEND_URL}/company-informations`)
@@ -29,7 +51,31 @@ const CompanyInfo = ({ editMode }: CompanyInfoProps) => {
       .then((data) => {
         if (data.success) {
           setCompagnyInfo(data.data);
+        } else {
+          toast.error(
+            "Impossible de récupérer les informations de l'entreprise.",
+            {
+              position: "bottom-center",
+              autoClose: 4000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              theme: "dark",
+            }
+          );
         }
+      })
+      .catch((err) => {
+        toast.error("Une erreur est survenue. Contactez support@savime.tech", {
+          position: "bottom-center",
+          autoClose: 4000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          theme: "dark",
+        });
       });
   }, []);
 

@@ -60,7 +60,8 @@ const LandingPage = () => {
             orientation: "left",
             anchor: "liberte",
             title: "La liberté, une motivation.",
-            content: "La liberté est une source de motivation importante dans dans le monde du travail. Elle encourage les individus à être plus productifs et à prendre des initiatives. La liberté de travailler sans contraintes et de prendre des décisions permet aux individus de s’épanouir professionnellement et de développer leur potentiel. Savime permet cette liberté de par sa facilité d'accès et facilite donc cette liberté de mouvement en brisant les barrières des demandes en présentielles beaucoup trop formelles pour notre époque.",
+            content:
+              "La liberté est une source de motivation importante dans dans le monde du travail. Elle encourage les individus à être plus productifs et à prendre des initiatives. La liberté de travailler sans contraintes et de prendre des décisions permet aux individus de s’épanouir professionnellement et de développer leur potentiel. Savime permet cette liberté de par sa facilité d'accès et facilite donc cette liberté de mouvement en brisant les barrières des demandes en présentielles beaucoup trop formelles pour notre époque.",
           },
           {
             image: banner2,
@@ -68,7 +69,8 @@ const LandingPage = () => {
             orientation: "right",
             anchor: "management",
             title: ".Le Management, une priorité",
-            content: "Le management doit être une priorité pour toute entreprise qui souhaite réussir. En effet, une bonne gestion est essentielle pour garantir le bon fonctionnement et la pérennité de l'entreprise. Elle permet de prendre les bonnes décisions au bon moment, de gérer efficacement les ressources et de motiver les équipes.  Pour garantir un management efficace, il est important de mettre en place une bonne organisation, de bien communiquer et de définir clairement les objectifs. Il est également essentiel de former et de motiver les équipes, de les impliquer dans la prise de décision et de les écouter",
+            content:
+              "Le management doit être une priorité pour toute entreprise qui souhaite réussir. En effet, une bonne gestion est essentielle pour garantir le bon fonctionnement et la pérennité de l'entreprise. Elle permet de prendre les bonnes décisions au bon moment, de gérer efficacement les ressources et de motiver les équipes.  Pour garantir un management efficace, il est important de mettre en place une bonne organisation, de bien communiquer et de définir clairement les objectifs. Il est également essentiel de former et de motiver les équipes, de les impliquer dans la prise de décision et de les écouter",
           },
           {
             image: banner3,

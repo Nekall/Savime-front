@@ -2,10 +2,10 @@ import { useState } from "react";
 import { useRecoilValue } from "recoil";
 
 // Components
-import CompanyInfo from '../../components/CompanyInfo';
-import Home from '../../components/Home';
-import Documents from '../../components/Documents';
-import Calendar from '../../components/Calendar';
+import CompanyInfo from "../../components/CompanyInfo";
+import Home from "../../components/Home";
+import Documents from "../../components/Documents";
+import Calendar from "../../components/Calendar";
 import MiniProfile from "../../components/MiniProfile";
 import SideMenu from "../../components/SideMenu";
 import Navbar from "../../components/Navbar";
@@ -16,7 +16,7 @@ import Employees from "../../components/Employees";
 import Contact from "../../components/Contact";
 
 // Pages
-import Error from "../Error"
+import Error from "../Error";
 
 // Styles
 import styles from "../../styles/pages/dashboard.module.scss";
@@ -59,24 +59,52 @@ const Dashboard = () => {
   ];
 
   const employeesBtns = [
-    { icon: home, alt: "home", target: <Home /> , name: "Accueil" },
+    { icon: home, alt: "home", target: <Home />, name: "Accueil" },
     { icon: card, alt: "card", target: <CompanyInfo />, name: "Informations" },
-    { icon: calendar, alt: "calendar", target: <Calendar />, name: "Calendrier" },
+    {
+      icon: calendar,
+      alt: "calendar",
+      target: <Calendar />,
+      name: "Calendrier",
+    },
     { icon: archive, alt: "archive", target: <Documents />, name: "Documents" },
   ];
 
   const managersBtns = [
-    { icon: home, alt: "home", target: <Home /> , name: "Accueil" },
+    { icon: home, alt: "home", target: <Home />, name: "Accueil" },
     { icon: card, alt: "person", target: <Employees />, name: "Employé·es" },
-    { icon: paperPlane, alt: "paper plane", target: <News editMode />, name: "Actualités" },
-    { icon: card, alt: "card", target: <CompanyInfo editMode />, name: "Informations" },
-    { icon: archive, alt: "archive", target: <Documents editMode />, name: "Documents" },
-    { icon: calendar, alt: "calendar", target: <Calendar />, name: "Calendrier" },
+    {
+      icon: paperPlane,
+      alt: "paper plane",
+      target: <News editMode />,
+      name: "Actualités",
+    },
+    {
+      icon: card,
+      alt: "card",
+      target: <CompanyInfo editMode />,
+      name: "Informations",
+    },
+    {
+      icon: archive,
+      alt: "archive",
+      target: <Documents editMode />,
+      name: "Documents",
+    },
+    {
+      icon: calendar,
+      alt: "calendar",
+      target: <Calendar />,
+      name: "Calendrier",
+    },
   ];
 
   const employeeShortcuts = (
     <div className={styles.__shortcut}>
-      <button className={styles.__envelope} onClick={() => setCurrentPage(<Contact />)}>
+      <button
+        className={styles.__envelope}
+        onClick={() => setCurrentPage(<Contact />)}
+      >
         <img src={envelopeClosed} alt="envelope" />
       </button>
       <button
@@ -109,11 +137,15 @@ const Dashboard = () => {
         </section>
       </div>
     );
-  }else if(role === "Employee"){
+  } else if (role === "Employee") {
     return (
       <div className={styles.__dashboard}>
         <section className={styles.__header}>
-          <Navbar setCurrentPage={setCurrentPage} links={employeeLinks} shortcuts={employeeShortcuts} />
+          <Navbar
+            setCurrentPage={setCurrentPage}
+            links={employeeLinks}
+            shortcuts={employeeShortcuts}
+          />
         </section>
         <section className={styles.__side_menu}>
           <MiniProfile
@@ -136,7 +168,7 @@ const Dashboard = () => {
     );
   }
 
-  return (<Error />)
+  return <Error />;
 };
 
 export default Dashboard;

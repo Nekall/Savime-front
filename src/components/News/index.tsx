@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
 
 // Components
@@ -33,7 +34,31 @@ const News = ({ editMode }: NewsProps) => {
       .then((data) => {
         if (data.success) {
           setNews(data.data);
+        } else {
+          toast.error(
+            "Une erreur est survenue lors de la récupération des actualités.",
+            {
+              position: "bottom-center",
+              autoClose: 4000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              theme: "dark",
+            }
+          );
         }
+      })
+      .catch((error) => {
+        toast.error("Une erreur est survenue. Contactez support@savime.tech", {
+          position: "bottom-center",
+          autoClose: 4000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          theme: "dark",
+        });
       });
   }, [refresh]);
 
@@ -54,7 +79,37 @@ const News = ({ editMode }: NewsProps) => {
         if (data.success) {
           setModalAddNews(false);
           setRefresh(!refresh);
+          toast.success("L'actualité a bien été ajoutée.", {
+            position: "bottom-center",
+            autoClose: 4000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            theme: "dark",
+          });
+        } else {
+          toast.error("L'actualité n'a pas pu être ajoutée.", {
+            position: "bottom-center",
+            autoClose: 4000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            theme: "dark",
+          });
         }
+      })
+      .catch((error) => {
+        toast.error("Une erreur est survenue. Contactez support@savime.tech", {
+          position: "bottom-center",
+          autoClose: 4000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          theme: "dark",
+        });
       });
   };
 
@@ -75,7 +130,37 @@ const News = ({ editMode }: NewsProps) => {
         if (data.success) {
           setModalEditNews(false);
           setRefresh(!refresh);
+          toast.success("L'actualité a bien été modifiée.", {
+            position: "bottom-center",
+            autoClose: 4000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            theme: "dark",
+          });
+        } else {
+          toast.error("L'actualité n'a pas pu être modifiée.", {
+            position: "bottom-center",
+            autoClose: 4000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            theme: "dark",
+          });
         }
+      })
+      .catch((error) => {
+        toast.error("Une erreur est survenue. Contactez support@savime.tech", {
+          position: "bottom-center",
+          autoClose: 4000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          theme: "dark",
+        });
       });
   };
 
@@ -87,7 +172,37 @@ const News = ({ editMode }: NewsProps) => {
       .then((data) => {
         if (data.success) {
           setRefresh(!refresh);
+          toast.success("L'actualité a bien été supprimée.", {
+            position: "bottom-center",
+            autoClose: 4000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            theme: "dark",
+          });
+        } else {
+          toast.error("L'actualité n'a pas pu être supprimée.", {
+            position: "bottom-center",
+            autoClose: 4000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            theme: "dark",
+          });
         }
+      })
+      .catch((error) => {
+        toast.error("Une erreur est survenue. Contactez support@savime.tech", {
+          position: "bottom-center",
+          autoClose: 4000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          theme: "dark",
+        });
       });
   };
 

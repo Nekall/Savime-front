@@ -27,7 +27,7 @@ const Home = () => {
       <div className={styles.__multi_sections}>
         {role === "Manager" ? (
           <>
-          <p>A remplir d'infos rapide...</p>
+            <p>A remplir d'infos rapide...</p>
           </>
         ) : (
           <>

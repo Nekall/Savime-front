@@ -16,7 +16,28 @@ const Contact = () => {
       .then((data) => {
         if (data.success) {
           setManagers(data.data);
+        } else {
+          toast.error("Impossible de récupérer la liste des membres RH.", {
+            position: "bottom-center",
+            autoClose: 8000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
         }
+      })
+      .catch((err) => {
+        toast.error("Une erreur est survenue. Contactez support@savime.tech", {
+          position: "bottom-center",
+          autoClose: 8000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
       });
   }, []);
 
@@ -34,6 +55,18 @@ const Contact = () => {
         progress: undefined,
       });
     }
+
+    /*
+      toast.success("Votre message a bien été envoyé.", {
+        position: "bottom-center",
+        autoClose: 8000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    */
 
     console.log("send mail");
   };

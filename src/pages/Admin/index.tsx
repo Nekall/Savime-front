@@ -27,7 +27,6 @@ const Admin = () => {
   const setToken = useSetRecoilState(tokenState);
   const setUserData = useSetRecoilState(userDataState);
 
-
   const login = (e: FormEvent<HTMLFormElement>) => {
     e?.preventDefault();
 
@@ -43,7 +42,7 @@ const Admin = () => {
         if (data.success) {
           const { token } = data;
           localStorage.setItem("__svm_token", token);
-          const role =  decodeJwt(token).role;
+          const role = decodeJwt(token).role;
           setUserData({
             id: null,
             role: role,

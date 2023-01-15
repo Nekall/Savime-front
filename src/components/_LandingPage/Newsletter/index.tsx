@@ -69,7 +69,6 @@ const Newsletter = ({ title, lead, content, anchor }: Props) => {
         })
         .catch((err) => {
           setIsSend(false);
-          console.error(err);
           toast.error(
             "Une erreur est survenue. Contactez support@savime.tech",
             {

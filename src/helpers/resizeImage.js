@@ -1,14 +1,14 @@
 function resizeImage(base64Str, maxWidth = 180, maxHeight = 180) {
   return new Promise((resolve) => {
-    let img = new Image()
-    img.src = base64Str
+    let img = new Image();
+    img.src = base64Str;
     img.onload = () => {
-      let canvas = document.createElement('canvas')
-      const MAX_WIDTH = maxWidth
-      const MAX_HEIGHT = maxHeight
-      let width = img.width
-      let height = img.height
-/*
+      let canvas = document.createElement("canvas");
+      const MAX_WIDTH = maxWidth;
+      const MAX_HEIGHT = maxHeight;
+      let width = img.width;
+      let height = img.height;
+      /*
       if (width > height) {
         if (width > MAX_WIDTH) {
           height *= MAX_WIDTH / width
@@ -21,14 +21,14 @@ function resizeImage(base64Str, maxWidth = 180, maxHeight = 180) {
         }
       }
 */
-      canvas.width = 200
-      canvas.height = 200
+      canvas.width = 200;
+      canvas.height = 200;
 
-      let ctx = canvas.getContext('2d')
-      ctx.drawImage(img, 0, 0, width, height)
-      resolve(canvas.toDataURL())
-    }
-  })
+      let ctx = canvas.getContext("2d");
+      ctx.drawImage(img, 0, 0, width, height);
+      resolve(canvas.toDataURL());
+    };
+  });
 }
 
 export default resizeImage;

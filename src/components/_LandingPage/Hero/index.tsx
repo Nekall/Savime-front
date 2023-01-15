@@ -18,16 +18,21 @@ const Hero = ({ image, alt, button, title }: Props) => {
 
   return (
     <>
-    <div className={styles.__hero}>
-      <div className={styles.__image}>
-        <img src={image} alt={alt} />
-        <h1>{title[0]}<span>{title[1]}</span></h1>
-      </div>
-      <div className={styles.__button}>
-          <div><button onClick={()=>setModalIsOpen(true)}>{button}</button></div>
+      <div className={styles.__hero}>
+        <div className={styles.__image}>
+          <img src={image} alt={alt} />
+          <h1>
+            {title[0]}
+            <span>{title[1]}</span>
+          </h1>
         </div>
-    </div>
-    {modalIsOpen && <Modal setModalIsOpen={setModalIsOpen} />}
+        <div className={styles.__button}>
+          <div>
+            <button onClick={() => setModalIsOpen(true)}>{button}</button>
+          </div>
+        </div>
+      </div>
+      {modalIsOpen && <Modal setModalIsOpen={setModalIsOpen} />}
     </>
   );
 };

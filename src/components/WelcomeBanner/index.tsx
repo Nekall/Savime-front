@@ -11,7 +11,10 @@ const WelcomeBanner = () => {
     <div className={styles.__welcome_banner}>
       <h2>Bienvenue sur votre espace Savime,</h2>
       <p>Nous somme le : {today}</p>
-      <p>N'hésitez pas à nous envoyer un message via l'onglet message si vous avez une demande particulière.</p>
+      <p>
+        N'hésitez pas à nous envoyer un message via l'onglet message si vous
+        avez une demande particulière.
+      </p>
     </div>
   );
 };

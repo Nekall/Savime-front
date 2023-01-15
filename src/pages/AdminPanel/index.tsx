@@ -122,6 +122,17 @@ const AdminPanel = () => {
             </table>
           );
         }
+      })
+      .catch((error) => {
+        toast.error("Une erreur est survenue. Contactez support@savime.tech", {
+          position: "bottom-center",
+          autoClose: 4000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          theme: "dark",
+        });
       });
   };
 
@@ -132,7 +143,31 @@ const AdminPanel = () => {
         .then((data) => {
           if (data.success) {
             setCurrentElement(data.data);
+          } else {
+            toast.error("Impossible de récupérer les éléments.", {
+              position: "bottom-center",
+              autoClose: 4000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              theme: "dark",
+            });
           }
+        })
+        .catch((error) => {
+          toast.error(
+            "Une erreur est survenue. Contactez support@savime.tech",
+            {
+              position: "bottom-center",
+              autoClose: 4000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              theme: "dark",
+            }
+          );
         });
     }
 
@@ -178,7 +213,37 @@ const AdminPanel = () => {
         if (data.success) {
           setModalEdit(false);
           setRefresh(!refresh);
+          toast.success("L'élément a bien été mis à jour.", {
+            position: "bottom-center",
+            autoClose: 4000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            theme: "dark",
+          });
+        } else {
+          toast.error("Impossible de mettre à jour l'élément.", {
+            position: "bottom-center",
+            autoClose: 4000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            theme: "dark",
+          });
         }
+      })
+      .catch((error) => {
+        toast.error("Une erreur est survenue. Contactez support@savime.tech", {
+          position: "bottom-center",
+          autoClose: 4000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          theme: "dark",
+        });
       });
   };
 
@@ -190,7 +255,37 @@ const AdminPanel = () => {
       .then((data) => {
         if (data.success) {
           setRefresh(!refresh);
+          toast.success("Element supprimé avec succès.", {
+            position: "bottom-center",
+            autoClose: 4000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            theme: "dark",
+          });
+        } else {
+          toast.error("Impossible de supprimer l'élément.", {
+            position: "bottom-center",
+            autoClose: 4000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            theme: "dark",
+          });
         }
+      })
+      .catch((error) => {
+        toast.error("Une erreur est survenue. Contactez support@savime.tech", {
+          position: "bottom-center",
+          autoClose: 4000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          theme: "dark",
+        });
       });
   };
 

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
+import { toast } from "react-toastify";
 
 // Styles
 import styles from "./styles.module.scss";
@@ -18,7 +19,31 @@ const Employees = () => {
       .then((data) => {
         if (data.success) {
           setEmployees(data.data);
+        } else {
+          toast.error(
+            "Une erreur est survenue lors de la récupération des employé·es.",
+            {
+              position: "bottom-center",
+              autoClose: 4000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              theme: "dark",
+            }
+          );
         }
+      })
+      .catch((error) => {
+        toast.error("Une erreur est survenue. Contactez support@savime.tech", {
+          position: "bottom-center",
+          autoClose: 4000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          theme: "dark",
+        });
       });
   }, [refresh]);
 
@@ -33,7 +58,31 @@ const Employees = () => {
       .then((data) => {
         if (data.success) {
           setRefresh(!refresh);
+        } else {
+          toast.error(
+            "Une erreur est survenue lors de la mise à jour de la vérification de l'employé.",
+            {
+              position: "bottom-center",
+              autoClose: 4000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              theme: "dark",
+            }
+          );
         }
+      })
+      .catch((error) => {
+        toast.error("Une erreur est survenue. Contactez support@savime.tech", {
+          position: "bottom-center",
+          autoClose: 4000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          theme: "dark",
+        });
       });
   };
 
