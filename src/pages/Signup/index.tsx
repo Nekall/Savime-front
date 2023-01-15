@@ -66,7 +66,6 @@ const Signup = () => {
         }
       })
       .catch((err) => {
-        console.error(err);
         toast.error("Une erreur est survenue. Contactez support@savime.tech", {
           position: "bottom-center",
           autoClose: 4000,

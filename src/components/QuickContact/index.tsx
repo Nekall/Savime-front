@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 // Styles
 import styles from "./styles.module.scss";
@@ -21,7 +22,7 @@ const QuickContact = () => {
       <h2>Contact rapide</h2>
       <ul>
         {managers.map(({ firstname, lastname, email, phone }: any) => (
-          <li>
+          <li key={uuidv4()}>
             <h3>{`${firstname} ${lastname}`}</h3>
             <a href={`mailto:${email}`}>{email}</a>
             

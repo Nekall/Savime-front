@@ -15,6 +15,7 @@ interface Props {
   alt?: string;
   required?: boolean;
   pattern?: string;
+  title?: string;
 }
 
 const Input = ({
@@ -30,6 +31,7 @@ const Input = ({
   alt,
   required,
   pattern,
+  title,
 }: Props) => {
   minlength = minlength ? minlength : 0;
   maxlength = maxlength ? maxlength : 100;
@@ -64,6 +66,7 @@ const Input = ({
           minLength={minlength}
           maxLength={maxlength}
           pattern={pattern}
+          title={title}
         />
       )}
       {error && <div className={styles.__error}>{error}</div>}
