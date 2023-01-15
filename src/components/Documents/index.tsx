@@ -42,7 +42,6 @@ const Documents = ({ editMode }: DocumentsProps) => {
       .then((data) => {
         if (data.success) {
           setDocuments(data.data);
-          console.log(data);
           setAttestation(
             data.data.find(
               (document: { type: string }) => document.type === "attestation"

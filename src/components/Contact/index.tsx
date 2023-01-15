@@ -24,7 +24,7 @@ const Contact = () => {
     e.preventDefault();
 
     if (size > 1000) {
-      toast.info("Votre message est trop long", {
+      return toast.info("Votre message est trop long", {
         position: "bottom-center",
         autoClose: 8000,
         hideProgressBar: false,
@@ -33,15 +33,10 @@ const Contact = () => {
         draggable: true,
         progress: undefined,
       });
-      return;
     }
 
     console.log("send mail");
   };
-
-  console.log(managers);
-  console.log(email);
-  console.log(message);
 
   return (
     <div className={styles.__contact}>
@@ -57,12 +52,13 @@ const Contact = () => {
           className={size > 1000 ? styles.__red : ""}
         ></textarea>
         <br />
-        <select onChange={(e) => setEmail(e.target.value)}>
+        <select value={email} onChange={(e) => setEmail(e.target.value)}>
           <option value="" selected disabled hidden>
             Choisir un·e manager
           </option>
           {managers.map(({ firstname, lastname, email }: any) => (
             <option
+              key={email}
               value={email}
             >{`${firstname} ${lastname} (${email})`}</option>
           ))}
