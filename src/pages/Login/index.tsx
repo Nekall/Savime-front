@@ -53,15 +53,7 @@ const Login = () => {
           const { verified } = user;
           const role = decodeJwt(token).role;
           if (!verified && role !== "Manager") {
-            return toast.info("Votre compte n'est pas vérifié.", {
-              position: "bottom-center",
-              autoClose: 8000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              theme: "dark",
-            });
+            return toast.info("Votre compte n'est pas vérifié.");
           }
           localStorage.setItem("__svm_token", token);
           setUserData({

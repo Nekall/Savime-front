@@ -66,7 +66,7 @@ const Documents = ({ editMode }: DocumentsProps) => {
         }
       })
       .catch((error) => {
-        console.log(error);
+        console.error(error);
         toast.error("Une erreur est survenue. Contactez support@savime.tech");
       });
   }, [id, role, refresh]);
@@ -96,6 +96,7 @@ const Documents = ({ editMode }: DocumentsProps) => {
           if (data.success) {
             setRefresh(!refresh);
             setModalUpdate(false);
+            toast.success("Document mis à jour.");
           } else {
             console.error(data);
             toast.error("Impossible de mettre à jour le document.");

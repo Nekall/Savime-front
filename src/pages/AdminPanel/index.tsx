@@ -48,7 +48,7 @@ const AdminPanel = () => {
     fetch(`${process.env.REACT_APP_BACKEND_URL}/${section}`)
       .then((response) => response.json())
       .then((data) => {
-        if (data.data.length === 0) {
+        if (data.data.length === 0 || !data.success) {
           setView(<p className={styles.__message_no_data}>{data.message}</p>);
         } else {
           setView(
@@ -170,7 +170,7 @@ const AdminPanel = () => {
       })
       .catch((error) => {
         console.error(error);
-        toast.error("Une erreur est survenue.");
+        toast.error("Une erreur est survenue. Contactez support@savime.tech");
       });
   };
 
