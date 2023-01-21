@@ -107,7 +107,6 @@ const Settings = () => {
     const file = input.files[0];
 
     if (!file.type.includes("image")) {
-      // make controle of size ?
       e.target.value = null;
       return toast.error("Seule les images sont acceptées.");
     } else {
@@ -115,8 +114,13 @@ const Settings = () => {
       reader.readAsDataURL(file);
       reader.onload = async function () {
         const base64PP = reader.result;
-        //console.log(await resizeImage(base64PP));
-        setProfilePicture(await resizeImage(base64PP));
+        try {
+          const resizedPP = await resizeImage(base64PP);
+          setProfilePicture(resizedPP);
+        } catch (error) {
+          console.error(error);
+          toast.error("Votre image de profil n'est pas acceptée.");
+        }
       };
     }
   };
