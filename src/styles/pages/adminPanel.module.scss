@@ -82,6 +82,11 @@
                 border-bottom: 2px solid $primary-bg;
                 transition: 0.2s;
 
+                &:nth-child(1){
+                    background-color: $purple-color;
+                    border-radius: 8px 8px 0 0;
+                }
+
                 &:hover {
                     background-color: $primary-bg;
                 }
@@ -163,7 +168,7 @@
     }
 }
 
-.__edit_modal {
+.__edit_modal, .__create_manager_modal {
 
     .__close {
         float: right;

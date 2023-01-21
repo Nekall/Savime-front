@@ -1,0 +1,58 @@
+.__table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    border: 1px solid $primary-bg;
+
+    thead {
+        position: -webkit-sticky;
+        position: sticky;
+        top: 0;
+    }
+
+    th {
+        background-color: $primary-bg;
+        color: $white-color;
+        padding: 10px;
+        text-align: left;
+    }
+
+    .__btn_edit {
+        width: 85px;
+
+        .__btn {
+            float: right;
+            cursor: pointer;
+            padding-top: 4px;
+            border: none;
+            top: 0;
+            background-color: transparent;
+
+
+            img {
+                background-color: $primary-bg;
+                padding: 6px;
+                border-radius: 8px;
+            }
+
+            :hover {
+                background-color: $secondary-bg;
+            }
+        }
+    }
+
+    tr {
+
+        &:hover {
+            background-color: $primary-bg;
+            color: $white-color;
+        }
+
+        td {
+            padding: 10px;
+            border-bottom: 1px solid $primary-bg;
+            cursor: default;
+        }
+    }
+
+}

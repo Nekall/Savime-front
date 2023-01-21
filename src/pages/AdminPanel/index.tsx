@@ -21,9 +21,8 @@ import Input from "../../components/Input";
 // Assets
 import exit from "../../assets/images/icon/exit.svg";
 import cross from "../../assets/images/icon/cross.svg";
-import trash from "../../assets/images/icon/trash.svg";
-import pen from "../../assets/images/icon/pen.svg";
 import logo from "../../assets/images/logo/logo-full-transparent.png";
+import AdminTable from "../../components/AdminTable";
 
 const AdminPanel = () => {
   const [view, setView] = useState<any>(null);
@@ -36,6 +35,14 @@ const AdminPanel = () => {
   const [modalEdit, setModalEdit] = useState(false);
   const [id, setId] = useState(0);
   const [currentElement, setCurrentElement] = useState<any>(null);
+  const [modalCreateManager, setModalCreateManager] = useState(false);
+  const [newManager, setNewManager] = useState<any>({
+    firstname: "",
+    lastname: "",
+    phone: "",
+    email: "",
+    password: "",
+  });
 
   const updateView = (section: string) => {
     fetch(`${process.env.REACT_APP_BACKEND_URL}/${section}`)
@@ -45,81 +52,14 @@ const AdminPanel = () => {
           setView(<p className={styles.__message_no_data}>{data.message}</p>);
         } else {
           setView(
-            <table>
-              <thead>
-                <tr>
-                  {Object.keys(data.data[0]).map((key: any, index: number) => {
-                    if (
-                      key !== "profilePicture" &&
-                      key !== "updatedAt" &&
-                      key !== "createdAt" &&
-                      key !== "employee" &&
-                      key !== "document" &&
-                      key !== "verified"
-                    ) {
-                      return (
-                        <th key={uuidv4()}>
-                          {key === "employee_id" && index > 0
-                            ? "EMPLOYEE"
-                            : key.toUpperCase()}
-                        </th>
-                      );
-                    } else {
-                      return null;
-                    }
-                  })}
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody>
-                {data.data.map((item: any) => {
-                  return (
-                    <tr key={uuidv4()}>
-                      {Object.keys(item).map((key: any) => {
-                        if (
-                          key !== "profilePicture" &&
-                          key !== "updatedAt" &&
-                          key !== "createdAt" &&
-                          key !== "employee" &&
-                          key !== "document" &&
-                          key !== "verified"
-                        ) {
-                          return (
-                            <td key={uuidv4()}>
-                              {key === "employee_id" && item.employee
-                                ? `${item.employee.firstname} ${item.employee.lastname} (id: ${item.employee.employee_id})`
-                                : item[key]}
-                            </td>
-                          );
-                        } else {
-                          return null;
-                        }
-                      })}
-                      <td className={styles.__btn_edit}>
-                        <button
-                          title="Double clic pour supprimer 💡"
-                          className={styles.__btn}
-                          onDoubleClick={() =>
-                            deleteElement(item[Object.keys(item)[0]])
-                          }
-                        >
-                          <img src={trash} alt="Supprimer" />
-                        </button>
-                        <button
-                          onClick={() => {
-                            setModalEdit(true);
-                            setId(item[Object.keys(item)[0]]);
-                          }}
-                          className={styles.__btn}
-                        >
-                          <img src={pen} alt="Editer" />
-                        </button>
-                      </td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
+            <AdminTable
+              setModalEdit={setModalEdit}
+              setId={setId}
+              setRefresh={setRefresh}
+              refresh={refresh}
+              section={section}
+              data={data}
+            />
           );
         }
       })
@@ -149,7 +89,7 @@ const AdminPanel = () => {
 
     updateView(section);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [refresh, modalEdit, id]);
+  }, [refresh, modalEdit, id, modalCreateManager]);
 
   if (useCheckJwt() === false) {
     return <Loading />;
@@ -193,23 +133,44 @@ const AdminPanel = () => {
       });
   };
 
-  const deleteElement = (id: number) => {
-    fetch(`${process.env.REACT_APP_BACKEND_URL}/${section}/${id}`, {
-      method: "DELETE",
+  const createManager = (e: any) => {
+    e.preventDefault();
+
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/managers`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        firstname: newManager.firstname,
+        lastname: newManager.lastname,
+        phone: newManager.phone,
+        email: newManager.email,
+        password: newManager.password,
+      }),
     })
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
+          setModalCreateManager(false);
+          setSection("managers");
           setRefresh(!refresh);
-          toast.success("Element supprimé avec succès.");
+          setNewManager({
+            firstname: "",
+            lastname: "",
+            phone: "",
+            email: "",
+            password: "",
+          });
+          toast.success("Le manager a bien été créé.");
         } else {
           console.error(data);
-          toast.error("Impossible de supprimer l'élément.");
+          toast.error("Impossible de créer le manager.");
         }
       })
       .catch((error) => {
         console.error(error);
-        toast.error("Une erreur est survenue. Contactez support@savime.tech");
+        toast.error("Une erreur est survenue.");
       });
   };
 
@@ -226,6 +187,9 @@ const AdminPanel = () => {
         </div>
         <div className={styles.__pannel}>
           <div className={styles.__menu}>
+          <button onClick={() => setModalCreateManager(true)}>
+          Créer un compte Manager
+        </button>
             {[
               { name: "Employé·es", value: "employees" },
               { name: "Managers", value: "managers" },
@@ -299,6 +263,45 @@ const AdminPanel = () => {
                   );
                 }
               )}
+              <Input type="submit" value="Sauvegarder" />
+            </form>
+          </div>
+        </Modal>
+      )}
+      {modalCreateManager && (
+        <Modal>
+          <div className={styles.__create_manager_modal}>
+            <button
+              className={styles.__close}
+              onClick={() => setModalCreateManager(false)}
+            >
+              <img src={cross} alt="Close" />
+            </button>
+            <br />
+            <form onSubmit={(e) => createManager(e)}>
+              {Object.entries(newManager).map((element: any, index: number) => {
+                return (
+                  <>
+                    <label>{element[0]}</label>
+                    <Input
+                      type={
+                        element[0] === "email"
+                          ? "email"
+                          : element[0] === "phone"
+                          ? "tel"
+                          : "text"
+                      }
+                      value={element[1]}
+                      onChange={(e: { target: { value: any } }) => {
+                        setNewManager({
+                          ...newManager,
+                          [element[0]]: e.target.value,
+                        });
+                      }}
+                    />
+                  </>
+                );
+              })}
               <Input type="submit" value="Sauvegarder" />
             </form>
           </div>
