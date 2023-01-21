@@ -17,27 +17,13 @@ const Contact = () => {
         if (data.success) {
           setManagers(data.data);
         } else {
-          toast.error("Impossible de récupérer la liste des membres RH.", {
-            position: "bottom-center",
-            autoClose: 8000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          });
+          console.error(data);
+          toast.error("Impossible de récupérer la liste des membres RH.");
         }
       })
-      .catch((err) => {
-        toast.error("Une erreur est survenue. Contactez support@savime.tech", {
-          position: "bottom-center",
-          autoClose: 8000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
+      .catch((error) => {
+        console.error(error);
+        toast.error("Une erreur est survenue. Contactez support@savime.tech");
       });
   }, []);
 
@@ -45,27 +31,11 @@ const Contact = () => {
     e.preventDefault();
 
     if (size > 1000) {
-      return toast.info("Votre message est trop long", {
-        position: "bottom-center",
-        autoClose: 8000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+      return toast.info("Votre message est trop long");
     }
 
     /*
-      toast.success("Votre message a bien été envoyé.", {
-        position: "bottom-center",
-        autoClose: 8000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+      toast.success("Votre message a bien été envoyé.");
     */
 
     console.log("send mail");

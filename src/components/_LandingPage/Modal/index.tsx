@@ -54,42 +54,16 @@ const Modal = ({ setModalIsOpen }: ModalProps) => {
         .then((response) => response.json())
         .then((data) => {
           if (data.success) {
-            toast.success(data.message, {
-              position: "bottom-center",
-              autoClose: 4000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              theme: "dark",
-            });
+            toast.success(data.message);
             setModalIsOpen(false);
           } else {
-            toast.error(data.message, {
-              position: "bottom-center",
-              autoClose: 4000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              theme: "dark",
-            });
+            console.error(data);
+            toast.error(data.message);
           }
         })
-        .catch((err) => {
-          console.error(err);
-          toast.error(
-            "Une erreur est survenue. Contactez support@savime.tech",
-            {
-              position: "bottom-center",
-              autoClose: 4000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              theme: "dark",
-            }
-          );
+        .catch((error) => {
+          console.error(error);
+          toast.error("Une erreur est survenue. Contactez support@savime.tech");
         });
     }
   };

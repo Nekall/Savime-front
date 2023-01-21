@@ -10,7 +10,6 @@ import styles from "./styles.module.scss";
 // Assets
 import logo from "../../assets/images/logo/logo-full-transparent.png";
 import exit from "../../assets/images/icon/exit.svg";
-//import chat from "../../assets/images/icon/chat.svg";
 
 // Atoms
 import { tokenState, userDataState } from "../../atoms/user";

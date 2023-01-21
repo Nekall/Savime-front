@@ -74,39 +74,16 @@ const Login = () => {
             profilePicture: user.profilePicture,
           });
           setToken(token);
-          toast.success("Vous êtes connecté !", {
-            position: "bottom-center",
-            autoClose: 4000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            theme: "dark",
-          });
+          toast.success("Vous êtes connecté !");
           navigateTo("/tableau-de-bord");
         } else {
-          toast.error(data.message, {
-            position: "bottom-center",
-            autoClose: 4000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            theme: "dark",
-          });
+          console.error(data);
+          toast.error(data.message);
         }
       })
-      .catch((err) => {
-        console.error(err);
-        toast.error("Une erreur est survenue. Contactez support@savime.tech", {
-          position: "bottom-center",
-          autoClose: 4000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          theme: "dark",
-        });
+      .catch((error) => {
+        console.error(error);
+        toast.error("Une erreur est survenue. Contactez support@savime.tech");
       });
   };
 

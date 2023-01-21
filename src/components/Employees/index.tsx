@@ -20,30 +20,15 @@ const Employees = () => {
         if (data.success) {
           setEmployees(data.data);
         } else {
+          console.error(data);
           toast.error(
-            "Une erreur est survenue lors de la récupération des employé·es.",
-            {
-              position: "bottom-center",
-              autoClose: 4000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              theme: "dark",
-            }
+            "Une erreur est survenue lors de la récupération des employé·es."
           );
         }
       })
       .catch((error) => {
-        toast.error("Une erreur est survenue. Contactez support@savime.tech", {
-          position: "bottom-center",
-          autoClose: 4000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          theme: "dark",
-        });
+        console.error(error);
+        toast.error("Une erreur est survenue. Contactez support@savime.tech");
       });
   }, [refresh]);
 
@@ -59,30 +44,15 @@ const Employees = () => {
         if (data.success) {
           setRefresh(!refresh);
         } else {
+          console.error(data);
           toast.error(
-            "Une erreur est survenue lors de la mise à jour de la vérification de l'employé.",
-            {
-              position: "bottom-center",
-              autoClose: 4000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              theme: "dark",
-            }
+            "Une erreur est survenue lors de la mise à jour de la vérification de l'employé."
           );
         }
       })
       .catch((error) => {
-        toast.error("Une erreur est survenue. Contactez support@savime.tech", {
-          position: "bottom-center",
-          autoClose: 4000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          theme: "dark",
-        });
+        console.error(error);
+        toast.error("Une erreur est survenue. Contactez support@savime.tech");
       });
   };
 

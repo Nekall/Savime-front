@@ -22,13 +22,11 @@ import resizeImage from "../../helpers/resizeImage";
 
 const Settings = () => {
   const [dataUser, setDateUser] = useRecoilState(userDataState);
-
   const [firstname, setFirstname] = useState(dataUser.firstname);
   const [lastname, setLastname] = useState(dataUser.lastname);
   const [email, setEmail] = useState(dataUser.email);
   const [job, setJob] = useState(dataUser.job);
   const [profilePicture, setProfilePicture] = useState(dataUser.profilePicture);
-
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
@@ -59,37 +57,15 @@ const Settings = () => {
             job: job,
             profilePicture: profilePicture,
           });
-          toast.success("Informations mises à jour avec succès.", {
-            position: "bottom-center",
-            autoClose: 4000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            theme: "dark",
-          });
+          toast.success("Informations mises à jour avec succès.");
         } else {
-          toast.error("Les informations n'ont pas pu être mises à jour.", {
-            position: "bottom-center",
-            autoClose: 4000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            theme: "dark",
-          });
+          console.error(data);
+          toast.error("Les informations n'ont pas pu être mises à jour.");
         }
       })
       .catch((error) => {
-        toast.error("Une erreur est survenue. Contactez support@savime.tech", {
-          position: "bottom-center",
-          autoClose: 4000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          theme: "dark",
-        });
+        console.error(error);
+        toast.error("Une erreur est survenue. Contactez support@savime.tech");
       });
   };
 
@@ -97,15 +73,7 @@ const Settings = () => {
     e.preventDefault();
 
     if (password !== confirmPassword) {
-      return toast.error("Les mots de passe ne correspondent pas.", {
-        position: "bottom-center",
-        autoClose: 4000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        theme: "dark",
-      });
+      return toast.error("Les mots de passe ne correspondent pas.");
     }
 
     fetch(`${process.env.REACT_APP_BACKEND_URL}/employees/${dataUser.id}`, {
@@ -122,37 +90,15 @@ const Settings = () => {
         if (data.success) {
           setPassword("");
           setConfirmPassword("");
-          toast.success("Mot de passe mis à jour.", {
-            position: "bottom-center",
-            autoClose: 4000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            theme: "dark",
-          });
+          toast.success("Mot de passe mis à jour.");
         } else {
-          toast.error("Le mot de passe n'a pas pu être mis à jour.", {
-            position: "bottom-center",
-            autoClose: 4000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            theme: "dark",
-          });
+          console.error(data);
+          toast.error("Le mot de passe n'a pas pu être mis à jour.");
         }
       })
       .catch((error) => {
-        toast.error("Une erreur est survenue. Contactez support@savime.tech", {
-          position: "bottom-center",
-          autoClose: 4000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          theme: "dark",
-        });
+        console.error(error);
+        toast.error("Une erreur est survenue. Contactez support@savime.tech");
       });
   };
 
@@ -163,15 +109,7 @@ const Settings = () => {
     if (!file.type.includes("image")) {
       // make controle of size ?
       e.target.value = null;
-      return toast.error("Seule les images sont acceptées.", {
-        position: "bottom-center",
-        autoClose: 4000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        theme: "dark",
-      });
+      return toast.error("Seule les images sont acceptées.");
     } else {
       const reader = new FileReader();
       reader.readAsDataURL(file);

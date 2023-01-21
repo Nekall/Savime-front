@@ -43,38 +43,16 @@ const Signup = () => {
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
-          toast.success("Votre compte a bien été créé !", {
-            position: "bottom-center",
-            autoClose: 4000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            theme: "dark",
-          });
+          toast.success("Votre compte a bien été créé !");
           navigateTo("/connexion");
         } else {
-          toast.error(data.message, {
-            position: "bottom-center",
-            autoClose: 4000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            theme: "dark",
-          });
+          console.error(data);
+          toast.error(data.message);
         }
       })
-      .catch((err) => {
-        toast.error("Une erreur est survenue. Contactez support@savime.tech", {
-          position: "bottom-center",
-          autoClose: 4000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          theme: "dark",
-        });
+      .catch((error) => {
+        console.error(error);
+        toast.error("Une erreur est survenue. Contactez support@savime.tech");
       });
   };
 

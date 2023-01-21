@@ -49,7 +49,14 @@ const App = () => {
 
   return (
     <>
-      <ToastContainer />
+      <ToastContainer
+        position="bottom-center"
+        autoClose={3000}
+        hideProgressBar={false}
+        closeOnClick={true}
+        pauseOnHover={true}
+        draggable={true}
+      />
       <Router>
         <Routes>
           <Route

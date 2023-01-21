@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 // Components
@@ -19,23 +18,6 @@ import hero from "../../assets/images/landingPage/helena-lopes-unsplash.jpg";
 import styles from "../../styles/pages/landing-page.module.scss";
 
 const LandingPage = () => {
-  const [refreshTitle, setRefreshTitle] = useState<boolean>(false);
-
-  useEffect(() => {
-    let refreshTitleInterval = setInterval(
-      () => setRefreshTitle(!refreshTitle),
-      5000
-    );
-
-    if (document.title === "Savime") {
-      document.title = "Time-saver for teams & companies";
-    } else {
-      document.title = "Savime";
-    }
-
-    return () => clearInterval(refreshTitleInterval);
-  }, [refreshTitle]);
-
   return (
     <section className={styles.__landing_page}>
       <Navbar

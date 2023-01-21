@@ -61,27 +61,13 @@ const Documents = ({ editMode }: DocumentsProps) => {
             )
           );
         } else {
-          toast.error("Impossible de récupérer les documents.", {
-            position: "bottom-center",
-            autoClose: 4000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            theme: "dark",
-          });
+          console.error(data);
+          toast.error("Impossible de récupérer les documents.");
         }
       })
       .catch((error) => {
-        toast.error("Une erreur est survenue. Contactez support@savime.tech", {
-          position: "bottom-center",
-          autoClose: 4000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          theme: "dark",
-        });
+        console.log(error);
+        toast.error("Une erreur est survenue. Contactez support@savime.tech");
       });
   }, [id, role, refresh]);
 
@@ -111,30 +97,13 @@ const Documents = ({ editMode }: DocumentsProps) => {
             setRefresh(!refresh);
             setModalUpdate(false);
           } else {
-            toast.error("Impossible de mettre à jour le document.", {
-              position: "bottom-center",
-              autoClose: 4000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              theme: "dark",
-            });
+            console.error(data);
+            toast.error("Impossible de mettre à jour le document.");
           }
         })
         .catch((error) => {
-          toast.error(
-            "Une erreur est survenue. Contactez support@savime.tech",
-            {
-              position: "bottom-center",
-              autoClose: 4000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              theme: "dark",
-            }
-          );
+          console.error(error);
+          toast.error("Une erreur est survenue. Contactez support@savime.tech");
         });
     };
   };
@@ -150,37 +119,15 @@ const Documents = ({ editMode }: DocumentsProps) => {
       .then((data) => {
         if (data.success) {
           setRefresh(!refresh);
-          toast.success("Document supprimé.", {
-            position: "bottom-center",
-            autoClose: 4000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            theme: "dark",
-          });
+          toast.success("Document supprimé.");
         } else {
-          toast.error("Impossible de supprimer le document.", {
-            position: "bottom-center",
-            autoClose: 4000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            theme: "dark",
-          });
+          console.error(data);
+          toast.error("Impossible de supprimer le document.");
         }
       })
       .catch((error) => {
-        toast.error("Une erreur est survenue. Contactez support@savime.tech", {
-          position: "bottom-center",
-          autoClose: 4000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          theme: "dark",
-        });
+        console.error(error);
+        toast.error("Une erreur est survenue. Contactez support@savime.tech");
       });
   };
 

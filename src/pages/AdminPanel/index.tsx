@@ -124,15 +124,8 @@ const AdminPanel = () => {
         }
       })
       .catch((error) => {
-        toast.error("Une erreur est survenue. Contactez support@savime.tech", {
-          position: "bottom-center",
-          autoClose: 4000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          theme: "dark",
-        });
+        console.error(error);
+        toast.error("Une erreur est survenue. Contactez support@savime.tech");
       });
   };
 
@@ -144,30 +137,13 @@ const AdminPanel = () => {
           if (data.success) {
             setCurrentElement(data.data);
           } else {
-            toast.error("Impossible de récupérer les éléments.", {
-              position: "bottom-center",
-              autoClose: 4000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              theme: "dark",
-            });
+            console.error(data);
+            toast.error("Impossible de récupérer les éléments.");
           }
         })
         .catch((error) => {
-          toast.error(
-            "Une erreur est survenue. Contactez support@savime.tech",
-            {
-              position: "bottom-center",
-              autoClose: 4000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              theme: "dark",
-            }
-          );
+          console.error(error);
+          toast.error("Une erreur est survenue. Contactez support@savime.tech");
         });
     }
 
@@ -187,15 +163,7 @@ const AdminPanel = () => {
     navigateTo("/");
     setToken(null);
     localStorage.removeItem("__svm_token");
-    toast.success("Vous êtes déconnecté !", {
-      position: "bottom-center",
-      autoClose: 4000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      theme: "dark",
-    });
+    toast.success("Vous êtes déconnecté !");
   };
 
   const updateElement = (e: any) => {
@@ -213,37 +181,15 @@ const AdminPanel = () => {
         if (data.success) {
           setModalEdit(false);
           setRefresh(!refresh);
-          toast.success("L'élément a bien été mis à jour.", {
-            position: "bottom-center",
-            autoClose: 4000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            theme: "dark",
-          });
+          toast.success("L'élément a bien été mis à jour.");
         } else {
-          toast.error("Impossible de mettre à jour l'élément.", {
-            position: "bottom-center",
-            autoClose: 4000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            theme: "dark",
-          });
+          console.error(data);
+          toast.error("Impossible de mettre à jour l'élément.");
         }
       })
       .catch((error) => {
-        toast.error("Une erreur est survenue. Contactez support@savime.tech", {
-          position: "bottom-center",
-          autoClose: 4000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          theme: "dark",
-        });
+        console.error(error);
+        toast.error("Une erreur est survenue. Contactez support@savime.tech");
       });
   };
 
@@ -255,37 +201,15 @@ const AdminPanel = () => {
       .then((data) => {
         if (data.success) {
           setRefresh(!refresh);
-          toast.success("Element supprimé avec succès.", {
-            position: "bottom-center",
-            autoClose: 4000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            theme: "dark",
-          });
+          toast.success("Element supprimé avec succès.");
         } else {
-          toast.error("Impossible de supprimer l'élément.", {
-            position: "bottom-center",
-            autoClose: 4000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            theme: "dark",
-          });
+          console.error(data);
+          toast.error("Impossible de supprimer l'élément.");
         }
       })
       .catch((error) => {
-        toast.error("Une erreur est survenue. Contactez support@savime.tech", {
-          position: "bottom-center",
-          autoClose: 4000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          theme: "dark",
-        });
+        console.error(error);
+        toast.error("Une erreur est survenue. Contactez support@savime.tech");
       });
   };
 

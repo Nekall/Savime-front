@@ -15,27 +15,13 @@ const QuickContact = () => {
         if (data.success) {
           setManagers(data.data);
         } else {
-          toast.error("Impossible de récupérer la liste des membres RH.", {
-            position: "bottom-center",
-            autoClose: 4000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            theme: "dark",
-          });
+          console.error(data);
+          toast.error("Impossible de récupérer la liste des membres RH.");
         }
       })
       .catch((error) => {
-        toast.error("Une erreur est survenue. Contactez support@savime.tech", {
-          position: "bottom-center",
-          autoClose: 4000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          theme: "dark",
-        });
+        console.error(error);
+        toast.error("Une erreur est survenue. Contactez support@savime.tech");
       });
   }, []);
 
@@ -47,7 +33,6 @@ const QuickContact = () => {
           <li key={uuidv4()}>
             <h3>{`${firstname} ${lastname}`}</h3>
             <a href={`mailto:${email}`}>{email}</a>
-
             <a href={`tel:+${phone}`}>{phone}</a>
           </li>
         ))}

@@ -45,42 +45,17 @@ const Newsletter = ({ title, lead, content, anchor }: Props) => {
           if (data.success) {
             setEmail("");
             setIsSend(false);
-            toast.success(data.message, {
-              position: "bottom-center",
-              autoClose: 4000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              theme: "dark",
-            });
+            toast.success(data.message);
           } else {
+            console.error(data);
             setIsSend(false);
-            toast.error(data.message, {
-              position: "bottom-center",
-              autoClose: 4000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              theme: "dark",
-            });
+            toast.error(data.message);
           }
         })
-        .catch((err) => {
+        .catch((error) => {
+          console.error(error);
           setIsSend(false);
-          toast.error(
-            "Une erreur est survenue. Contactez support@savime.tech",
-            {
-              position: "bottom-center",
-              autoClose: 4000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              theme: "dark",
-            }
-          );
+          toast.error("Une erreur est survenue. Contactez support@savime.tech");
         });
     }
   };

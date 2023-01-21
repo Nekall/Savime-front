@@ -23,27 +23,13 @@ const CompanyInfo = ({ editMode }: CompanyInfoProps) => {
         if (data.success) {
           setTeamInfo(data.data);
         } else {
-          toast.error("Impossible de récupérer la liste des membres RH.", {
-            position: "bottom-center",
-            autoClose: 4000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            theme: "dark",
-          });
+          console.error(data);
+          toast.error("Impossible de récupérer la liste des membres RH.");
         }
       })
-      .catch((err) => {
-        toast.error("Une erreur est survenue. Contactez support@savime.tech", {
-          position: "bottom-center",
-          autoClose: 4000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          theme: "dark",
-        });
+      .catch((error) => {
+        console.error(error);
+        toast.error("Une erreur est survenue. Contactez support@savime.tech");
       });
 
     fetch(`${process.env.REACT_APP_BACKEND_URL}/company-informations`)
@@ -52,30 +38,15 @@ const CompanyInfo = ({ editMode }: CompanyInfoProps) => {
         if (data.success) {
           setCompagnyInfo(data.data);
         } else {
+          console.error(data);
           toast.error(
-            "Impossible de récupérer les informations de l'entreprise.",
-            {
-              position: "bottom-center",
-              autoClose: 4000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              theme: "dark",
-            }
+            "Impossible de récupérer les informations de l'entreprise."
           );
         }
       })
-      .catch((err) => {
-        toast.error("Une erreur est survenue. Contactez support@savime.tech", {
-          position: "bottom-center",
-          autoClose: 4000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          theme: "dark",
-        });
+      .catch((error) => {
+        console.error(error);
+        toast.error("Une erreur est survenue. Contactez support@savime.tech");
       });
   }, []);
 
@@ -91,8 +62,19 @@ const CompanyInfo = ({ editMode }: CompanyInfoProps) => {
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
-          console.log(data);
+          toast.success(
+            "Les informations de l'entreprise ont bien été modifiées."
+          );
+        } else {
+          console.error(data);
+          toast.error(
+            "Impossible de modifier les informations de l'entreprise."
+          );
         }
+      })
+      .catch((error) => {
+        console.error(error);
+        toast.error("Une erreur est survenue. Contactez support@savime.tech");
       });
   };
 
