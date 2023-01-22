@@ -1,15 +1,26 @@
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import { useRecoilValue } from "recoil";
 import { v4 as uuidv4 } from "uuid";
+
+// Atoms
+import { userDataState } from "../../atoms/user";
 
 // Styles
 import styles from "./styles.module.scss";
 
 const QuickContact = () => {
+  const token = useRecoilValue(userDataState).token;
   const [managers, setManagers] = useState<any>([]);
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_BACKEND_URL}/managers`)
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/managers`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    })
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
@@ -23,7 +34,7 @@ const QuickContact = () => {
         console.error(error);
         toast.error("Une erreur est survenue. Contactez support@savime.tech");
       });
-  }, []);
+  }, [token]);
 
   return (
     <div className={styles.__quick_contact}>

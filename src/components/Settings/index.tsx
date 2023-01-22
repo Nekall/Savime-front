@@ -1,4 +1,4 @@
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { FormEvent, useState } from "react";
 import { toast } from "react-toastify";
 
@@ -21,6 +21,7 @@ import { userDataState } from "../../atoms/user";
 import resizeImage from "../../helpers/resizeImage";
 
 const Settings = () => {
+  const token = useRecoilValue(userDataState).token;
   const [dataUser, setDateUser] = useRecoilState(userDataState);
   const [firstname, setFirstname] = useState(dataUser.firstname);
   const [lastname, setLastname] = useState(dataUser.lastname);
@@ -36,6 +37,7 @@ const Settings = () => {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
         firstname,
@@ -56,6 +58,7 @@ const Settings = () => {
             email: email,
             job: job,
             profilePicture: profilePicture,
+            token: dataUser.token,
           });
           toast.success("Informations mises à jour avec succès.");
         } else {
@@ -80,6 +83,7 @@ const Settings = () => {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
         password,

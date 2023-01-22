@@ -1,4 +1,4 @@
-import { useSetRecoilState } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import { FormEvent, useState } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
@@ -21,6 +21,7 @@ import { tokenState, userDataState } from "../../atoms/user";
 import decodeJwt from "../../helpers/decodeJwt";
 
 const Admin = () => {
+  const token = useRecoilValue(userDataState).token;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigateTo = useNavigate();
@@ -34,6 +35,7 @@ const Admin = () => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({ email, password }),
     })
@@ -51,6 +53,7 @@ const Admin = () => {
             email: null,
             job: null,
             profilePicture: null,
+            token: null,
           });
           setToken(token);
           toast.success("Vous êtes connecté !");

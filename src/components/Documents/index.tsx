@@ -21,7 +21,7 @@ interface DocumentsProps {
 
 const Documents = ({ editMode }: DocumentsProps) => {
   const userData = useRecoilValue(userDataState);
-  const { role, id } = userData;
+  const { role, id, token } = userData;
   const [documents, setDocuments] = useState([]);
   const [docId, setDocId] = useState(0);
   const [newDocument, setNewDocument] = useState<any>(null);
@@ -37,7 +37,14 @@ const Documents = ({ editMode }: DocumentsProps) => {
     fetch(
       `${process.env.REACT_APP_BACKEND_URL}/documents${
         role === "Manager" ? "" : `/employee/${id}`
-      }`
+      }`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
     )
       .then((response) => response.json())
       .then((data) => {
@@ -69,7 +76,7 @@ const Documents = ({ editMode }: DocumentsProps) => {
         console.error(error);
         toast.error("Une erreur est survenue. Contactez support@savime.tech");
       });
-  }, [id, role, refresh]);
+  }, [id, role, refresh, token]);
 
   const updateAttestation = () => {
     // simply endpoint to update attestation (date)
@@ -86,6 +93,7 @@ const Documents = ({ editMode }: DocumentsProps) => {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
           document: reader.result,
@@ -114,6 +122,7 @@ const Documents = ({ editMode }: DocumentsProps) => {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
     })
       .then((response) => response.json())

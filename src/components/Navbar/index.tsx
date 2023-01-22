@@ -36,6 +36,7 @@ const Navbar = ({ setCurrentPage, links, shortcuts }: Props) => {
       email: null,
       job: null,
       profilePicture: null,
+      token: null,
     });
     setToken(null);
     localStorage.removeItem("__svm_token");

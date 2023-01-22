@@ -1,17 +1,28 @@
 import { FormEvent, useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import { useRecoilValue } from "recoil";
+
+// Atoms
+import { userDataState } from "../../atoms/user";
 
 // Styles
 import styles from "./styles.module.scss";
 
 const Contact = () => {
+  const token = useRecoilValue(userDataState).token;
   const [managers, setManagers] = useState<any>([]);
   const [message, setMessage] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [size, setSize] = useState<number>(0);
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_BACKEND_URL}/managers`)
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/managers`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    })
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
@@ -25,7 +36,7 @@ const Contact = () => {
         console.error(error);
         toast.error("Une erreur est survenue. Contactez support@savime.tech");
       });
-  }, []);
+  }, [token]);
 
   const sendMail = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();

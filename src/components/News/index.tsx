@@ -1,8 +1,12 @@
+import { useRecoilValue } from "recoil";
 import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
 
 // Components
 import Modal from "../Modal";
+
+// Atoms
+import { userDataState } from "../../atoms/user";
 
 // Assets
 import plus from "../../assets/images/icon/plus.svg";
@@ -18,6 +22,7 @@ interface NewsProps {
 }
 
 const News = ({ editMode }: NewsProps) => {
+  const token = useRecoilValue(userDataState).token;
   const [news, setNews] = useState<any>([]);
   const [newTitle, setNewTitle] = useState<string>("");
   const [id, setId] = useState<number>(0);
@@ -29,7 +34,13 @@ const News = ({ editMode }: NewsProps) => {
   const [selectedNews, setSelectedNews] = useState<any>(null);
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_BACKEND_URL}/news`)
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/news`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    })
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
@@ -45,7 +56,7 @@ const News = ({ editMode }: NewsProps) => {
         console.error(error);
         toast.error("Une erreur est survenue. Contactez support@savime.tech");
       });
-  }, [refresh]);
+  }, [refresh, token]);
 
   const addNews = (e: any) => {
     e.preventDefault();
@@ -53,6 +64,7 @@ const News = ({ editMode }: NewsProps) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
         title: newTitle,
@@ -82,6 +94,7 @@ const News = ({ editMode }: NewsProps) => {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
         title: newTitle,
@@ -108,6 +121,10 @@ const News = ({ editMode }: NewsProps) => {
   const deleteNews = (id: number) => {
     fetch(`${process.env.REACT_APP_BACKEND_URL}/news/${id}`, {
       method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
     })
       .then((response) => response.json())
       .then((data) => {

@@ -1,9 +1,13 @@
+import { useRecoilValue } from "recoil";
 import { toast } from "react-toastify";
 import { v4 as uuidv4 } from "uuid";
 
 // Assets
 import trash from "../../assets/images/icon/trash.svg";
 import pen from "../../assets/images/icon/pen.svg";
+
+// Atoms
+import { userDataState } from "../../atoms/user";
 
 // Styles
 import styles from "./styles.module.scss";
@@ -25,9 +29,16 @@ const AdminTable = ({
   section,
   data,
 }: AdminTableProps) => {
+  const token = useRecoilValue(userDataState).token;
+
+
   const deleteElement = (id: number) => {
     fetch(`${process.env.REACT_APP_BACKEND_URL}/${section}/${id}`, {
       method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
     })
       .then((response) => response.json())
       .then((data) => {

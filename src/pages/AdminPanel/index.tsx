@@ -29,7 +29,7 @@ const AdminPanel = () => {
   const navigateTo = useNavigate();
   const setToken = useSetRecoilState(tokenState);
   const userData = useRecoilValue(userDataState);
-  const { role } = userData;
+  const { role, token } = userData;
   const [refresh, setRefresh] = useState(false);
   const [section, setSection] = useState("employees");
   const [modalEdit, setModalEdit] = useState(false);
@@ -45,7 +45,13 @@ const AdminPanel = () => {
   });
 
   const updateView = (section: string) => {
-    fetch(`${process.env.REACT_APP_BACKEND_URL}/${section}`)
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/${section}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    })
       .then((response) => response.json())
       .then((data) => {
         if (data.data.length === 0 || !data.success) {
@@ -71,7 +77,13 @@ const AdminPanel = () => {
 
   useEffect(() => {
     if (id !== 0) {
-      fetch(`${process.env.REACT_APP_BACKEND_URL}/${section}/${id}`)
+      fetch(`${process.env.REACT_APP_BACKEND_URL}/${section}/${id}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      })
         .then((response) => response.json())
         .then((data) => {
           if (data.success) {
@@ -95,7 +107,7 @@ const AdminPanel = () => {
     return <Loading />;
   }
 
-  if (role !== "admin") {
+  if (role !== "Admin") {
     navigateTo("/tableau-de-bord");
   }
 
@@ -113,6 +125,7 @@ const AdminPanel = () => {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(currentElement),
     })
@@ -140,6 +153,7 @@ const AdminPanel = () => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
         firstname: newManager.firstname,
@@ -187,9 +201,9 @@ const AdminPanel = () => {
         </div>
         <div className={styles.__pannel}>
           <div className={styles.__menu}>
-          <button onClick={() => setModalCreateManager(true)}>
-          Créer un compte Manager
-        </button>
+            <button onClick={() => setModalCreateManager(true)}>
+              Créer un compte Manager
+            </button>
             {[
               { name: "Employé·es", value: "employees" },
               { name: "Managers", value: "managers" },

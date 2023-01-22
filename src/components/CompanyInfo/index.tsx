@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import { useRecoilValue } from "recoil";
 import { v4 as uuidv4 } from "uuid";
 
 // Components
 import Input from "../../components/Input";
+
+// Atoms
+import { userDataState } from "../../atoms/user";
 
 // Styles
 import styles from "./styles.module.scss";
@@ -15,9 +19,16 @@ interface CompanyInfoProps {
 const CompanyInfo = ({ editMode }: CompanyInfoProps) => {
   const [teamInfo, setTeamInfo] = useState<any>([]);
   const [compagnyInfo, setCompagnyInfo] = useState<any>([]);
+  const token = useRecoilValue(userDataState).token;
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_BACKEND_URL}/managers`)
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/managers`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    })
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
@@ -32,7 +43,13 @@ const CompanyInfo = ({ editMode }: CompanyInfoProps) => {
         toast.error("Une erreur est survenue. Contactez support@savime.tech");
       });
 
-    fetch(`${process.env.REACT_APP_BACKEND_URL}/company-informations`)
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/company-informations`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    })
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
@@ -48,7 +65,7 @@ const CompanyInfo = ({ editMode }: CompanyInfoProps) => {
         console.error(error);
         toast.error("Une erreur est survenue. Contactez support@savime.tech");
       });
-  }, []);
+  }, [token]);
 
   const updateCompanyInfo = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -56,6 +73,7 @@ const CompanyInfo = ({ editMode }: CompanyInfoProps) => {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(compagnyInfo),
     })
