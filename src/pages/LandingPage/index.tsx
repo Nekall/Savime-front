@@ -1,9 +1,10 @@
 import { v4 as uuidv4 } from "uuid";
 
 // Components
+import Introduction from "../../components/_LandingPage/Introduction";
+import Newsletter from "../../components/_LandingPage/Newsletter";
 import Navbar from "../../components/_LandingPage/Navbar";
 import Footer from "../../components/_LandingPage/Footer";
-import Newsletter from "../../components/_LandingPage/Newsletter";
 import Banner from "../../components/_LandingPage/Banner";
 import Hero from "../../components/_LandingPage/Hero";
 
@@ -22,6 +23,7 @@ const LandingPage = () => {
     <section className={styles.__landing_page}>
       <Navbar
         links={[
+          { target: "#introduction", name: "Introduction" },
           { target: "#liberte", name: "Liberté" },
           { target: "#management", name: "Management" },
           { target: "#teletravail", name: "Télétravail" },
@@ -33,6 +35,16 @@ const LandingPage = () => {
         title={["The time-saver", "for teams & companies"]}
         alt={"group of people sitting while using laptop computer"}
         button={"Contactez-nous"}
+      />
+      <Introduction
+        anchor={"introduction"}
+        title={"Savime, c'est quoi ?"}
+        lead={
+          "Savime est une application de gestion des ressources humaines qui facilite la communication entre les employés et le département RH en offrant une expérience utilisateur efficace et une gestion efficace des ressources humaines."
+        }
+        content={
+          "Savime est une application de gestion des ressources humaines (RH) conçue pour améliorer la communication entre les employés et le département RH d'une entreprise. Elle a été conçue pour être simple, rapide et sécurisée, offrant ainsi une expérience utilisateur efficace. Avec Savime, les employés peuvent facilement partager des documents et accéder aux informations importantes liées à l'entreprise et à leur carrière. Par exemple, les employés peuvent utiliser l'application pour soumettre des demandes de congés, accéder à leur historique de paie, consulter les politiques de l'entreprise et bien plus encore. De plus, le département RH peut utiliser Savime pour gérer les informations des employés, telles que les dossiers de paie, les demandes de congés et les informations de contact. Cela permet aux responsables RH de traiter les demandes plus rapidement et de prendre des décisions éclairées en matière de gestion des ressources humaines. En somme, Savime est une application tout-en-un qui facilite la communication entre les employés et le département RH, offrant une expérience utilisateur efficace et une gestion efficace des ressources humaines. Cette application est clé en main, c'est-à-dire qu'elle est prête à l'emploi et ne nécessite pas de configuration supplémentaire pour être utilisée."
+        }
       />
       <div className={styles.__content}>
         {[

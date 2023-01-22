@@ -1,0 +1,65 @@
+.__introduction {
+    background-color: $secondary-bg;
+    border-radius: 8px;
+    margin: 35px 5%;
+    padding: 80px;
+
+    h3 {
+        font-size: 30px;
+        margin: 15px 0;
+    }
+
+    h5 {
+        font-size: 26px;
+        font-weight: initial;
+        margin: 15px 0;
+    }
+
+    p {
+        margin: 15px 0;
+    }
+
+    @media only screen and (max-width: 1200px) {
+        margin: 25px 3%;
+        padding: 20px;
+        text-align: center;
+
+        h3 {
+            font-size: 20px;
+            margin: 10px 0;
+        }
+
+        h5 {
+            font-size: 16px;
+            font-weight: initial;
+            margin: 10px 0;
+        }
+
+        p {
+            font-size: 14px;
+            margin: 15px 0;
+        }
+    }
+
+    @media only screen and (max-width: 600px) {
+        margin: 25px 3%;
+        padding: 20px;
+        text-align: center;
+
+        h3 {
+            font-size: 20px;
+            margin: 10px 0;
+        }
+
+        h5 {
+            font-size: 16px;
+            font-weight: initial;
+            margin: 10px 0;
+        }
+
+        p {
+            font-size: 14px;
+            margin: 15px 0;
+        }
+    }
+}
