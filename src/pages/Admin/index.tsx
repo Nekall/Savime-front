@@ -90,6 +90,7 @@ const Admin = () => {
             value={password}
             onChange={(e: any) => setPassword(e.currentTarget.value)}
             required
+            togglePasswordVisibility
           />
           <Input type={"submit"} value={"Connexion"} />
         </form>

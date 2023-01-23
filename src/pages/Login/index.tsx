@@ -101,6 +101,7 @@ const Login = () => {
             value={password}
             onChange={(e: any) => setPassword(e.currentTarget.value)}
             required
+            togglePasswordVisibility
           />
           <div className={styles.__switch}>
             <p>Connexion à un compte RH </p>

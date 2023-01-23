@@ -67,6 +67,7 @@ const ResetPassword = () => {
               "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$"
             }
             required
+            togglePasswordVisibility
           />
           <Input
             icon={lock}
@@ -77,6 +78,7 @@ const ResetPassword = () => {
               "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$"
             }
             required
+            togglePasswordVisibility
           />
           <p className={styles.__pwd_details}>
             ⓘ *Le mot de passe doit contenir au moins 8 caractères,

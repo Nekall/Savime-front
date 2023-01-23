@@ -1,5 +1,11 @@
+import { useState } from "react";
+
 // Styles
 import styles from "./styles.module.scss";
+
+// Assets
+import eyeClosed from "../../assets/images/icon/eye-closed.svg";
+import eyeOpen from "../../assets/images/icon/eye-open.svg";
 
 interface Props {
   error?: string;
@@ -16,6 +22,7 @@ interface Props {
   required?: boolean;
   pattern?: string;
   title?: string;
+  togglePasswordVisibility?: boolean;
 }
 
 const Input = ({
@@ -32,9 +39,16 @@ const Input = ({
   required,
   pattern,
   title,
+  togglePasswordVisibility,
 }: Props) => {
+  const [isVisible, setIsVisible] = useState(false);
   minlength = minlength ? minlength : 0;
   maxlength = maxlength ? maxlength : 100;
+
+  const TogglePasswordVisibility = () => {
+    setIsVisible(!isVisible);
+  };
+
   return (
     <div className={styles.__input}>
       {type !== "submit" && type !== "textArea" && icon && (
@@ -49,6 +63,7 @@ const Input = ({
           onChange={onChange}
         ></textarea>
       ) : (
+        <>
         <input
           className={
             type === "submit"
@@ -57,7 +72,7 @@ const Input = ({
               ? styles.__field
               : `${styles.__field} ${styles.__no_icon}`
           }
-          type={type}
+          type={isVisible ? "text" : type}
           placeholder={placeholder}
           value={value}
           onClick={onClick}
@@ -68,6 +83,12 @@ const Input = ({
           pattern={pattern}
           title={title}
         />
+        {togglePasswordVisibility && (
+          <button type="button" onClick={()=>TogglePasswordVisibility()} className={styles.__toggle_password_visibility}>
+            <img src={isVisible ? eyeOpen : eyeClosed} alt="eye icon" />
+          </button>
+        )}
+        </>
       )}
       {error && <div className={styles.__error}>{error}</div>}
     </div>

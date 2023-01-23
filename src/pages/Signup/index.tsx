@@ -103,6 +103,7 @@ const Signup = () => {
             pattern={
               "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$"
             }
+            togglePasswordVisibility
           />
           <Input
             icon={lock}
@@ -115,6 +116,7 @@ const Signup = () => {
             pattern={
               "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$"
             }
+            togglePasswordVisibility
           />
           <p className={styles.__pwd_details}>
             ⓘ *Le mot de passe doit contenir au moins 8 caractères,

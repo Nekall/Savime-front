@@ -1,5 +1,15 @@
 .__input {
 
+    .__toggle_password_visibility {
+        display: inline;
+        margin-left: -50px;
+        padding: 10px 12px 10px 15px;
+        cursor: pointer;
+        background-color: transparent;
+        border: none;
+        opacity: 0.6;
+    }
+
     input:disabled {
         opacity: 0.6;
     }
@@ -79,7 +89,7 @@
             height: 25px;
             font-size: 16px;
         }
-        
+
         .__submit {
             padding: 8px 20px;
             font-size: 16px;

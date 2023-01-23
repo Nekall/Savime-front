@@ -181,24 +181,26 @@ const Settings = () => {
           <Input
             required
             icon={lock}
-            type={"text"}
+            type={"password"}
             placeholder={"Mot de passe"}
             value={password}
             onChange={(e: any) => setPassword(e.currentTarget.value)}
             pattern={
               "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$"
             }
+            togglePasswordVisibility
           />
           <Input
             required
             icon={lock}
-            type={"text"}
+            type={"password"}
             placeholder={"Confirmation du mot de passe"}
             value={confirmPassword}
             onChange={(e: any) => setConfirmPassword(e.currentTarget.value)}
             pattern={
               "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$"
             }
+            togglePasswordVisibility
           />
           <p className={styles.__pwd_details}>
             ⓘ *Le mot de passe doit contenir au moins 8 caractères,
