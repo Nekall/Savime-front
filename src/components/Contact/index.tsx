@@ -41,9 +41,7 @@ const Contact = () => {
   const sendMail = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (size > 1000) {
-      return toast.info("Votre message est trop long");
-    }
+    if (size > 1000) return toast.info("Votre message est trop long");
 
     fetch(`${process.env.REACT_APP_BACKEND_URL}/contact`, {
       method: "POST",
