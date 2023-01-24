@@ -81,14 +81,14 @@ const Contact = () => {
           value={message}
           onChange={(e) => {
             setMessage(e.target.value);
-            console.log(e.target.value)
+            console.log(e.target.value);
             setSize(e.target.value.length);
           }}
           className={size > 1000 ? styles.__red : ""}
         ></textarea>
         <br />
         <select value={email} onChange={(e) => setEmail(e.target.value)}>
-          <option value="" selected disabled hidden>
+          <option value="" selected disabled hidden defaultChecked>
             Choisir un·e manager
           </option>
           {managers.map(({ firstname, lastname, email }: any) => (

@@ -53,7 +53,7 @@ const Admin = () => {
             email: null,
             job: null,
             profilePicture: null,
-            token: null,
+            token: token,
           });
           setToken(token);
           toast.success("Vous êtes connecté !");

@@ -1,5 +1,23 @@
 .__documents {
 
+    .__btn_add_doc {
+        cursor: pointer;
+        padding-top: 4px;
+        border: none;
+        background-color: transparent;
+        float: right;
+
+        img {
+            padding: 6px;
+            border-radius: 8px;
+            background-color: $blue-color;
+        }
+
+        :hover {
+            background-color: $light-blue-color;
+        }
+    }
+
     button {
         cursor: pointer;
         background-color: $blue-color;

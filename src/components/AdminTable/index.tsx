@@ -31,7 +31,6 @@ const AdminTable = ({
 }: AdminTableProps) => {
   const token = useRecoilValue(userDataState).token;
 
-
   const deleteElement = (id: number) => {
     fetch(`${process.env.REACT_APP_BACKEND_URL}/${section}/${id}`, {
       method: "DELETE",

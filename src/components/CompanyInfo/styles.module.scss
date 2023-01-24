@@ -1,9 +1,48 @@
 .__company_info {
     padding-left: 2%;
 
+    .__btn_add_info {
+        cursor: pointer;
+        padding-top: 4px;
+        border: none;
+        background-color: transparent;
+        float: right;
+
+        img {
+            padding: 6px;
+            border-radius: 8px;
+            background-color: $blue-color;
+        }
+
+        :hover {
+            background-color: $light-blue-color;
+        }
+    }
+
     .__inputs {
-        .__label {
-            margin-top: 10px;
+        border: solid 1px $primary-bg;
+        border-radius: 8px;
+        max-width: 320px;
+        padding: 10px;
+        margin: 10px 0;
+
+        .__delete_btn {
+            cursor: pointer;
+            padding-top: 4px;
+            border: none;
+            top: 0;
+            background-color: transparent;
+
+
+            img {
+                background-color: $primary-bg;
+                padding: 6px;
+                border-radius: 8px;
+            }
+
+            :hover {
+                background-color: $secondary-bg;
+            }
         }
     }
 

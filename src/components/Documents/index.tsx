@@ -5,12 +5,13 @@ import { toast } from "react-toastify";
 
 // Components
 import Modal from "../Modal";
+import Input from "../Input";
 
 // Atoms
 import { userDataState } from "../../atoms/user";
 
 // Assets
-import cross from "../../assets/images/icon/cross.svg";
+import plus from "../../assets/images/icon/plus.svg";
 
 // Styles
 import styles from "./styles.module.scss";
@@ -24,7 +25,7 @@ const Documents = ({ editMode }: DocumentsProps) => {
   const { role, id, token } = userData;
   const [documents, setDocuments] = useState([]);
   const [docId, setDocId] = useState(0);
-  const [newDocument, setNewDocument] = useState<any>(null);
+  const [updatedDocument, setNewDocument] = useState<any>(null);
   const [attestation, setAttestation] = useState<any>(undefined);
   const [contract, setContract] = useState<any>(undefined);
   const [payslip, setPayslip] = useState<any>([]);
@@ -32,8 +33,21 @@ const Documents = ({ editMode }: DocumentsProps) => {
   const [refresh, setRefresh] = useState(false);
   const [modalPreview, setModalPreview] = useState(false);
   const [preview, setPreview] = useState("");
+  const [modalAddDoc, setModalAddDoc] = useState(false);
+  const [newDocType, setNewDocType] = useState("");
+  const [newDocName, setNewDocName] = useState("");
+  const [newDocFile, setNewDocFile] = useState<any>(null);
+  const [employees, setEmployees] = useState<any>([]);
+  const [selectedEmployee, setSelectedEmployee] = useState<any>(null);
 
   useEffect(() => {
+    if (!modalAddDoc) {
+      setNewDocType("");
+      setNewDocName("");
+      setNewDocFile(null);
+      setSelectedEmployee(null);
+    }
+
     fetch(
       `${process.env.REACT_APP_BACKEND_URL}/documents${
         role === "Manager" ? "" : `/employee/${id}`
@@ -76,7 +90,30 @@ const Documents = ({ editMode }: DocumentsProps) => {
         console.error(error);
         toast.error("Une erreur est survenue. Contactez support@savime.tech");
       });
-  }, [id, role, refresh, token]);
+
+    if (role === "Manager") {
+      fetch(`${process.env.REACT_APP_BACKEND_URL}/employees`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.success) {
+            setEmployees(data.data);
+          } else {
+            console.error(data);
+            toast.error("Impossible de récupérer les employés.");
+          }
+        })
+        .catch((error) => {
+          console.error(error);
+          toast.error("Une erreur est survenue. Contactez");
+        });
+    }
+  }, [id, role, refresh, token, modalAddDoc]);
 
   const updateAttestation = () => {
     // simply endpoint to update attestation (date)
@@ -87,7 +124,7 @@ const Documents = ({ editMode }: DocumentsProps) => {
     e.preventDefault();
 
     const reader = new FileReader();
-    reader.readAsDataURL(newDocument);
+    reader.readAsDataURL(updatedDocument);
     reader.onload = async function () {
       fetch(`${process.env.REACT_APP_BACKEND_URL}/documents/${document_id}`, {
         method: "PATCH",
@@ -141,25 +178,111 @@ const Documents = ({ editMode }: DocumentsProps) => {
       });
   };
 
+  const addDocument = (e: any) => {
+    e.preventDefault();
+
+    const reader = new FileReader();
+    reader.readAsDataURL(newDocFile);
+    reader.onload = async function () {
+      fetch(`${process.env.REACT_APP_BACKEND_URL}/documents`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          name: newDocName,
+          document: reader.result,
+          type: newDocType,
+          employeeId: selectedEmployee,
+        }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.success) {
+            setRefresh(!refresh);
+            setModalAddDoc(false);
+            toast.success("Document ajouté.");
+          } else {
+            console.error(data);
+            toast.error("Impossible d'ajouter le document.");
+          }
+        })
+        .catch((error) => {
+          console.error(error);
+          toast.error("Une erreur est survenue. Contactez support@savime.tech");
+        });
+    };
+  };
+
   return (
     <>
       {modalPreview && (
-        <Modal>
+        <Modal setModalOpen={setModalPreview}>
           <div className={styles.__preview_document}>
-            <button
-              className={styles.__close}
-              onClick={() => setModalPreview(false)}
-            >
-              <img src={cross} alt="Close" />
-            </button>
             <h2>Aperçu</h2>
             <embed type="application/pdf" src={preview} />
           </div>
         </Modal>
       )}
+      {modalAddDoc && (
+        <Modal setModalOpen={setModalAddDoc}>
+          <div className={styles.__new_actuality}>
+            <br />
+            <h3>Ajouter un document</h3>
+            <form onSubmit={(e) => addDocument(e)}>
+              <label>Nom</label>
+              <Input
+                type={"text"}
+                value={newDocName}
+                onChange={(e: any) => setNewDocName(e.currentTarget.value)}
+              />
+              <select
+                value={newDocType}
+                onChange={(e: any) => setNewDocType(e.currentTarget.value)}
+              >
+                <option defaultChecked disabled hidden value="">
+                  Type du document
+                </option>
+                <option value="attestation">Attestation</option>
+                <option value="contract">Contrat</option>
+                <option value="payslip">Bulletin de paie</option>
+              </select>
+              <select
+                value={selectedEmployee}
+                onChange={(e: any) =>
+                  setSelectedEmployee(e.currentTarget.value)
+                }
+              >
+                <option defaultChecked disabled hidden value="">
+                  Employé
+                </option>
+                {employees &&
+                  employees.map((employee: any) => (
+                    <option
+                      value={employee.employee_id}
+                    >{`${employee.firstname} ${employee.lastname}`}</option>
+                  ))}
+              </select>
+              <Input
+                type={"file"}
+                onChange={(e: any) => setNewDocFile(e.target.files[0])}
+              />
+              <input type="submit" value="Ajouter" />
+            </form>
+          </div>
+        </Modal>
+      )}
       {editMode ? (
         <div className={styles.__documents}>
-          <p>Edit mode</p>
+          <button
+            className={styles.__btn_add_doc}
+            onClick={() => {
+              setModalAddDoc(!modalAddDoc);
+            }}
+          >
+            <img src={plus} alt="plus" />
+          </button>
           <h2>Documents</h2>
           <table>
             <thead>
@@ -220,14 +343,8 @@ const Documents = ({ editMode }: DocumentsProps) => {
             </tbody>
           </table>
           {modalUpdate && (
-            <Modal>
+            <Modal setModalOpen={setModalUpdate}>
               <div className={styles.__update_document}>
-                <button
-                  className={styles.__close}
-                  onClick={() => setModalUpdate(false)}
-                >
-                  <img src={cross} alt="Close" />
-                </button>
                 <h2>Mettre à jour le document</h2>
                 <form onSubmit={(e) => updateDocument(e, docId)}>
                   <label htmlFor="document">Document</label>

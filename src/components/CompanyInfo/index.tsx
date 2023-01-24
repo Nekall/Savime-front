@@ -3,6 +3,10 @@ import { toast } from "react-toastify";
 import { useRecoilValue } from "recoil";
 import { v4 as uuidv4 } from "uuid";
 
+// Assets
+import plus from "../../assets/images/icon/plus.svg";
+import trash from "../../assets/images/icon/trash.svg";
+
 // Components
 import Input from "../../components/Input";
 
@@ -11,6 +15,7 @@ import { userDataState } from "../../atoms/user";
 
 // Styles
 import styles from "./styles.module.scss";
+import Modal from "../Modal";
 
 interface CompanyInfoProps {
   editMode?: boolean;
@@ -19,9 +24,20 @@ interface CompanyInfoProps {
 const CompanyInfo = ({ editMode }: CompanyInfoProps) => {
   const [teamInfo, setTeamInfo] = useState<any>([]);
   const [compagnyInfo, setCompagnyInfo] = useState<any>([]);
+  const [modalAddInfo, setModalAddInfo] = useState(false);
+  const [newNameInfo, setNewNameInfo] = useState("");
+  const [newValueInfo, setNewValueInfo] = useState("");
+  const [refresh, setRefresh] = useState(false);
   const token = useRecoilValue(userDataState).token;
 
+  console.log(compagnyInfo);
+
   useEffect(() => {
+    if (!modalAddInfo) {
+      setNewNameInfo("");
+      setNewValueInfo("");
+    }
+
     fetch(`${process.env.REACT_APP_BACKEND_URL}/managers`, {
       method: "GET",
       headers: {
@@ -65,7 +81,7 @@ const CompanyInfo = ({ editMode }: CompanyInfoProps) => {
         console.error(error);
         toast.error("Une erreur est survenue. Contactez support@savime.tech");
       });
-  }, [token]);
+  }, [token, modalAddInfo, refresh]);
 
   const updateCompanyInfo = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -96,15 +112,113 @@ const CompanyInfo = ({ editMode }: CompanyInfoProps) => {
       });
   };
 
+  const addCompanyInfo = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/company-informations`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        name: newNameInfo,
+        value: newValueInfo,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          setCompagnyInfo([...compagnyInfo, data.data]);
+          toast.success("L'information a bien été ajoutée.");
+        } else {
+          console.error(data);
+          toast.error("Impossible d'ajouter l'information.");
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+        toast.error("Une erreur est survenue. Contactez support@savime.tech");
+      });
+  };
+
+  const deleteCompanyInfo = (id: string) => {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/company-informations/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          setRefresh(!refresh);
+          toast.success("L'information a bien été supprimée.");
+        } else {
+          console.error(data);
+          toast.error("Impossible de supprimer l'information.");
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+        toast.error("Une erreur est survenue. Contactez nous.");
+      });
+  };
+
   return editMode ? (
     <>
       <div className={styles.__company_info}>
+        <button
+          className={styles.__btn_add_info}
+          onClick={() => {
+            setModalAddInfo(!modalAddInfo);
+          }}
+        >
+          <img src={plus} alt="plus" />
+        </button>
         <h2>Informations générales de l'entreprise</h2>
+        {modalAddInfo && (
+          <Modal setModalOpen={setModalAddInfo}>
+            <div className={styles.__new_actuality}>
+              <br />
+              <h3>Ajouter une information</h3>
+              <form onSubmit={(e) => addCompanyInfo(e)}>
+                <label>Nom</label>
+                <Input
+                  type={"text"}
+                  value={newNameInfo}
+                  onChange={(e: any) => setNewNameInfo(e.target.value)}
+                />
+                <label>Valeur</label>
+                <Input
+                  type={"text"}
+                  value={newValueInfo}
+                  onChange={(e: any) => setNewValueInfo(e.target.value)}
+                />
+                <input type="submit" value="Ajouter" />
+              </form>
+            </div>
+          </Modal>
+        )}
         <form onSubmit={(e) => updateCompanyInfo(e)}>
-          {compagnyInfo.map(({ name, value }: any) => {
+          {compagnyInfo.map(({ company_information_id, name, value }: any) => {
             return (
               <div className={styles.__inputs} key={name}>
-                <div className={styles.__label}>{name} :</div>
+                <Input
+                  required
+                  type="text"
+                  value={name}
+                  onChange={(e: { target: { value: any } }) => {
+                    setCompagnyInfo(
+                      compagnyInfo.map((item: { name: any; value: any }) => {
+                        if (item.name === name) {
+                          item.name = e.target.value;
+                        }
+                        return item;
+                      })
+                    );
+                  }}
+                />
                 <Input
                   required
                   type="text"
@@ -120,6 +234,16 @@ const CompanyInfo = ({ editMode }: CompanyInfoProps) => {
                     );
                   }}
                 />
+                <button
+                  title="Double clic pour supprimer 💡"
+                  className={styles.__delete_btn}
+                  type="button"
+                  onDoubleClick={() =>
+                    deleteCompanyInfo(company_information_id)
+                  }
+                >
+                  <img src={trash} alt="Supprimer" />
+                </button>
               </div>
             );
           })}

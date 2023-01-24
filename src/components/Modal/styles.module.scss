@@ -9,6 +9,28 @@
     overflow-y: auto;
     background-color: rgba(0, 0, 0, 0.2);
 
+    .__close {
+        height: 40px;
+
+        .__btn {
+            float: right;
+            cursor: pointer;
+            padding-top: 4px;
+            background-color: transparent;
+            border: none;
+
+            img {
+                padding: 6px;
+                border-radius: 8px;
+            }
+
+            :hover {
+                background-color: $primary-bg;
+            }
+        }
+
+    }
+
     .__content {
         text-align: center;
         background-color: #222d42;

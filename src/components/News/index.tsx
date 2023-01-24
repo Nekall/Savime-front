@@ -11,7 +11,6 @@ import { userDataState } from "../../atoms/user";
 // Assets
 import plus from "../../assets/images/icon/plus.svg";
 import trash from "../../assets/images/icon/trash.svg";
-import cross from "../../assets/images/icon/cross.svg";
 import pen from "../../assets/images/icon/pen.svg";
 
 // Styles
@@ -156,14 +155,8 @@ const News = ({ editMode }: NewsProps) => {
       </button>
       <h2>Actualités internes</h2>
       {modalAddNews && (
-        <Modal>
+        <Modal setModalOpen={setModalAddNews}>
           <div className={styles.__new_actuality}>
-            <button
-              className={styles.__close}
-              onClick={() => setModalAddNews(false)}
-            >
-              <img src={cross} alt="Close" />
-            </button>
             <br />
             <h3>Ajouter une actualité</h3>
             <form onSubmit={(e) => addNews(e)}>
@@ -195,7 +188,7 @@ const News = ({ editMode }: NewsProps) => {
               className={styles.__btn}
               onDoubleClick={() => deleteNews(new_id)}
             >
-              <img src={trash} alt="poubelle" />
+              <img src={trash} alt="Supprimer" />
             </button>
             <button
               className={styles.__btn}
@@ -209,14 +202,8 @@ const News = ({ editMode }: NewsProps) => {
               <img src={pen} alt="crayon" />
             </button>
             {modalEditNews && (
-              <Modal>
+              <Modal setModalOpen={setModalEditNews}>
                 <div className={styles.__new_actuality}>
-                  <button
-                    className={styles.__close}
-                    onClick={() => setModalEditNews(false)}
-                  >
-                    <img src={cross} alt="Close" />
-                  </button>
                   <br />
                   <h3>Editer une actualité</h3>
                   <form onSubmit={(e) => editNews(e)}>
@@ -253,14 +240,8 @@ const News = ({ editMode }: NewsProps) => {
     <div className={styles.__news}>
       <h2>Actualités internes</h2>
       {modalReadNews && (
-        <Modal>
+        <Modal setModalOpen={setModalReadNews}>
           <div className={styles.__read_actuality}>
-            <button
-              className={styles.__close}
-              onClick={() => setModalReadNews(false)}
-            >
-              <img src={cross} alt="Close" />
-            </button>
             <br />
             <h3>{selectedNews.title}</h3>
             <p>

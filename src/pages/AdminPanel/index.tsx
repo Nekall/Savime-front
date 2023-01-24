@@ -20,7 +20,6 @@ import Input from "../../components/Input";
 
 // Assets
 import exit from "../../assets/images/icon/exit.svg";
-import cross from "../../assets/images/icon/cross.svg";
 import logo from "../../assets/images/logo/logo-full-transparent.png";
 import AdminTable from "../../components/AdminTable";
 
@@ -229,14 +228,8 @@ const AdminPanel = () => {
         </div>
       </div>
       {modalEdit && currentElement && (
-        <Modal>
+        <Modal setModalOpen={setModalEdit}>
           <div className={styles.__edit_modal}>
-            <button
-              className={styles.__close}
-              onClick={() => setModalEdit(false)}
-            >
-              <img src={cross} alt="Close" />
-            </button>
             <br />
             <form onSubmit={(e) => updateElement(e)}>
               {Object.entries(currentElement).map(
@@ -283,14 +276,8 @@ const AdminPanel = () => {
         </Modal>
       )}
       {modalCreateManager && (
-        <Modal>
+        <Modal setModalOpen={setModalCreateManager}>
           <div className={styles.__create_manager_modal}>
-            <button
-              className={styles.__close}
-              onClick={() => setModalCreateManager(false)}
-            >
-              <img src={cross} alt="Close" />
-            </button>
             <br />
             <form onSubmit={(e) => createManager(e)}>
               {Object.entries(newManager).map((element: any, index: number) => {

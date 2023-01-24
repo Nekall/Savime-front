@@ -10,7 +10,6 @@ import eyeOpen from "../../assets/images/icon/eye-open.svg";
 interface Props {
   error?: string;
   type: string;
-  label?: string;
   minlength?: number;
   maxlength?: number;
   placeholder?: string;
@@ -64,30 +63,34 @@ const Input = ({
         ></textarea>
       ) : (
         <>
-        <input
-          className={
-            type === "submit"
-              ? styles.__submit
-              : icon
-              ? styles.__field
-              : `${styles.__field} ${styles.__no_icon}`
-          }
-          type={isVisible ? "text" : type}
-          placeholder={placeholder}
-          value={value}
-          onClick={onClick}
-          onChange={onChange}
-          required={required}
-          minLength={minlength}
-          maxLength={maxlength}
-          pattern={pattern}
-          title={title}
-        />
-        {togglePasswordVisibility && (
-          <button type="button" onClick={()=>TogglePasswordVisibility()} className={styles.__toggle_password_visibility}>
-            <img src={isVisible ? eyeOpen : eyeClosed} alt="eye icon" />
-          </button>
-        )}
+          <input
+            className={
+              type === "submit"
+                ? styles.__submit
+                : icon
+                ? styles.__field
+                : `${styles.__field} ${styles.__no_icon}`
+            }
+            type={isVisible ? "text" : type}
+            placeholder={placeholder}
+            value={value}
+            onClick={onClick}
+            onChange={onChange}
+            required={required}
+            minLength={minlength}
+            maxLength={maxlength}
+            pattern={pattern}
+            title={title}
+          />
+          {togglePasswordVisibility && (
+            <button
+              type="button"
+              onClick={() => TogglePasswordVisibility()}
+              className={styles.__toggle_password_visibility}
+            >
+              <img src={isVisible ? eyeOpen : eyeClosed} alt="eye icon" />
+            </button>
+          )}
         </>
       )}
       {error && <div className={styles.__error}>{error}</div>}
