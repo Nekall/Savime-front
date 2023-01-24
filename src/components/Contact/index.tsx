@@ -9,7 +9,7 @@ import { userDataState } from "../../atoms/user";
 import styles from "./styles.module.scss";
 
 const Contact = () => {
-  const token = useRecoilValue(userDataState).token;
+  const { token, firstname, lastname } = useRecoilValue(userDataState);
   const [managers, setManagers] = useState<any>([]);
   const [message, setMessage] = useState<string>("");
   const [email, setEmail] = useState<string>("");
@@ -45,11 +45,33 @@ const Contact = () => {
       return toast.info("Votre message est trop long");
     }
 
-    /*
-      toast.success("Votre message a bien été envoyé.");
-    */
-
-    console.log("send mail");
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/contact`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        firstname,
+        lastname,
+        email,
+        message,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          toast.success("Votre message a bien été envoyé.");
+          setMessage("");
+        } else {
+          console.error(data);
+          toast.error("Impossible d'envoyer votre message.");
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+        toast.error("Une erreur est survenue. Contactez support@savime.tech");
+      });
   };
 
   return (
@@ -61,6 +83,7 @@ const Contact = () => {
           value={message}
           onChange={(e) => {
             setMessage(e.target.value);
+            console.log(e.target.value)
             setSize(e.target.value.length);
           }}
           className={size > 1000 ? styles.__red : ""}
