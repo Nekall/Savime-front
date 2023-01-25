@@ -170,6 +170,17 @@
 
 .__edit_modal, .__create_manager_modal {
 
+    select {
+        display: grid;
+        padding: 5px 10px;
+        font-size: 16px;
+        border-radius: 6px;
+        cursor: pointer;
+        margin: 10px auto 5px auto;
+        background-color: $white-color;
+        border: none;
+    }
+
     .__close {
         float: right;
         cursor: pointer;

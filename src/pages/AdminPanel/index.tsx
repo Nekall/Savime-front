@@ -241,20 +241,50 @@ const AdminPanel = () => {
                     element[0] !== "updatedAt" && (
                       <div key={element[0]}>
                         <label>{element[0]}</label>
-                        {element[0] !== "content" ? (
+                        {element[0] && element[0] !== "type" ? (
                           <Input
-                            type="text"
-                            value={element[1]}
-                            onChange={(e: { target: { value: any } }) => {
-                              setCurrentElement({
-                                ...currentElement,
-                                [element[0]]: e.target.value,
-                              });
+                            type={
+                              element[0] === "content"
+                                ? "textArea"
+                                : element[0] === "document"
+                                ? "file"
+                                : "text"
+                            }
+                            {...(element[0] === "employee_id" && {
+                              disabled: true,
+                            })}
+                            {...(element[0] !== "document"
+                              ? { value: element[1] }
+                              : { accept: "application/pdf" })}
+                            onChange={(e: any) => {
+                              let file: string | ArrayBuffer | null = "";
+                              if (element[0] === "document") {
+                                const reader = new FileReader();
+                                reader.readAsDataURL(e.target.files[0]);
+                                reader.onload = async function () {
+                                  if (reader.onerror) {
+                                    file = "";
+                                    toast.error(
+                                      "Une erreur est survenue lors de la lecture du fichier."
+                                    );
+                                  } else {
+                                    file = reader.result;
+                                  }
+                                  setCurrentElement({
+                                    ...currentElement,
+                                    [element[0]]: file,
+                                  });
+                                };
+                              } else {
+                                setCurrentElement({
+                                  ...currentElement,
+                                  [element[0]]: e.target.value,
+                                });
+                              }
                             }}
                           />
                         ) : (
-                          <Input
-                            type="textArea"
+                          <select
                             value={element[1]}
                             onChange={(e: { target: { value: any } }) => {
                               setCurrentElement({
@@ -262,7 +292,11 @@ const AdminPanel = () => {
                                 [element[0]]: e.target.value,
                               });
                             }}
-                          />
+                          >
+                            <option value="attestation">Attestation</option>
+                            <option value="payslip">Bulletin</option>
+                            <option value="contract">Contrat</option>
+                          </select>
                         )}
                         <br />
                       </div>

@@ -117,6 +117,11 @@ const Settings = () => {
       const reader = new FileReader();
       reader.readAsDataURL(file);
       reader.onload = async function () {
+        if(reader.onerror) {
+          console.error(reader.error);
+          toast.error("Une erreur est survenue lors de la lecture du fichier.");
+          return;
+        }
         const base64PP = reader.result;
         try {
           const resizedPP = await resizeImage(base64PP);

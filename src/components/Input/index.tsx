@@ -23,6 +23,7 @@ interface Props {
   title?: string;
   togglePasswordVisibility?: boolean;
   accept?: string;
+  disabled?: boolean;
 }
 
 const Input = ({
@@ -41,6 +42,7 @@ const Input = ({
   title,
   togglePasswordVisibility,
   accept,
+  disabled,
 }: Props) => {
   const [isVisible, setIsVisible] = useState(false);
   minlength = minlength ? minlength : 0;
@@ -83,7 +85,8 @@ const Input = ({
             maxLength={maxlength}
             pattern={pattern}
             title={title}
-            accept={accept? accept : "*"}
+            {...(accept && { accept: accept })}
+            {...(disabled && { disabled: true })}
           />
           {togglePasswordVisibility && (
             <button

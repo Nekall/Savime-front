@@ -126,6 +126,12 @@ const Documents = ({ editMode }: DocumentsProps) => {
     const reader = new FileReader();
     reader.readAsDataURL(updatedDocument);
     reader.onload = async function () {
+      if(reader.onerror) {
+        console.error(reader.error);
+        toast.error("Une erreur est survenue lors de la lecture du fichier.");
+        return;
+      }
+
       fetch(`${process.env.REACT_APP_BACKEND_URL}/documents/${document_id}`, {
         method: "PATCH",
         headers: {
@@ -184,6 +190,12 @@ const Documents = ({ editMode }: DocumentsProps) => {
     const reader = new FileReader();
     reader.readAsDataURL(newDocFile);
     reader.onload = async function () {
+      if(reader.onerror) {
+        console.error(reader.error);
+        toast.error("Une erreur est survenue lors de la lecture du fichier.");
+        return;
+      }
+
       fetch(`${process.env.REACT_APP_BACKEND_URL}/documents`, {
         method: "POST",
         headers: {
