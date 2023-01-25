@@ -38,7 +38,7 @@ const Documents = ({ editMode }: DocumentsProps) => {
   const [newDocName, setNewDocName] = useState("");
   const [newDocFile, setNewDocFile] = useState<any>(null);
   const [employees, setEmployees] = useState<any>([]);
-  const [selectedEmployee, setSelectedEmployee] = useState<any>(null);
+  const [selectedEmployee, setSelectedEmployee] = useState<any>("");
 
   useEffect(() => {
     if (!modalAddDoc) {
@@ -126,7 +126,7 @@ const Documents = ({ editMode }: DocumentsProps) => {
     const reader = new FileReader();
     reader.readAsDataURL(updatedDocument);
     reader.onload = async function () {
-      if(reader.onerror) {
+      if (reader.onerror) {
         console.error(reader.error);
         toast.error("Une erreur est survenue lors de la lecture du fichier.");
         return;
@@ -190,7 +190,7 @@ const Documents = ({ editMode }: DocumentsProps) => {
     const reader = new FileReader();
     reader.readAsDataURL(newDocFile);
     reader.onload = async function () {
-      if(reader.onerror) {
+      if (reader.onerror) {
         console.error(reader.error);
         toast.error("Une erreur est survenue lors de la lecture du fichier.");
         return;
@@ -245,7 +245,7 @@ const Documents = ({ editMode }: DocumentsProps) => {
             <form onSubmit={(e) => addDocument(e)}>
               <label>Nom</label>
               <Input
-              required
+                required
                 type={"text"}
                 value={newDocName}
                 onChange={(e: any) => setNewDocName(e.currentTarget.value)}
@@ -263,11 +263,9 @@ const Documents = ({ editMode }: DocumentsProps) => {
                 <option value="payslip">Bulletin de paie</option>
               </select>
               <select
-              required
+                required
                 value={selectedEmployee}
-                onChange={(e: any) =>
-                  setSelectedEmployee(e.currentTarget.value)
-                }
+                onChange={(e: any) => setSelectedEmployee(e.target.value)}
               >
                 <option defaultChecked disabled hidden value="">
                   Employé
@@ -276,7 +274,7 @@ const Documents = ({ editMode }: DocumentsProps) => {
                   employees.map((employee: any) => (
                     <option
                       value={employee.employee_id}
-                    >{`${employee.firstname} ${employee.lastname}`}</option>
+                    >{`${employee.firstname} ${employee.lastname} (${employee.employee_id})`}</option>
                   ))}
               </select>
               <Input
