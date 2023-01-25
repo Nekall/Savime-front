@@ -115,11 +115,6 @@ const Documents = ({ editMode }: DocumentsProps) => {
     }
   }, [id, role, refresh, token, modalAddDoc]);
 
-  const updateAttestation = () => {
-    // simply endpoint to update attestation (date)
-    console.log("Update Attestation");
-  };
-
   const updateDocument = (e: any, document_id: number) => {
     e.preventDefault();
 
@@ -217,7 +212,9 @@ const Documents = ({ editMode }: DocumentsProps) => {
             toast.success("Document ajouté.");
           } else {
             console.error(data);
-            toast.error("Impossible d'ajouter le document.");
+            toast.error(
+              data.message ? data.message : "Impossible d'ajouter le document."
+            );
           }
         })
         .catch((error) => {
@@ -377,16 +374,26 @@ const Documents = ({ editMode }: DocumentsProps) => {
         <div className={styles.__documents}>
           <h2>Attestation de travail</h2>
           <div>
-            {attestation && (
-              <button onClick={() => updateAttestation()}>
-                Actualisation*
+            {attestation ? (
+              <button
+                onClick={() => {
+                  setPreview(attestation.document);
+                  setDocId(attestation.document_id);
+                  setModalPreview(true);
+                }}
+              >
+                Aperçu | Télécharger
               </button>
+            ) : (
+              <p>
+                Votre contrat de travail n'est pas disponible au téléchargement,
+                veuillez contacter l'équipe RH.
+              </p>
             )}
             {attestation && (
               <p>
-                *actualisation de la date de l'attestation. (Dernière
-                actualisation :{" "}
-                {new Date(attestation.createdAt).toLocaleDateString("fr-FR")})
+                Dernière actualisation :{" "}
+                {new Date(attestation.createdAt).toLocaleDateString("fr-FR")}
               </p>
             )}
           </div>
@@ -394,8 +401,8 @@ const Documents = ({ editMode }: DocumentsProps) => {
           {contract ? (
             <button
               onClick={() => {
-                setPreview(attestation.document);
-                setDocId(attestation.document_id);
+                setPreview(contract.document);
+                setDocId(contract.document_id);
                 setModalPreview(true);
               }}
             >
