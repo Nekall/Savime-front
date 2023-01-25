@@ -185,17 +185,19 @@ const CompanyInfo = ({ editMode }: CompanyInfoProps) => {
               <form onSubmit={(e) => addCompanyInfo(e)}>
                 <label>Nom</label>
                 <Input
+                  required
                   type={"text"}
                   value={newNameInfo}
                   onChange={(e: any) => setNewNameInfo(e.target.value)}
                 />
                 <label>Valeur</label>
                 <Input
+                  required
                   type={"text"}
                   value={newValueInfo}
                   onChange={(e: any) => setNewValueInfo(e.target.value)}
                 />
-                <input type="submit" value="Ajouter" />
+                <Input type="submit" value="Ajouter" />
               </form>
             </div>
           </Modal>

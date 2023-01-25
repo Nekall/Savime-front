@@ -227,12 +227,13 @@ const Documents = ({ editMode }: DocumentsProps) => {
       )}
       {modalAddDoc && (
         <Modal setModalOpen={setModalAddDoc}>
-          <div className={styles.__new_actuality}>
+          <div className={styles.__new_document}>
             <br />
             <h3>Ajouter un document</h3>
             <form onSubmit={(e) => addDocument(e)}>
               <label>Nom</label>
               <Input
+              required
                 type={"text"}
                 value={newDocName}
                 onChange={(e: any) => setNewDocName(e.currentTarget.value)}
@@ -240,6 +241,7 @@ const Documents = ({ editMode }: DocumentsProps) => {
               <select
                 value={newDocType}
                 onChange={(e: any) => setNewDocType(e.currentTarget.value)}
+                required
               >
                 <option defaultChecked disabled hidden value="">
                   Type du document
@@ -249,6 +251,7 @@ const Documents = ({ editMode }: DocumentsProps) => {
                 <option value="payslip">Bulletin de paie</option>
               </select>
               <select
+              required
                 value={selectedEmployee}
                 onChange={(e: any) =>
                   setSelectedEmployee(e.currentTarget.value)
@@ -267,8 +270,9 @@ const Documents = ({ editMode }: DocumentsProps) => {
               <Input
                 type={"file"}
                 onChange={(e: any) => setNewDocFile(e.target.files[0])}
+                required
               />
-              <input type="submit" value="Ajouter" />
+              <Input type="submit" value="Ajouter" />
             </form>
           </div>
         </Modal>
@@ -348,14 +352,12 @@ const Documents = ({ editMode }: DocumentsProps) => {
                 <h2>Mettre à jour le document</h2>
                 <form onSubmit={(e) => updateDocument(e, docId)}>
                   <label htmlFor="document">Document</label>
-                  <input
+                  <Input
                     onChange={(e: any) => setNewDocument(e.target.files[0])}
                     type="file"
-                    name="document"
-                    id="document"
                     accept="application/pdf"
                   />
-                  <input type="submit" value="Mettre à jour" />
+                  <Input type="submit" value="Mettre à jour" />
                 </form>
               </div>
             </Modal>

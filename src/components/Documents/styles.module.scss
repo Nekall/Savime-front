@@ -88,6 +88,19 @@
     }
 }
 
+.__new_document {
+
+    select {
+        padding: 5px 10px;
+        font-size: 16px;
+        border-radius: 6px;
+        cursor: pointer;
+        margin: 10px 10px 5px 0;
+        background-color: #ffffff;
+        border: none;
+    }
+}
+
 .__preview_document {
     .__close {
         float: right;
