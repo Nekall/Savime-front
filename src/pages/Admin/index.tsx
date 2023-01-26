@@ -54,6 +54,7 @@ const Admin = () => {
             job: null,
             profilePicture: null,
             token: token,
+            phone: null,
           });
           setToken(token);
           toast.success("Vous êtes connecté !");

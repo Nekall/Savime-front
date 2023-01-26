@@ -1,6 +1,6 @@
 import { atom } from "recoil";
-import { recoilPersist } from 'recoil-persist'
-const { persistAtom } = recoilPersist()
+import { recoilPersist } from "recoil-persist";
+const { persistAtom } = recoilPersist();
 
 type UserDataState = {
   id: number | null;
@@ -11,6 +11,7 @@ type UserDataState = {
   job: string | null;
   profilePicture: string | null;
   token: string | null;
+  phone: string | null;
 };
 
 export const userDataState = atom<UserDataState>({
@@ -23,7 +24,8 @@ export const userDataState = atom<UserDataState>({
     email: null,
     job: null,
     profilePicture: null,
-    token: null
+    token: null,
+    phone: null,
   },
   effects_UNSTABLE: [persistAtom],
 });

@@ -22,10 +22,12 @@ import resizeImage from "../../helpers/resizeImage";
 
 const Settings = () => {
   const token = useRecoilValue(userDataState).token;
+  const role = useRecoilValue(userDataState).role;
   const [dataUser, setDateUser] = useRecoilState(userDataState);
   const [firstname, setFirstname] = useState(dataUser.firstname);
   const [lastname, setLastname] = useState(dataUser.lastname);
   const [email, setEmail] = useState(dataUser.email);
+  const [phone, setPhone] = useState(dataUser.phone);
   const [job, setJob] = useState(dataUser.job);
   const [profilePicture, setProfilePicture] = useState(dataUser.profilePicture);
   const [password, setPassword] = useState("");
@@ -33,20 +35,25 @@ const Settings = () => {
 
   const updateData = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    fetch(`${process.env.REACT_APP_BACKEND_URL}/employees/${dataUser.id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({
-        firstname,
-        lastname,
-        email,
-        job,
-        profilePicture,
-      }),
-    })
+    fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/${role?.toLowerCase()}s/${
+        dataUser.id
+      }`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          firstname,
+          lastname,
+          email,
+          job,
+          profilePicture,
+        }),
+      }
+    )
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
@@ -59,6 +66,7 @@ const Settings = () => {
             job: job,
             profilePicture: profilePicture,
             token: dataUser.token,
+            phone: phone,
           });
           toast.success("Informations mises à jour avec succès.");
         } else {
@@ -79,16 +87,21 @@ const Settings = () => {
       return toast.error("Les mots de passe ne correspondent pas.");
     }
 
-    fetch(`${process.env.REACT_APP_BACKEND_URL}/employees/${dataUser.id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({
-        password,
-      }),
-    })
+    fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/${role?.toLowerCase()}s/${
+        dataUser.id
+      }`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          password,
+        }),
+      }
+    )
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
@@ -117,7 +130,7 @@ const Settings = () => {
       const reader = new FileReader();
       reader.readAsDataURL(file);
       reader.onload = async function () {
-        if(reader.onerror) {
+        if (reader.onerror) {
           console.error(reader.error);
           toast.error("Une erreur est survenue lors de la lecture du fichier.");
           return;
@@ -159,22 +172,37 @@ const Settings = () => {
           value={email}
           onChange={(e: any) => setEmail(e.currentTarget.value)}
         />
-        <Input
-          icon={rocket}
-          type={"text"}
-          placeholder={"Métier"}
-          value={job}
-          onChange={(e: any) => setJob(e.currentTarget.value)}
-        />
-        <Input
-          icon={rocket}
-          type={"file"}
-          onChange={(e: any) => processProfilePicture(e)}
-        />
-        <p className={styles.__img_details}>
-          ⓘ Il est conseillé d'utiliser une image carrée <br />
-          si vous ne voulez pas subir une deformation de votre photo.
-        </p>
+
+        {role === "Manager" && (
+          <Input
+            icon={envelope}
+            type={"phone"}
+            placeholder={"Téléphone"}
+            value={phone}
+            onChange={(e: any) => setPhone(e.currentTarget.value)}
+          />
+        )}
+
+        {role !== "Manager" && (
+          <>
+            <Input
+              icon={rocket}
+              type={"text"}
+              placeholder={"Métier"}
+              value={job}
+              onChange={(e: any) => setJob(e.currentTarget.value)}
+            />
+            <Input
+              icon={rocket}
+              type={"file"}
+              onChange={(e: any) => processProfilePicture(e)}
+            />
+            <p className={styles.__img_details}>
+              ⓘ Il est conseillé d'utiliser une image carrée <br />
+              si vous ne voulez pas subir une deformation de votre photo.
+            </p>
+          </>
+        )}
         <Input type={"submit"} value={"Sauvegarder"} />
       </form>
       <br />
