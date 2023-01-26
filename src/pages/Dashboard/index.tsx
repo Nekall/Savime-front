@@ -71,7 +71,6 @@ const Dashboard = () => {
   ];
 
   const managersBtns = [
-    { icon: home, alt: "home", target: <Home />, name: "Accueil" },
     { icon: card, alt: "person", target: <Employees />, name: "Employé·es" },
     {
       icon: paperPlane,
@@ -99,6 +98,17 @@ const Dashboard = () => {
     },
   ];
 
+  const managerShortcuts = (
+    <div className={styles.__shortcut}>
+      <button
+        className={styles.__gear}
+        onClick={() => setCurrentPage(<Settings />)}
+      >
+        <img src={gear} alt="gear" />
+      </button>
+    </div>
+  );
+
   const employeeShortcuts = (
     <div className={styles.__shortcut}>
       <button
@@ -124,7 +134,10 @@ const Dashboard = () => {
     return (
       <div className={styles.__dashboard}>
         <section className={styles.__header}>
-          <Navbar setCurrentPage={setCurrentPage} />
+          <Navbar
+            setCurrentPage={setCurrentPage}
+            shortcuts={managerShortcuts}
+          />
         </section>
         <section className={styles.__side_menu}>
           <SideMenu btns={managersBtns} setCurrentPage={setCurrentPage} />

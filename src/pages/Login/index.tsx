@@ -65,6 +65,7 @@ const Login = () => {
             job: user.job,
             profilePicture: user.profilePicture,
             token: token,
+            phone: user.phone,
           });
           setToken(token);
           toast.success("Vous êtes connecté !");
