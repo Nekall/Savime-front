@@ -25,7 +25,6 @@ const Documents = ({ editMode }: DocumentsProps) => {
   const { role, id, token } = userData;
   const [documents, setDocuments] = useState([]);
   const [docId, setDocId] = useState(0);
-  const [updatedDocument, setNewDocument] = useState<any>(null);
   const [attestation, setAttestation] = useState<any>(undefined);
   const [contract, setContract] = useState<any>(undefined);
   const [payslip, setPayslip] = useState<any>([]);
@@ -102,7 +101,7 @@ const Documents = ({ editMode }: DocumentsProps) => {
         .then((response) => response.json())
         .then((data) => {
           if (data.success) {
-            setEmployees(data.data);
+            setEmployees(data.data.filter((employee: any) => employee.verified));
           } else {
             console.error(data);
             toast.error("Impossible de récupérer les employés.");
@@ -118,15 +117,9 @@ const Documents = ({ editMode }: DocumentsProps) => {
   const updateDocument = (e: any, document_id: number) => {
     e.preventDefault();
 
-    const reader = new FileReader();
-    reader.readAsDataURL(updatedDocument);
-    reader.onload = async function () {
-      if (reader.onerror) {
-        console.error(reader.error);
-        toast.error("Une erreur est survenue lors de la lecture du fichier.");
-        return;
-      }
+    console.log(newDocFile);
 
+    const patchDocument = async (doc: any) => {
       fetch(`${process.env.REACT_APP_BACKEND_URL}/documents/${document_id}`, {
         method: "PATCH",
         headers: {
@@ -134,7 +127,8 @@ const Documents = ({ editMode }: DocumentsProps) => {
           Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
-          document: reader.result,
+          name: newDocName,
+          document: doc,
         }),
       })
         .then((response) => response.json())
@@ -152,7 +146,22 @@ const Documents = ({ editMode }: DocumentsProps) => {
           console.error(error);
           toast.error("Une erreur est survenue. Contactez support@savime.tech");
         });
-    };
+      };
+
+      if(newDocFile){
+        const reader = new FileReader();
+        reader.readAsDataURL(newDocFile);
+        reader.onload = async function () {
+          if (reader.onerror) {
+            console.error(reader.error);
+            toast.error("Une erreur est survenue lors de la lecture du fichier.");
+            return;
+          }
+          await patchDocument(reader.result);
+        };
+      }else{
+        patchDocument(null);
+      }
   };
 
   const deleteDocument = (document_id: number) => {
@@ -289,6 +298,10 @@ const Documents = ({ editMode }: DocumentsProps) => {
           <button
             className={styles.__btn_add_doc}
             onClick={() => {
+              setNewDocFile(null);
+              setNewDocName("");
+              setNewDocType("");
+              setSelectedEmployee("");
               setModalAddDoc(!modalAddDoc);
             }}
           >
@@ -327,7 +340,9 @@ const Documents = ({ editMode }: DocumentsProps) => {
                         <button
                           onClick={() => {
                             setDocId(document_id);
+                            setNewDocName(name);
                             setModalUpdate(true);
+                            setNewDocFile(null);
                           }}
                         >
                           Mettre à jour
@@ -358,9 +373,10 @@ const Documents = ({ editMode }: DocumentsProps) => {
               <div className={styles.__update_document}>
                 <h2>Mettre à jour le document</h2>
                 <form onSubmit={(e) => updateDocument(e, docId)}>
-                  <label htmlFor="document">Document</label>
+                  <label>Nom du document</label>
+                  <Input required type="text" value={newDocName} onChange={(e: any)=>setNewDocName(e.target.value)}/>
                   <Input
-                    onChange={(e: any) => setNewDocument(e.target.files[0])}
+                    onChange={(e: any) => setNewDocFile(e.target.files[0])}
                     type="file"
                     accept="application/pdf"
                   />

@@ -222,7 +222,7 @@ const News = ({ editMode }: NewsProps) => {
                       required
                     />
                     <br />
-                    <input type="submit" value="Ajouter" />
+                    <input type="submit" value="Sauvegarder" />
                   </form>
                 </div>
               </Modal>
