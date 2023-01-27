@@ -251,22 +251,6 @@ const CompanyInfo = ({ editMode }: CompanyInfoProps) => {
           })}
           <Input type="submit" value="Sauvegarder" />
         </form>
-        <br />
-        <h3>Equipe RH</h3>
-        {teamInfo.map(({ firstname, lastname, email, phone, service }: any) => {
-          return (
-            <div key={uuidv4()}>
-              <div>
-                <p>{firstname}</p>
-                <p>{lastname}</p>
-                <p>{email}</p>
-                <p>{phone}</p>
-                <p>{service}</p>
-              </div>
-              <br />
-            </div>
-          );
-        })}
       </div>
     </>
   ) : (
