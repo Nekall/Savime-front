@@ -40,8 +40,8 @@ import paperPlane from "../../assets/images/icon/paper-plane.svg";
 const Dashboard = () => {
   const userData = useRecoilValue(userDataState);
   const { role, firstname, lastname, email, job, profilePicture } = userData;
-  const [currentPage, setCurrentPage] = useState<any>(role === "employee" ? <Home /> : <Employees />);
-
+  const [currentPage, setCurrentPage] = useState<any>(role === "Employee" ? <Home /> : <Employees />);
+  console.info(role);
   const employeeLinks = [
     { target: "#", name: "Lorem ipsum", newTab: false },
     { target: "#", name: "Dolor sit", newTab: false },

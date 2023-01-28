@@ -111,7 +111,7 @@ const AdminPanel = () => {
   }
 
   const logout = () => {
-    navigateTo("/");
+    navigateTo("/admin");
     setToken(null);
     localStorage.removeItem("__svm_token");
     toast.success("Vous êtes déconnecté !");

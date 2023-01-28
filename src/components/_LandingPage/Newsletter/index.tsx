@@ -20,15 +20,7 @@ const Newsletter = ({ title, lead, content, anchor }: Props) => {
 
   const sendMail = () => {
     if (email === "") {
-      toast.info("Veuillez renseigner votre email.", {
-        position: "bottom-center",
-        autoClose: 8000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+      toast.info("Veuillez renseigner votre email.");
     } else {
       setIsSend(true);
       fetch(`${process.env.REACT_APP_BACKEND_URL}/newsletters`, {
@@ -71,7 +63,7 @@ const Newsletter = ({ title, lead, content, anchor }: Props) => {
           type="email"
           name="email"
           id="email"
-          placeholder="email@adress.com"
+          placeholder="votre@email.com"
           value={email}
           onChange={(e: any) => setEmail(e.currentTarget.value)}
         />

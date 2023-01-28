@@ -41,15 +41,7 @@ const Navbar = ({ setCurrentPage, links, shortcuts }: Props) => {
     });
     setToken(null);
     localStorage.removeItem("__svm_token");
-    toast.success("Vous êtes déconnecté !", {
-      position: "bottom-center",
-      autoClose: 4000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      theme: "dark",
-    });
+    toast.success("Vous êtes déconnecté !");
   };
 
   return (

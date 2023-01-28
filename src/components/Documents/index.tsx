@@ -101,7 +101,9 @@ const Documents = ({ editMode }: DocumentsProps) => {
         .then((response) => response.json())
         .then((data) => {
           if (data.success) {
-            setEmployees(data.data.filter((employee: any) => employee.verified));
+            setEmployees(
+              data.data.filter((employee: any) => employee.verified)
+            );
           } else {
             console.error(data);
             toast.error("Impossible de récupérer les employés.");
@@ -116,8 +118,6 @@ const Documents = ({ editMode }: DocumentsProps) => {
 
   const updateDocument = (e: any, document_id: number) => {
     e.preventDefault();
-
-    console.log(newDocFile);
 
     const patchDocument = async (doc: any) => {
       fetch(`${process.env.REACT_APP_BACKEND_URL}/documents/${document_id}`, {
@@ -146,22 +146,22 @@ const Documents = ({ editMode }: DocumentsProps) => {
           console.error(error);
           toast.error("Une erreur est survenue. Contactez support@savime.tech");
         });
-      };
+    };
 
-      if(newDocFile){
-        const reader = new FileReader();
-        reader.readAsDataURL(newDocFile);
-        reader.onload = async function () {
-          if (reader.onerror) {
-            console.error(reader.error);
-            toast.error("Une erreur est survenue lors de la lecture du fichier.");
-            return;
-          }
-          await patchDocument(reader.result);
-        };
-      }else{
-        patchDocument(null);
-      }
+    if (newDocFile) {
+      const reader = new FileReader();
+      reader.readAsDataURL(newDocFile);
+      reader.onload = async function () {
+        if (reader.onerror) {
+          console.error(reader.error);
+          toast.error("Une erreur est survenue lors de la lecture du fichier.");
+          return;
+        }
+        await patchDocument(reader.result);
+      };
+    } else {
+      patchDocument(null);
+    }
   };
 
   const deleteDocument = (document_id: number) => {
@@ -313,7 +313,7 @@ const Documents = ({ editMode }: DocumentsProps) => {
               <tr>
                 <th>Type</th>
                 <th>Nom</th>
-                <th>Employé</th>
+                <th>Employé·es</th>
                 <th>Email</th>
                 <th>Actions</th>
               </tr>
@@ -374,7 +374,12 @@ const Documents = ({ editMode }: DocumentsProps) => {
                 <h2>Mettre à jour le document</h2>
                 <form onSubmit={(e) => updateDocument(e, docId)}>
                   <label>Nom du document</label>
-                  <Input required type="text" value={newDocName} onChange={(e: any)=>setNewDocName(e.target.value)}/>
+                  <Input
+                    required
+                    type="text"
+                    value={newDocName}
+                    onChange={(e: any) => setNewDocName(e.target.value)}
+                  />
                   <Input
                     onChange={(e: any) => setNewDocFile(e.target.files[0])}
                     type="file"

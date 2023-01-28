@@ -29,15 +29,7 @@ const Modal = ({ setModalIsOpen }: ModalProps) => {
 
   const sendMail = () => {
     if (email === "" || firstname === "" || lastname === "" || text === "") {
-      toast.info("Veuillez remplir tous les champs.", {
-        position: "bottom-center",
-        autoClose: 8000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+      toast.info("Veuillez remplir tous les champs.");
     } else {
       fetch(`${process.env.REACT_APP_BACKEND_URL}/contact`, {
         method: "POST",
