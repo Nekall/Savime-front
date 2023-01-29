@@ -137,6 +137,7 @@ const Settings = () => {
           toast.error("Une erreur est survenue lors de la lecture du fichier.");
           return;
         }
+
         const base64PP = reader.result;
         try {
           const resizedPP = await resizeImage(base64PP);

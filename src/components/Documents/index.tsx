@@ -157,7 +157,18 @@ const Documents = ({ editMode }: DocumentsProps) => {
           toast.error("Une erreur est survenue lors de la lecture du fichier.");
           return;
         }
-        await patchDocument(reader.result);
+
+        if (
+          reader.result &&
+          typeof reader.result === "string" &&
+          reader.result.includes("data:application/pdf;base64,")
+        ) {
+          await patchDocument(reader.result);
+        } else {
+          setNewDocFile(null);
+          toast.error("Le fichier doit être au format PDF.");
+          return;
+        }
       };
     } else {
       patchDocument(null);
@@ -200,36 +211,50 @@ const Documents = ({ editMode }: DocumentsProps) => {
         return;
       }
 
-      fetch(`${process.env.REACT_APP_BACKEND_URL}/documents`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          name: newDocName,
-          document: reader.result,
-          type: newDocType,
-          employeeId: selectedEmployee,
-        }),
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          if (data.success) {
-            setRefresh(!refresh);
-            setModalAddDoc(false);
-            toast.success("Document ajouté.");
-          } else {
-            console.error(data);
-            toast.error(
-              data.message ? data.message : "Impossible d'ajouter le document."
-            );
-          }
+      if (
+        reader.result &&
+        typeof reader.result === "string" &&
+        reader.result.includes("data:application/pdf;base64,")
+      ) {
+        fetch(`${process.env.REACT_APP_BACKEND_URL}/documents`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            name: newDocName,
+            document: reader.result,
+            type: newDocType,
+            employeeId: selectedEmployee,
+          }),
         })
-        .catch((error) => {
-          console.error(error);
-          toast.error("Une erreur est survenue. Contactez support@savime.tech");
-        });
+          .then((response) => response.json())
+          .then((data) => {
+            if (data.success) {
+              setRefresh(!refresh);
+              setModalAddDoc(false);
+              toast.success("Document ajouté.");
+            } else {
+              console.error(data);
+              toast.error(
+                data.message
+                  ? data.message
+                  : "Impossible d'ajouter le document."
+              );
+            }
+          })
+          .catch((error) => {
+            console.error(error);
+            toast.error(
+              "Une erreur est survenue. Contactez support@savime.tech"
+            );
+          });
+      } else {
+        setNewDocFile(null);
+        toast.error("Le fichier doit être au format PDF.");
+        return;
+      }
     };
   };
 
@@ -286,6 +311,7 @@ const Documents = ({ editMode }: DocumentsProps) => {
               <Input
                 type={"file"}
                 onChange={(e: any) => setNewDocFile(e.target.files[0])}
+                accept="application/pdf"
                 required
               />
               <Input type="submit" value="Ajouter" />
@@ -407,8 +433,8 @@ const Documents = ({ editMode }: DocumentsProps) => {
               </button>
             ) : (
               <p>
-                Votre attestation de travail n'est pas disponible au téléchargement,
-                veuillez contacter l'équipe RH.
+                Votre attestation de travail n'est pas disponible au
+                téléchargement, veuillez contacter l'équipe RH.
               </p>
             )}
             {attestation && (
