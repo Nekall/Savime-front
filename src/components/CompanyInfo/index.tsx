@@ -30,8 +30,6 @@ const CompanyInfo = ({ editMode }: CompanyInfoProps) => {
   const [refresh, setRefresh] = useState(false);
   const token = useRecoilValue(userDataState).token;
 
-  console.log(compagnyInfo);
-
   useEffect(() => {
     if (!modalAddInfo) {
       setNewNameInfo("");
@@ -128,6 +126,7 @@ const CompanyInfo = ({ editMode }: CompanyInfoProps) => {
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
+          setModalAddInfo(false);
           setCompagnyInfo([...compagnyInfo, data.data]);
           toast.success("L'information a bien été ajoutée.");
         } else {
@@ -249,7 +248,7 @@ const CompanyInfo = ({ editMode }: CompanyInfoProps) => {
               </div>
             );
           })}
-          <Input type="submit" value="Sauvegarder" />
+          {compagnyInfo.length > 0 && <Input type="submit" value="Sauvegarder" />}
         </form>
       </div>
     </>

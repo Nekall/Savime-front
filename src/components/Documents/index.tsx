@@ -407,7 +407,7 @@ const Documents = ({ editMode }: DocumentsProps) => {
               </button>
             ) : (
               <p>
-                Votre contrat de travail n'est pas disponible au téléchargement,
+                Votre attestation de travail n'est pas disponible au téléchargement,
                 veuillez contacter l'équipe RH.
               </p>
             )}
