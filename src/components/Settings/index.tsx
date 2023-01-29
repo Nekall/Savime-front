@@ -13,6 +13,8 @@ import avatar from "../../assets/images/icon/avatar.svg";
 import envelope from "../../assets/images/icon/envelope.svg";
 import rocket from "../../assets/images/icon/rocket.svg";
 import lock from "../../assets/images/icon/lock.svg";
+import bubble from "../../assets/images/icon/bubble.svg";
+import camera from "../../assets/images/icon/camera.svg";
 
 // Atoms
 import { userDataState } from "../../atoms/user";
@@ -175,7 +177,7 @@ const Settings = () => {
 
         {role === "Manager" && (
           <Input
-            icon={envelope}
+            icon={bubble}
             type={"phone"}
             placeholder={"Téléphone"}
             value={phone}
@@ -193,7 +195,7 @@ const Settings = () => {
               onChange={(e: any) => setJob(e.currentTarget.value)}
             />
             <Input
-              icon={rocket}
+              icon={camera}
               type={"file"}
               onChange={(e: any) => processProfilePicture(e)}
             />
