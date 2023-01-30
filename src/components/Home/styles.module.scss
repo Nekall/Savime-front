@@ -15,4 +15,17 @@
         min-height: 350px;
         color: #000000;
     }
+
+  @media only screen and (max-width: 1200px) {
+    .__multi_sections {
+      grid-template-columns: 1fr;
+      grid-template-rows: 1fr;
+    }
+  }
+
+  @media only screen and (max-width: 600px) {
+    .__calendar{
+      display: none;
+    }
+  }
 }

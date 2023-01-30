@@ -49,6 +49,11 @@
     .__date {
         font-size: 12px;
     }
+
+    @media only screen and (max-width: 600px) {
+        min-width: 0;
+        width: 90% !important;
+    }
 }
 
 .__news_edit_mode {

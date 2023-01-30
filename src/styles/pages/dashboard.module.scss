@@ -73,7 +73,8 @@
 
         .__view {
             padding-right: 0;
-
+            overflow-y: inherit;
+            
             .__content {
                 border-radius: 40px 0 0 0;
                 padding: 20px 5px;
