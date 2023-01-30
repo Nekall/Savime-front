@@ -46,4 +46,29 @@
             margin-top: 10px;
         }
     }
+
+    @media only screen and (max-width: 1200px){
+        form {
+            textarea {
+                width: 72%;
+            }
+        }
+
+        .__counter {
+            display: none;
+        }
+    }
+
+    @media only screen and (max-width: 900px){
+        width: 100%;
+        form {
+            textarea {
+                width: 90%;
+            }
+
+            select{
+                width: 60%;
+            }
+        }
+    }
 }

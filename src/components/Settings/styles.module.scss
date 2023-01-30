@@ -12,4 +12,10 @@
             color: red;
         }
     }
+
+    @media only screen and (max-width: 900px){
+        .__img_details>br{
+            display: none;
+        }
+    }
 }

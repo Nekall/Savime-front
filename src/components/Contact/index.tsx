@@ -103,7 +103,7 @@ const Contact = () => {
           type="submit"
           value="Envoyer"
         />
-        <div>{size}/1000</div>
+        <div className={styles.__counter}>{size}/1000</div>
       </form>
     </div>
   );
