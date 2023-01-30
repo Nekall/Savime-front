@@ -49,4 +49,27 @@
             }
         }
     }
+
+
+
+    @media only screen and (max-width: 900px){
+
+        .__logo {
+            height: 25px;
+            margin: 0 15px;
+        }
+
+        .__company_name {
+            top: 47px;
+            left: 54px;
+        }
+
+        .__menu{
+            display: none;
+        }
+
+        .__disconnect>button>span {
+            display: none;
+        }
+    }
 }

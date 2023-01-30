@@ -65,6 +65,27 @@
             }
         }
     }
+
+    @media only screen and (max-width: 900px){
+        .__shortcut>button{
+            margin: 0;
+        }
+
+        .__view {
+            padding-right: 0;
+
+            .__content {
+                border-radius: 40px 0 0 0;
+                padding: 20px 5px;
+            }
+        }
+
+        .__side_menu {
+            hr{
+                display: none;
+            }
+        }
+    }
 }
 
 @keyframes wriggle {

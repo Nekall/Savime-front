@@ -12,14 +12,14 @@ interface Props {
 
 const SideMenu = ({ btns, setCurrentPage }: Props) => {
   return (
-    <div className={styles.__slide_menu}>
+    <div className={styles.__side_menu}>
       {btns.map(({ icon, alt, target, name }) => (
         <button
           key={uuidv4()}
           className={styles.__buttons}
           onClick={() => setCurrentPage(target)}
         >
-          <img src={icon} alt={alt} /> {name}
+          <img src={icon} alt={alt} /> <span>{name}</span>
         </button>
       ))}
     </div>

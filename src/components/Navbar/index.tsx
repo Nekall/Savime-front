@@ -68,7 +68,7 @@ const Navbar = ({ setCurrentPage, links, shortcuts }: Props) => {
       {shortcuts && shortcuts}
       <div className={styles.__disconnect}>
         <button onClick={() => disconnect()}>
-          Déconnexion <img src={exit} alt="logout" />
+          <span>Déconnexion</span> <img src={exit} alt="logout" />
         </button>
       </div>
     </div>

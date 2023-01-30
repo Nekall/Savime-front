@@ -1,4 +1,4 @@
-.__slide_menu {
+.__side_menu {
     padding: 30px;
 
     .__buttons {
@@ -18,6 +18,14 @@
 
         &:hover{
             opacity: 0.8;
+        }
+    }
+
+    @media only screen and (max-width: 900px){
+        padding: 15px;
+
+        .__buttons>span{
+            display: none;
         }
     }
 }
