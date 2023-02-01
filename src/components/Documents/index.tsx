@@ -12,6 +12,7 @@ import { userDataState } from "../../atoms/user";
 
 // Assets
 import plus from "../../assets/images/icon/plus.svg";
+import virustotal from "../../assets/images/icon/virustotal.svg";
 
 // Styles
 import styles from "./styles.module.scss";
@@ -38,6 +39,8 @@ const Documents = ({ editMode }: DocumentsProps) => {
   const [newDocFile, setNewDocFile] = useState<any>(null);
   const [employees, setEmployees] = useState<any>([]);
   const [selectedEmployee, setSelectedEmployee] = useState<any>("");
+
+  const [onLoading, setOnLoading] = useState(false);
 
   useEffect(() => {
     if (!modalAddDoc) {
@@ -201,7 +204,7 @@ const Documents = ({ editMode }: DocumentsProps) => {
 
   const addDocument = (e: any) => {
     e.preventDefault();
-
+    setOnLoading(true);
     const reader = new FileReader();
     reader.readAsDataURL(newDocFile);
     reader.onload = async function () {
@@ -243,9 +246,11 @@ const Documents = ({ editMode }: DocumentsProps) => {
                   : "Impossible d'ajouter le document."
               );
             }
+            setOnLoading(false);
           })
           .catch((error) => {
             console.error(error);
+            setOnLoading(false);
             toast.error(
               "Une erreur est survenue. Contactez support@savime.tech"
             );
@@ -270,53 +275,76 @@ const Documents = ({ editMode }: DocumentsProps) => {
       )}
       {modalAddDoc && (
         <Modal setModalOpen={setModalAddDoc}>
-          <div className={styles.__new_document}>
-            <br />
-            <h3>Ajouter un document</h3>
-            <form onSubmit={(e) => addDocument(e)}>
-              <label>Nom</label>
-              <Input
-                required
-                type={"text"}
-                value={newDocName}
-                onChange={(e: any) => setNewDocName(e.currentTarget.value)}
-              />
-              <select
-                value={newDocType}
-                onChange={(e: any) => setNewDocType(e.currentTarget.value)}
-                required
-              >
-                <option defaultChecked disabled hidden value="">
-                  Type du document
-                </option>
-                <option value="attestation">Attestation</option>
-                <option value="contract">Contrat</option>
-                <option value="payslip">Bulletin de paie</option>
-              </select>
-              <select
-                required
-                value={selectedEmployee}
-                onChange={(e: any) => setSelectedEmployee(e.target.value)}
-              >
-                <option defaultChecked disabled hidden value="">
-                  Employé
-                </option>
-                {employees &&
-                  employees.map((employee: any) => (
-                    <option
-                      value={employee.employee_id}
-                    >{`${employee.firstname} ${employee.lastname} (${employee.employee_id})`}</option>
-                  ))}
-              </select>
-              <Input
-                type={"file"}
-                onChange={(e: any) => setNewDocFile(e.target.files[0])}
-                accept="application/pdf"
-                required
-              />
-              <Input type="submit" value="Ajouter" />
-            </form>
-          </div>
+          {!onLoading ? (
+            <div className={styles.__new_document}>
+              <br />
+              <h3>Ajouter un document</h3>
+              <form onSubmit={(e) => addDocument(e)}>
+                <label>Nom</label>
+                <Input
+                  required
+                  type={"text"}
+                  value={newDocName}
+                  onChange={(e: any) => setNewDocName(e.currentTarget.value)}
+                />
+                <select
+                  value={newDocType}
+                  onChange={(e: any) => setNewDocType(e.currentTarget.value)}
+                  required
+                >
+                  <option defaultChecked disabled hidden value="">
+                    Type du document
+                  </option>
+                  <option value="attestation">Attestation</option>
+                  <option value="contract">Contrat</option>
+                  <option value="payslip">Bulletin de paie</option>
+                </select>
+                <select
+                  required
+                  value={selectedEmployee}
+                  onChange={(e: any) => setSelectedEmployee(e.target.value)}
+                >
+                  <option defaultChecked disabled hidden value="">
+                    Employé
+                  </option>
+                  {employees &&
+                    employees.map((employee: any) => (
+                      <option
+                        value={employee.employee_id}
+                      >{`${employee.firstname} ${employee.lastname} (${employee.employee_id})`}</option>
+                    ))}
+                </select>
+                <Input
+                  type={"file"}
+                  onChange={(e: any) => setNewDocFile(e.target.files[0])}
+                  accept="application/pdf"
+                  required
+                />
+                <Input type="submit" value="Ajouter" />
+              </form>
+            </div>
+          ) : (
+            <div className={styles.__new_document}>
+              <h5>Un scan antivirus est en cours, veuillez patienter...</h5>
+              <div className={styles.__animated_dots}>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+              </div>
+              <p className={styles.__loading}>
+                par{" "}
+                <a
+                  href="https://www.virustotal.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  VirusTotal
+                </a>
+                <img src={virustotal} alt="virustotal logo" />
+              </p>
+            </div>
+          )}
         </Modal>
       )}
       {editMode ? (
