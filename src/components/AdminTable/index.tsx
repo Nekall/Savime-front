@@ -30,7 +30,6 @@ const AdminTable = ({
   data,
 }: AdminTableProps) => {
   const token = useRecoilValue(userDataState).token;
-
   const deleteElement = (id: number) => {
     fetch(`${process.env.REACT_APP_BACKEND_URL}/${section}/${id}`, {
       method: "DELETE",
@@ -72,7 +71,7 @@ const AdminTable = ({
                 <th key={uuidv4()}>
                   {key === "employee_id" && index > 0
                     ? "EMPLOYEE"
-                    : key.toUpperCase()}
+                    : index === 0? "ID" : key.toUpperCase()}
                 </th>
               );
             } else {

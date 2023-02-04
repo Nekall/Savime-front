@@ -81,7 +81,6 @@ const Contact = () => {
           value={message}
           onChange={(e) => {
             setMessage(e.target.value);
-            console.log(e.target.value);
             setSize(e.target.value.length);
           }}
           className={size > 1000 ? styles.__red : ""}
