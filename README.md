@@ -8,14 +8,14 @@ Application orienté RH, Savime `seɪv.ɪm` sert à créer une communication rap
 Que se soit le partage de documents, la gestion des congés ou l’accès aux informations importantes lié à l’entreprise & la carrière des employé·es.
 Cette application se veux clef en main.
 
-## Tech Stack
+## Tech Stack 🛠️
 
 <u>**Frontend:**</u> React, Typescript, Sass, Recoil
 
 **Backend:** Node, Express, Sequelize
 
 
-## Fonctionnalités
+## Fonctionnalités ⚙️
 
 - Tableau de bord Employé·es.
 - Tableau de bord Managers.
@@ -25,7 +25,24 @@ Cette application se veux clef en main.
 - Contact via mails.
 - Calendrier.
 
-## Scripts disponibles
+## Installation en local 🏗️
+
+- Installez Node.js et npm (Node Package Manager) sur votre machine en suivant les instructions sur https://nodejs.org/.
+
+- Ouvrez votre terminal et naviguez jusqu'au répertoire où vous souhaitez installer votre projet React.
+
+- Clonez le projet à partir de GitHub en utilisant la commande git clone `<url du repository>` ou en téléchargant le zip.
+
+- Une fois le clonage, ou la décompression du zip, terminé, accédez au répertoire du projet en utilisant la commande cd `<nom du projet>`.
+
+- Installez les dépendances du projet en utilisant la commande npm install.
+💡 Il est possible que vous rencontriez des problèmes lors de l'installation de l'application en raison d'un conflit de dépendances entre le paquet "craco-sass-resources-loader" et la version actuelle de react-scripts. Pour résoudre ce problème, vous pouvez utiliser l'option "--legacy-peer-deps" lors de l'exécution de la commande "npm install", soit `npm install --legacy-peer-deps`. Cette option permet d'accepter une résolution de dépendance, ce qui peut être nécessaire si le paquet "craco-sass-resources-loader" n'a pas été mis à jour et n'est pas compatible avec la version actuelle de certains autres paquets. Cependant, cela ne pose actuellement aucun problème de compatibilité ou de stabilité pour l'application.
+
+- Démarrez le serveur de développement en utilisant la commande npm start.
+
+- Ouvrez votre navigateur web et accédez à http://localhost:3000 pour voir votre application React en cours d'exécution.
+
+## Scripts disponibles ⚡
 
 Dans le répertoire du projet, vous pouvez exécuter :
 
@@ -48,7 +65,7 @@ Il regroupe correctement React en mode production et optimise la compilation pou
 La compilation est réduite et les noms de fichiers incluent les hachages.\
 L'application est prête à être déployée !
 
-## Variables d'environnement
+## Variables d'environnement 🔐
 
 Pour exécuter ce projet, vous devrez ajouter les variables d'environnement suivantes à votre fichier .env
 
@@ -79,13 +96,13 @@ REACT_APP_MAINTENANCE=XXXXX
 - [@types/react-dom](https://www.npmjs.com/package/@types/react-dom)
 - [@types/node](https://www.npmjs.com/package/@types/node)
 
-## Credits
+## Credits 💬
 
 Images
 - [Unsplash](https://unsplash.com/)
 
 Interface
-- [Référence graphique](https://www.behance.net/gallery/102784977/Web-Application-Interface-PR-Club)
+- [Référence graphique](https://www.behance.net/gallery/102784977/Web-Application-Interface-PR-Club/modules/591476137)
 
 Icons
 - [Radix-UI](https://icons.radix-ui.com/)
