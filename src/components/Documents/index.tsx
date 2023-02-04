@@ -14,6 +14,10 @@ import { userDataState } from "../../atoms/user";
 import plus from "../../assets/images/icon/plus.svg";
 import virustotal from "../../assets/images/icon/virustotal.svg";
 
+import download from "../../assets/images/icon/download.svg";
+import update from "../../assets/images/icon/update.svg";
+import trash from "../../assets/images/icon/trash.svg";
+
 // Styles
 import styles from "./styles.module.scss";
 
@@ -366,9 +370,9 @@ const Documents = ({ editMode }: DocumentsProps) => {
             <thead>
               <tr>
                 <th>Type</th>
-                <th>Nom</th>
-                <th>Employé·es</th>
-                <th>Email</th>
+                <th className={styles.__disable_on_mobile}>Nom</th>
+                <th>Employé·e</th>
+                <th className={styles.__disable_on_mobile}>Email</th>
                 <th>Actions</th>
               </tr>
             </thead>
@@ -384,14 +388,15 @@ const Documents = ({ editMode }: DocumentsProps) => {
                           ? "Attestation"
                           : "Contrat"}
                       </td>
-                      <td>{name}</td>
+                      <td className={styles.__disable_on_mobile}>{name}</td>
                       <td>
                         {employee &&
                           `${employee.firstname} ${employee.lastname}`}
                       </td>
-                      <td>{employee && employee.email}</td>
+                      <td  className={styles.__disable_on_mobile}>{employee && employee.email}</td>
                       <td>
                         <button
+                          title="Mettre à jour le document"
                           onClick={() => {
                             setDocId(document_id);
                             setNewDocName(name);
@@ -399,22 +404,23 @@ const Documents = ({ editMode }: DocumentsProps) => {
                             setNewDocFile(null);
                           }}
                         >
-                          Mettre à jour
+                          <img src={update} alt="Mise à jour" />
                         </button>
                         <button
                           title="Double clic pour supprimer 💡"
                           onDoubleClick={() => deleteDocument(document_id)}
                         >
-                          Supprimer
+                          <img src={trash} alt="Supprimer" />
                         </button>
                         <button
+                          title="Télécharger le document"
                           onClick={() => {
                             setPreview(document);
                             setDocId(document_id);
                             setModalPreview(true);
                           }}
                         >
-                          Aperçu | Télécharger
+                          <img src={download} alt="Téléchargement" />
                         </button>
                       </td>
                     </tr>

@@ -87,10 +87,10 @@ const Employees = () => {
             }: any) => {
               return (
                 <tr key={uuidv4()}>
-                  <td>{firstname}</td>
-                  <td>{lastname}</td>
+                  <td className={styles.__disable_on_mobile}>{firstname}</td>
+                  <td className={styles.__disable_on_mobile}>{lastname}</td>
                   <td>{email}</td>
-                  <td>{job}</td>
+                  <td className={styles.__disable_on_mobile}>{job}</td>
                   <td className={styles.__btn_verif}>
                     <button
                       className={styles.__btn}

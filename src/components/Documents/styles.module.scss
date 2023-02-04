@@ -1,5 +1,4 @@
 .__documents {
-
     .__btn_add_doc {
         cursor: pointer;
         padding-top: 4px;
@@ -20,13 +19,16 @@
 
     button {
         cursor: pointer;
-        background-color: $blue-color;
-        color: #fff;
+        background-color: transparent;
         border: none;
-        padding: 8px 28px;
         border-radius: 8px;
-        font-size: 16px;
-        margin: 10px 10px 10px 0;
+        margin: 5px;
+
+        img{
+            padding: 6px;
+            border-radius: 8px;
+            background-color: $blue-color;
+        }
 
         &:hover {
             opacity: 0.8;
@@ -84,6 +86,18 @@
             :hover {
                 background-color: $primary-bg;
             }
+        }
+    }
+
+    @media (max-width: 760px) {
+        .__disable_on_mobile {
+            display: none;
+        }
+
+        td {
+            padding: 4px !important;
+            word-break: keep-all;
+            word-wrap: break-word;
         }
     }
 }

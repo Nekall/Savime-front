@@ -47,4 +47,17 @@
         }
     }
 
+
+    @media (max-width: 760px) {
+        .__disable_on_mobile {
+            display: none;
+        }
+
+        td {
+            padding: 4px !important;
+            word-break: keep-all;
+            word-wrap: break-word;
+        }
+    }
+
 }
