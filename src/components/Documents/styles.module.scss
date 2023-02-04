@@ -1,4 +1,10 @@
 .__documents {
+    .__btn_employee {
+        background-color: $blue-color;
+        color: $white-color;
+        padding: 5px 8px;
+    }
+
     .__btn_add_doc {
         cursor: pointer;
         padding-top: 4px;
@@ -24,7 +30,7 @@
         border-radius: 8px;
         margin: 5px;
 
-        img{
+        img {
             padding: 6px;
             border-radius: 8px;
             background-color: $blue-color;

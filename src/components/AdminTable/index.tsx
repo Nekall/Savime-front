@@ -71,7 +71,9 @@ const AdminTable = ({
                 <th key={uuidv4()}>
                   {key === "employee_id" && index > 0
                     ? "EMPLOYEE"
-                    : index === 0? "ID" : key.toUpperCase()}
+                    : index === 0
+                    ? "ID"
+                    : key.toUpperCase()}
                 </th>
               );
             } else {

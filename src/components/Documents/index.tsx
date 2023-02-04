@@ -393,7 +393,9 @@ const Documents = ({ editMode }: DocumentsProps) => {
                         {employee &&
                           `${employee.firstname} ${employee.lastname}`}
                       </td>
-                      <td  className={styles.__disable_on_mobile}>{employee && employee.email}</td>
+                      <td className={styles.__disable_on_mobile}>
+                        {employee && employee.email}
+                      </td>
                       <td>
                         <button
                           title="Mettre à jour le document"
@@ -457,6 +459,7 @@ const Documents = ({ editMode }: DocumentsProps) => {
           <div>
             {attestation ? (
               <button
+                className={styles.__btn_employee}
                 onClick={() => {
                   setPreview(attestation.document);
                   setDocId(attestation.document_id);
@@ -481,6 +484,7 @@ const Documents = ({ editMode }: DocumentsProps) => {
           <h2>Contrat de travail</h2>
           {contract ? (
             <button
+              className={styles.__btn_employee}
               onClick={() => {
                 setPreview(contract.document);
                 setDocId(contract.document_id);
@@ -505,6 +509,7 @@ const Documents = ({ editMode }: DocumentsProps) => {
                     <td>{name}</td>
                     <td>
                       <button
+                        className={styles.__btn_employee}
                         onClick={() => {
                           setPreview(document);
                           setDocId(document_id);
