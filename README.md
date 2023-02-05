@@ -76,6 +76,17 @@ REACT_APP_FRONTEND_URL=XXXXXXXXXXX
 REACT_APP_MAINTENANCE=XXXXX
 ```
 
+## Routes principales 🛣️
+
+Les routes principales sont les suivantes :
+
+- `/` : Page d'accueil
+- `/concept` : Landing Page
+- `/inscription` : Page de creation de compte Employé·es
+- `/connexion` : Page de connexion Employé·es & Manager
+- `/tableau-de-bord` : Tableau de bord Employé·es & Manager
+- `/admin` : Page de connexion Administrateur
+- `/admin/panneau-administrateur` : Tableau de bord Administrateur
 
 ## Packages 📚
 
