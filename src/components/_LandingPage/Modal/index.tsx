@@ -20,7 +20,7 @@ const Modal = ({ setModalIsOpen }: ModalProps) => {
   const [email, setEmail] = useState("");
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
-  const [text, setText] = useState("");
+  const [message, setMessage] = useState("");
 
   useEffect((): any => {
     document.body.style.overflow = "hidden";
@@ -28,7 +28,7 @@ const Modal = ({ setModalIsOpen }: ModalProps) => {
   }, []);
 
   const sendMail = () => {
-    if (email === "" || firstname === "" || lastname === "" || text === "") {
+    if (email === "" || firstname === "" || lastname === "" || message === "") {
       toast.info("Veuillez remplir tous les champs.");
     } else {
       fetch(`${process.env.REACT_APP_BACKEND_URL}/contact`, {
@@ -40,7 +40,7 @@ const Modal = ({ setModalIsOpen }: ModalProps) => {
           email,
           firstname,
           lastname,
-          text,
+          message,
         }),
       })
         .then((response) => response.json())
@@ -99,8 +99,8 @@ const Modal = ({ setModalIsOpen }: ModalProps) => {
           placeholder={
             "Une question ? Une suggestion ? N'hésitez pas à nous envoyer un message, nous vous répondrons de façon aussi efficace que possible !"
           }
-          value={text}
-          onChange={(e: any) => setText(e.currentTarget.value)}
+          value={message}
+          onChange={(e: any) => setMessage(e.currentTarget.value)}
         />
         <Input onClick={() => sendMail()} type={"submit"} value={"Envoyer"} />
       </div>
