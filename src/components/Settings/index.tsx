@@ -32,8 +32,8 @@ const Settings = () => {
   const [phone, setPhone] = useState(dataUser.phone);
   const [job, setJob] = useState(dataUser.job);
   const [profilePicture, setProfilePicture] = useState(dataUser.profilePicture);
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [password, setPassword] = useState<string>("");
+  const [confirmPassword, setConfirmPassword] = useState<string>("");
 
   const updateData = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();

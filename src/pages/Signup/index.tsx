@@ -1,6 +1,6 @@
 import { FormEvent, useState } from "react";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import { NavigateFunction, useNavigate } from "react-router-dom";
 
 // Components
 import Wrapper from "../../components/Wrapper";
@@ -17,12 +17,12 @@ import lock from "../../assets/images/icon/lock.svg";
 import styles from "../../styles/pages/signup.module.scss";
 
 const Signup = () => {
-  const [firstname, setFirstname] = useState("");
-  const [lastname, setLastname] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const navigateTo = useNavigate();
+  const [firstname, setFirstname] = useState<string>("");
+  const [lastname, setLastname] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [confirmPassword, setConfirmPassword] = useState<string>("");
+  const navigateTo: NavigateFunction = useNavigate();
 
   const signup = (e: FormEvent<HTMLFormElement>) => {
     e?.preventDefault();

@@ -1,6 +1,6 @@
 import { FormEvent, useState } from "react";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import { NavigateFunction, useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
 
 // Styles
@@ -24,10 +24,10 @@ import { tokenState, userDataState } from "../../atoms/user";
 import decodeJwt from "../../helpers/decodeJwt";
 
 const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [checked, setChecked] = useState(false);
-  const navigateTo = useNavigate();
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [checked, setChecked] = useState<boolean>(false);
+  const navigateTo: NavigateFunction = useNavigate();
   const setUserData = useSetRecoilState(userDataState);
   const setToken = useSetRecoilState(tokenState);
 

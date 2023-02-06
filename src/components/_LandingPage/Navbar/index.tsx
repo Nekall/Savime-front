@@ -5,7 +5,10 @@ import logo from "../../../assets/images/logo/logo-full-transparent.png";
 import styles from "./styles.module.scss";
 
 interface Props {
-  links: Array<any>;
+  links: {
+    name: string;
+    target: string;
+  }[]
 }
 
 const Navbar = ({ links }: Props) => {

@@ -1,6 +1,6 @@
 import { FormEvent, useState } from "react";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import { NavigateFunction, useNavigate } from "react-router-dom";
 
 // Styles
 import styles from "../../styles/pages/forgotPassword.module.scss";
@@ -15,8 +15,8 @@ import Input from "../../components/Input";
 import Link from "../../components/Link";
 
 const ForgotPassword = () => {
-  const [email, setEmail] = useState("");
-  const navigateTo = useNavigate();
+  const [email, setEmail] = useState<string>("");
+  const navigateTo: NavigateFunction = useNavigate();
 
   const sendMail = (e: FormEvent<HTMLFormElement>) => {
     e?.preventDefault();

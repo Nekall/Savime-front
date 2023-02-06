@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { ReactElement, useState } from "react";
 import { useRecoilValue } from "recoil";
 
 // Components
@@ -40,8 +40,13 @@ import paperPlane from "../../assets/images/icon/paper-plane.svg";
 const Dashboard = () => {
   const userData = useRecoilValue(userDataState);
   const { role, firstname, lastname, email, job, profilePicture } = userData;
-  const [currentPage, setCurrentPage] = useState<any>(role === "Employee" ? <Home /> : <Employees />);
-  const employeeLinks = [
+  const [currentPage, setCurrentPage] = useState<ReactElement>(
+    role === "Employee" ? <Home /> : <Employees />
+  );
+  const employeeLinks: (
+    | { target: string; name: string | ReactElement; newTab: boolean }
+    | { target: string; name: Element; newTab: boolean }
+  )[] = [
     { target: "#", name: "Lorem ipsum", newTab: false },
     { target: "#", name: "Dolor sit", newTab: false },
     { target: "#", name: "Sit dolores", newTab: false },
@@ -57,7 +62,12 @@ const Dashboard = () => {
     },
   ];
 
-  const employeesBtns = [
+  const employeesBtns: {
+    icon: string;
+    alt: string;
+    target: Element | ReactElement;
+    name: string;
+  }[] = [
     { icon: home, alt: "home", target: <Home />, name: "Accueil" },
     { icon: card, alt: "card", target: <CompanyInfo />, name: "Informations" },
     {
@@ -69,7 +79,12 @@ const Dashboard = () => {
     { icon: archive, alt: "archive", target: <Documents />, name: "Documents" },
   ];
 
-  const managersBtns = [
+  const managersBtns: {
+    icon: string;
+    alt: string;
+    target: Element | ReactElement;
+    name: string;
+  }[] = [
     { icon: card, alt: "person", target: <Employees />, name: "Employé·es" },
     {
       icon: paperPlane,
@@ -97,7 +112,7 @@ const Dashboard = () => {
     },
   ];
 
-  const managerShortcuts = (
+  const managerShortcuts: ReactElement = (
     <div className={styles.__shortcut}>
       <button
         className={styles.__gear}
@@ -108,7 +123,7 @@ const Dashboard = () => {
     </div>
   );
 
-  const employeeShortcuts = (
+  const employeeShortcuts: ReactElement = (
     <div className={styles.__shortcut}>
       <button
         className={styles.__envelope}

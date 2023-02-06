@@ -24,6 +24,7 @@ import Home from "./pages/Home";
 
 // Atoms
 import { tokenState } from "./atoms/user";
+import { ReactElement } from "react";
 
 // Env
 const { REACT_APP_MAINTENANCE } = process.env;
@@ -35,8 +36,8 @@ const App = () => {
   const token = useRecoilValue(tokenState);
 
   interface AppProps {
-    token: any;
-    children: any;
+    token: string | null;
+    children: ReactElement;
   }
 
   const ProtectedRoute = ({ token, children }: AppProps) => {

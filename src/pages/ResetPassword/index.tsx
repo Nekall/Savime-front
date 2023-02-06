@@ -1,5 +1,5 @@
 import { FormEvent, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { NavigateFunction, Params, useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 
 // Styles
@@ -16,10 +16,10 @@ import Input from "../../components/Input";
 import Link from "../../components/Link";
 
 const ResetPassword = () => {
-  const { token } = useParams();
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const navigateTo = useNavigate();
+  const { token }: Readonly<Params<string>> = useParams();
+  const [password, setPassword] = useState<string>("");
+  const [confirmPassword, setConfirmPassword] = useState<string>("");
+  const navigateTo: NavigateFunction = useNavigate();
 
   const resetPassword = (e: FormEvent<HTMLFormElement>) => {
     e?.preventDefault();

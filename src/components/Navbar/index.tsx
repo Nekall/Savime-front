@@ -1,7 +1,7 @@
-import { useNavigate } from "react-router-dom";
-import { useSetRecoilState } from "recoil";
+import { NavigateFunction, useNavigate } from "react-router-dom";
+import { SetterOrUpdater, useSetRecoilState } from "recoil";
 import { toast } from "react-toastify";
-import { SetStateAction } from "react";
+import { Dispatch } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 // Styles
@@ -15,16 +15,16 @@ import exit from "../../assets/images/icon/exit.svg";
 import { tokenState, userDataState } from "../../atoms/user";
 
 interface Props {
-  setCurrentPage: SetStateAction<any>;
+  setCurrentPage: Dispatch<any>;
   links?: Array<any>;
   shortcuts?: any;
 }
 
 const Navbar = ({ setCurrentPage, links, shortcuts }: Props) => {
-  const navigateTo = useNavigate();
-  const setUserData = useSetRecoilState(userDataState);
-  const setToken = useSetRecoilState(tokenState);
-  const companyName = process.env.REACT_APP_COMPANY_NAME;
+  const navigateTo: NavigateFunction = useNavigate();
+  const setUserData: SetterOrUpdater<any> = useSetRecoilState(userDataState);
+  const setToken: SetterOrUpdater<string | null> = useSetRecoilState(tokenState);
+  const companyName: string | undefined = process.env.REACT_APP_COMPANY_NAME;
 
   const disconnect = () => {
     navigateTo("/connexion");

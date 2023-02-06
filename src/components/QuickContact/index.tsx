@@ -11,7 +11,7 @@ import styles from "./styles.module.scss";
 
 const QuickContact = () => {
   const token = useRecoilValue(userDataState).token;
-  const [managers, setManagers] = useState<any>([]);
+  const [managers, setManagers] = useState<Array<any>>([]);
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_BACKEND_URL}/managers`, {

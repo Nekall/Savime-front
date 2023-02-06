@@ -167,7 +167,6 @@ const News = ({ editMode }: NewsProps) => {
                 onChange={(e) => setNewTitle(e.target.value)}
                 required
               />
-              <br />
               <textarea
                 placeholder="Contenu"
                 value={newContent}
@@ -214,7 +213,6 @@ const News = ({ editMode }: NewsProps) => {
                       onChange={(e) => setNewTitle(e.target.value)}
                       required
                     />
-                    <br />
                     <textarea
                       placeholder="Contenu"
                       value={newContent}

@@ -1,7 +1,7 @@
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { FormEvent, useState } from "react";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import { NavigateFunction, useNavigate } from "react-router-dom";
 
 // Styles
 import styles from "../../styles/pages/admin.module.scss";
@@ -21,10 +21,10 @@ import { tokenState, userDataState } from "../../atoms/user";
 import decodeJwt from "../../helpers/decodeJwt";
 
 const Admin = () => {
-  const token = useRecoilValue(userDataState).token;
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const navigateTo = useNavigate();
+  const token: string | null = useRecoilValue(userDataState).token;
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const navigateTo: NavigateFunction = useNavigate();
   const setToken = useSetRecoilState(tokenState);
   const setUserData = useSetRecoilState(userDataState);
 

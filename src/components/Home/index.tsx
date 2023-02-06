@@ -18,7 +18,7 @@ import styles from "./styles.module.scss";
 
 const Home = () => {
   const firstname = useRecoilValue(userDataState).firstname;
-  const [value, onChange] = useState(new Date());
+  const [value, onChange] = useState<Date>(new Date());
 
   return (
     <div className={styles.__home}>

@@ -15,8 +15,8 @@ import cross from "../../assets/images/icon/cross.svg";
 
 const Employees = () => {
   const token = useRecoilValue(userDataState).token;
-  const [employees, setEmployees] = useState([]);
-  const [refresh, setRefresh] = useState(false);
+  const [employees, setEmployees] = useState<Array<any>>([]);
+  const [refresh, setRefresh] = useState<boolean>(false);
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_BACKEND_URL}/employees`, {

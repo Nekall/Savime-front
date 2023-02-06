@@ -28,20 +28,20 @@ interface DocumentsProps {
 const Documents = ({ editMode }: DocumentsProps) => {
   const userData = useRecoilValue(userDataState);
   const { role, id, token } = userData;
-  const [documents, setDocuments] = useState([]);
+  const [documents, setDocuments] = useState<Array<any>>([]);
   const [docId, setDocId] = useState(0);
-  const [attestation, setAttestation] = useState<any>(undefined);
+  const [attestation, setAttestation] = useState<undefined | object | any>(undefined);
   const [contract, setContract] = useState<any>(undefined);
-  const [payslip, setPayslip] = useState<any>([]);
-  const [modalUpdate, setModalUpdate] = useState(false);
-  const [refresh, setRefresh] = useState(false);
+  const [payslip, setPayslip] = useState<Array<any>>([]);
+  const [modalUpdate, setModalUpdate] = useState<boolean>(false);
+  const [refresh, setRefresh] = useState<boolean>(false);
   const [modalPreview, setModalPreview] = useState(false);
-  const [preview, setPreview] = useState("");
+  const [preview, setPreview] = useState<string>("");
   const [modalAddDoc, setModalAddDoc] = useState(false);
-  const [newDocType, setNewDocType] = useState("");
-  const [newDocName, setNewDocName] = useState("");
-  const [newDocFile, setNewDocFile] = useState<any>(null);
-  const [employees, setEmployees] = useState<any>([]);
+  const [newDocType, setNewDocType] = useState<string>("");
+  const [newDocName, setNewDocName] = useState<string>("");
+  const [newDocFile, setNewDocFile] = useState<null | Blob | any>(null);
+  const [employees, setEmployees] = useState<Array<any>>([]);
   const [selectedEmployee, setSelectedEmployee] = useState<any>("");
 
   const [onLoading, setOnLoading] = useState(false);

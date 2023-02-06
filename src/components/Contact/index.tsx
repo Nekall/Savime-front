@@ -10,7 +10,7 @@ import styles from "./styles.module.scss";
 
 const Contact = () => {
   const { token, firstname, lastname } = useRecoilValue(userDataState);
-  const [managers, setManagers] = useState<any>([]);
+  const [managers, setManagers] = useState<Array<any>>([]);
   const [message, setMessage] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [size, setSize] = useState<number>(0);

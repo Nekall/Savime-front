@@ -22,12 +22,12 @@ interface CompanyInfoProps {
 }
 
 const CompanyInfo = ({ editMode }: CompanyInfoProps) => {
-  const [teamInfo, setTeamInfo] = useState<any>([]);
+  const [teamInfo, setTeamInfo] = useState<Array<any>>([]);
   const [compagnyInfo, setCompagnyInfo] = useState<any>([]);
-  const [modalAddInfo, setModalAddInfo] = useState(false);
-  const [newNameInfo, setNewNameInfo] = useState("");
-  const [newValueInfo, setNewValueInfo] = useState("");
-  const [refresh, setRefresh] = useState(false);
+  const [modalAddInfo, setModalAddInfo] = useState<boolean>(false);
+  const [newNameInfo, setNewNameInfo] = useState<string>("");
+  const [newValueInfo, setNewValueInfo] = useState<string>("");
+  const [refresh, setRefresh] = useState<boolean>(false);
   const token = useRecoilValue(userDataState).token;
 
   useEffect(() => {

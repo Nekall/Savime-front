@@ -4,7 +4,12 @@ import styles from "./styles.module.scss";
 // Assets
 import cross from "../../assets/images/icon/cross.svg";
 
-const Modal = ({ setModalOpen, children }: any) => {
+interface ModalProps {
+  setModalOpen: (value: boolean) => void;
+  children: React.ReactNode;
+}
+
+const Modal = ({ setModalOpen, children }: ModalProps) => {
   return (
     <div className={styles.__modal}>
       <div className={styles.__content}>
