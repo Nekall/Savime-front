@@ -14,9 +14,9 @@ const Banner = ({ image, alt, orientation, title, content, anchor }: Props) => {
   return (
     <div
       id={anchor}
-      className={`${styles.__banner} ${
+      className={`${
         orientation === "right" ? styles.__right : ""
-      }`}
+      } ${styles.__banner}`}
     >
       <div className={styles.__content}>
         <div className={styles.__text}>

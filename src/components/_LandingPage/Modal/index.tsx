@@ -78,6 +78,7 @@ const Modal = ({ setModalIsOpen }: ModalProps) => {
           placeholder={"Prénom"}
           value={firstname}
           onChange={(e: any) => setFirstname(e.currentTarget.value)}
+          customClass={styles.__custom_inputs}
         />
         <Input
           icon={avatar}
@@ -86,6 +87,7 @@ const Modal = ({ setModalIsOpen }: ModalProps) => {
           placeholder={"Nom"}
           value={lastname}
           onChange={(e: any) => setLastname(e.currentTarget.value)}
+          customClass={styles.__custom_inputs}
         />
         <Input
           icon={envelope}
@@ -93,6 +95,7 @@ const Modal = ({ setModalIsOpen }: ModalProps) => {
           placeholder={"email@email.com"}
           value={email}
           onChange={(e: any) => setEmail(e.currentTarget.value)}
+          customClass={styles.__custom_inputs}
         />
         <Input
           type={"textArea"}
@@ -101,6 +104,7 @@ const Modal = ({ setModalIsOpen }: ModalProps) => {
           }
           value={message}
           onChange={(e: any) => setMessage(e.currentTarget.value)}
+          customClass={styles.__custom_inputs}
         />
         <Input onClick={() => sendMail()} type={"submit"} value={"Envoyer"} />
       </div>

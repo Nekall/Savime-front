@@ -62,7 +62,7 @@ const ForgotPassword = () => {
           />
           <Input
             type={"submit"}
-            value={"Demande de réinitialisation de mon mot de passe"}
+            value={"Demande de réinitialisation"}
           />
           <Link name={"Retour à l'accueil"} target={"/"} />
         </form>

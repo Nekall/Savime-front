@@ -11,7 +11,7 @@
 
     .__calendar {
         border-radius: 8px;
-        width: 100% !important;
+        width: 100% !important; // force react-calendar to be 100% width
         min-height: 350px;
         color: #000000;
     }

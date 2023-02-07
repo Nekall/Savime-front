@@ -24,6 +24,7 @@ interface Props {
   togglePasswordVisibility?: boolean;
   accept?: string;
   disabled?: boolean;
+  customClass?: string;
 }
 
 const Input = ({
@@ -43,6 +44,7 @@ const Input = ({
   togglePasswordVisibility,
   accept,
   disabled,
+  customClass,
 }: Props) => {
   const [isVisible, setIsVisible] = useState(false);
   minlength = minlength ? minlength : 0;
@@ -53,7 +55,7 @@ const Input = ({
   };
 
   return (
-    <div className={styles.__input}>
+    <div className={`${customClass ? customClass : ""} ${styles.__input}`}>
       {type !== "submit" && type !== "textArea" && icon && (
         <div className={`${styles.__icon} ${error ? styles.__red : ""}`}>
           <img src={icon} alt={alt} /> {icon && <>|</>}
@@ -73,7 +75,7 @@ const Input = ({
                 ? styles.__submit
                 : icon
                 ? styles.__field
-                : `${styles.__field} ${styles.__no_icon}`
+                : `${styles.__no_icon} ${styles.__field}`
             }
             type={isVisible ? "text" : type}
             placeholder={placeholder}

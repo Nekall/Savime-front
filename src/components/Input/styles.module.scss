@@ -31,10 +31,6 @@
         }
     }
 
-    .__no_icon {
-        padding: 10px !important;
-    }
-
     .__field {
         background-color: $primary-bg;
         color: #fff;
@@ -46,6 +42,10 @@
         height: 30px;
         font-size: 18px;
         outline: none;
+    }
+
+    .__no_icon {
+        padding: 10px;
     }
 
     .__submit {
@@ -89,7 +89,7 @@
 
 
         .__field {
-            width: 210px !important;
+            width: 210px;
             height: 25px;
             font-size: 16px;
         }
