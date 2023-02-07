@@ -281,7 +281,6 @@ const Documents = ({ editMode }: DocumentsProps) => {
         <Modal setModalOpen={setModalAddDoc}>
           {!onLoading ? (
             <div className={styles.__new_document}>
-              <br />
               <h3>Ajouter un document</h3>
               <form onSubmit={(e) => addDocument(e)}>
                 <label>Nom</label>
@@ -499,7 +498,6 @@ const Documents = ({ editMode }: DocumentsProps) => {
               veuillez contacter l'équipe RH.
             </p>
           )}
-          <br />
           <h2>Bulletins de salaires :</h2>
           <table>
             <tbody>

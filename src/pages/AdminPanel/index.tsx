@@ -230,7 +230,6 @@ const AdminPanel = () => {
       {modalEdit && currentElement && (
         <Modal setModalOpen={setModalEdit}>
           <div className={styles.__edit_modal}>
-            <br />
             <form onSubmit={(e) => updateElement(e)}>
               {Object.entries(currentElement).map(
                 (element: any, index: number) => {
@@ -298,7 +297,6 @@ const AdminPanel = () => {
                             <option value="contract">Contrat</option>
                           </select>
                         )}
-                        <br />
                       </div>
                     )
                   );
@@ -312,7 +310,6 @@ const AdminPanel = () => {
       {modalCreateManager && (
         <Modal setModalOpen={setModalCreateManager}>
           <div className={styles.__create_manager_modal}>
-            <br />
             <form onSubmit={(e) => createManager(e)}>
               {Object.entries(newManager).map((element: any, index: number) => {
                 return (

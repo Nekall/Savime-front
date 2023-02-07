@@ -120,8 +120,9 @@ const Signup = () => {
           />
           <p className={styles.__pwd_details}>
             ⓘ *Le mot de passe doit contenir au moins 8 caractères,
-            <br /> une majuscule, une minuscule, un chiffre et un caractère
-            spécial.
+          </p>
+          <p className={styles.__pwd_details}>
+            une majuscule, une minuscule, un chiffre et un caractère spécial.
           </p>
           <Input type={"submit"} value={"Inscription"} />
           <Link name={"J'ai déjà un compte !"} target={"/connexion"} />

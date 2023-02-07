@@ -26,7 +26,7 @@ const Home = () => {
       <div className={styles.__multi_sections}>
         <div>
           <WelcomeBanner />
-          <br />
+          
           <UsefulInfo />
         </div>
         <Calendar

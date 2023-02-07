@@ -82,8 +82,9 @@ const ResetPassword = () => {
           />
           <p className={styles.__pwd_details}>
             ⓘ *Le mot de passe doit contenir au moins 8 caractères,
-            <br /> une majuscule, une minuscule, un chiffre et un caractère
-            spécial.
+          </p>
+          <p className={styles.__pwd_details}>
+            une majuscule, une minuscule, un chiffre et un caractère spécial.
           </p>
           <Input type={"submit"} value={"Réinitialiser mon mot de passe"} />
           <Link name={"Retour à l'accueil"} target={"/"} />

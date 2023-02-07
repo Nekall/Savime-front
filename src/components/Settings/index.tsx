@@ -201,14 +201,15 @@ const Settings = () => {
               onChange={(e: any) => processProfilePicture(e)}
             />
             <p className={styles.__img_details}>
-              ⓘ Il est conseillé d'utiliser une image carrée <br />
+              ⓘ Il est conseillé d'utiliser une image carrée
+            </p>
+            <p className={styles.__img_details}>
               si vous ne voulez pas subir une deformation de votre photo.
             </p>
           </>
         )}
         <Input type={"submit"} value={"Sauvegarder"} />
       </form>
-      <br />
       <section className={styles.__danger_zone}>
         <hr />
         <h2>Danger Zone</h2>
@@ -240,8 +241,9 @@ const Settings = () => {
           />
           <p className={styles.__pwd_details}>
             ⓘ *Le mot de passe doit contenir au moins 8 caractères,
-            <br /> une majuscule, une minuscule, un chiffre et un caractère
-            spécial.
+          </p>
+          <p className={styles.__pwd_details}>
+            une majuscule, une minuscule, un chiffre et un caractère spécial.
           </p>
           <Input type={"submit"} value={"Sauvegarder"} />
         </form>

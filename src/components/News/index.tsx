@@ -157,7 +157,6 @@ const News = ({ editMode }: NewsProps) => {
       {modalAddNews && (
         <Modal setModalOpen={setModalAddNews}>
           <div className={styles.__new_actuality}>
-            <br />
             <h3>Ajouter une actualité</h3>
             <form onSubmit={(e) => addNews(e)}>
               <input
@@ -173,7 +172,6 @@ const News = ({ editMode }: NewsProps) => {
                 onChange={(e) => setNewContent(e.target.value)}
                 required
               />
-              <br />
               <input type="submit" value="Ajouter" />
             </form>
           </div>
@@ -203,7 +201,6 @@ const News = ({ editMode }: NewsProps) => {
             {modalEditNews && (
               <Modal setModalOpen={setModalEditNews}>
                 <div className={styles.__new_actuality}>
-                  <br />
                   <h3>Editer une actualité</h3>
                   <form onSubmit={(e) => editNews(e)}>
                     <input
@@ -219,7 +216,6 @@ const News = ({ editMode }: NewsProps) => {
                       onChange={(e) => setNewContent(e.target.value)}
                       required
                     />
-                    <br />
                     <input type="submit" value="Sauvegarder" />
                   </form>
                 </div>
@@ -240,7 +236,6 @@ const News = ({ editMode }: NewsProps) => {
       {modalReadNews && (
         <Modal setModalOpen={setModalReadNews}>
           <div className={styles.__read_actuality}>
-            <br />
             <h3>{selectedNews.title}</h3>
             <p>
               Publié le{" "}

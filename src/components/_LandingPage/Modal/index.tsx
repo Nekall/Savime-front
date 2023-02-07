@@ -69,7 +69,6 @@ const Modal = ({ setModalIsOpen }: ModalProps) => {
         >
           <img src={cross} alt="Close" />
         </button>
-        <br />
         <h1>Formulaire de contact</h1>
         <Input
           icon={avatar}

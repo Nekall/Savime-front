@@ -9,13 +9,13 @@ import trash from "../../assets/images/icon/trash.svg";
 
 // Components
 import Input from "../../components/Input";
+import Modal from "../Modal";
 
 // Atoms
 import { userDataState } from "../../atoms/user";
 
 // Styles
 import styles from "./styles.module.scss";
-import Modal from "../Modal";
 
 interface CompanyInfoProps {
   editMode?: boolean;
@@ -179,7 +179,6 @@ const CompanyInfo = ({ editMode }: CompanyInfoProps) => {
         {modalAddInfo && (
           <Modal setModalOpen={setModalAddInfo}>
             <div className={styles.__new_actuality}>
-              <br />
               <h3>Ajouter une information</h3>
               <form onSubmit={(e) => addCompanyInfo(e)}>
                 <label>Nom</label>
@@ -267,7 +266,6 @@ const CompanyInfo = ({ editMode }: CompanyInfoProps) => {
           })}
         </tbody>
       </table>
-      <br />
       <h3>Equipe RH</h3>
       <div className={styles.__managers}>
         {teamInfo.map(({ firstname, lastname, email, phone, service }: any) => {

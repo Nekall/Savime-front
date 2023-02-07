@@ -85,7 +85,6 @@ const Contact = () => {
           }}
           className={size > 1000 ? styles.__red : ""}
         ></textarea>
-        <br />
         <select value={email} onChange={(e) => setEmail(e.target.value)}>
           <option value="" selected disabled hidden defaultChecked>
             Choisir un·e manager
