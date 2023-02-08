@@ -136,7 +136,11 @@ const AdminPanel = () => {
           toast.success("L'élément a bien été mis à jour.");
         } else {
           console.error(data);
-          toast.error("Impossible de mettre à jour l'élément.");
+          if(data.message){
+            toast.error(data.message);
+          }else{
+            toast.error("Impossible de mettre à jour l'élément.");
+          }
         }
       })
       .catch((error) => {

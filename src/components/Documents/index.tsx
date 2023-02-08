@@ -125,7 +125,7 @@ const Documents = ({ editMode }: DocumentsProps) => {
 
   const updateDocument = (e: any, document_id: number) => {
     e.preventDefault();
-
+    setOnLoading(true);
     const patchDocument = async (doc: any) => {
       fetch(`${process.env.REACT_APP_BACKEND_URL}/documents/${document_id}`, {
         method: "PATCH",
@@ -148,9 +148,11 @@ const Documents = ({ editMode }: DocumentsProps) => {
             console.error(data);
             toast.error("Impossible de mettre à jour le document.");
           }
+          setOnLoading(false);
         })
         .catch((error) => {
           console.error(error);
+          setOnLoading(false);
           toast.error("Une erreur est survenue. Contactez support@savime.tech");
         });
     };
@@ -267,6 +269,29 @@ const Documents = ({ editMode }: DocumentsProps) => {
     };
   };
 
+  const modalVirusScan = (
+    <div className={styles.__new_document}>
+      <h5>Un scan antivirus est en cours, veuillez patienter...</h5>
+      <div className={styles.__animated_dots}>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <p className={styles.__loading}>
+        par{" "}
+        <a
+          href="https://www.virustotal.com"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          VirusTotal
+        </a>
+        <img src={virustotal} alt="virustotal logo" />
+      </p>
+    </div>
+  );
+
   return (
     <>
       {modalPreview && (
@@ -327,26 +352,7 @@ const Documents = ({ editMode }: DocumentsProps) => {
               </form>
             </div>
           ) : (
-            <div className={styles.__new_document}>
-              <h5>Un scan antivirus est en cours, veuillez patienter...</h5>
-              <div className={styles.__animated_dots}>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-              </div>
-              <p className={styles.__loading}>
-                par{" "}
-                <a
-                  href="https://www.virustotal.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  VirusTotal
-                </a>
-                <img src={virustotal} alt="virustotal logo" />
-              </p>
-            </div>
+            modalVirusScan
           )}
         </Modal>
       )}
@@ -431,24 +437,28 @@ const Documents = ({ editMode }: DocumentsProps) => {
           </table>
           {modalUpdate && (
             <Modal setModalOpen={setModalUpdate}>
-              <div className={styles.__update_document}>
-                <h2>Mettre à jour le document</h2>
-                <form onSubmit={(e) => updateDocument(e, docId)}>
-                  <label>Nom du document</label>
-                  <Input
-                    required
-                    type="text"
-                    value={newDocName}
-                    onChange={(e: any) => setNewDocName(e.target.value)}
-                  />
-                  <Input
-                    onChange={(e: any) => setNewDocFile(e.target.files[0])}
-                    type="file"
-                    accept="application/pdf"
-                  />
-                  <Input type="submit" value="Mettre à jour" />
-                </form>
-              </div>
+              {!onLoading ? (
+                <div className={styles.__update_document}>
+                  <h2>Mettre à jour le document</h2>
+                  <form onSubmit={(e) => updateDocument(e, docId)}>
+                    <label>Nom du document</label>
+                    <Input
+                      required
+                      type="text"
+                      value={newDocName}
+                      onChange={(e: any) => setNewDocName(e.target.value)}
+                    />
+                    <Input
+                      onChange={(e: any) => setNewDocFile(e.target.files[0])}
+                      type="file"
+                      accept="application/pdf"
+                    />
+                    <Input type="submit" value="Mettre à jour" />
+                  </form>
+                </div>
+              ) : (
+                modalVirusScan
+              )}
             </Modal>
           )}
         </div>
