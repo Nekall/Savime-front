@@ -9,10 +9,10 @@ import { userDataState } from "../../atoms/user";
 import styles from "./styles.module.scss";
 
 const Contact = () => {
-  const { token, firstname, lastname } = useRecoilValue(userDataState);
+  const { token, firstname, lastname, email } = useRecoilValue(userDataState);
   const [managers, setManagers] = useState<Array<any>>([]);
   const [message, setMessage] = useState<string>("");
-  const [email, setEmail] = useState<string>("");
+  const [emailManager, setEmailManager] = useState<string>("");
   const [size, setSize] = useState<number>(0);
 
   useEffect(() => {
@@ -43,7 +43,7 @@ const Contact = () => {
 
     if (size > 1000) return toast.info("Votre message est trop long");
 
-    fetch(`${process.env.REACT_APP_BACKEND_URL}/contact`, {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/internal-contact`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -54,6 +54,7 @@ const Contact = () => {
         lastname,
         email,
         message,
+        emailManager,
       }),
     })
       .then((response) => response.json())
@@ -85,7 +86,7 @@ const Contact = () => {
           }}
           className={size > 1000 ? styles.__red : ""}
         ></textarea>
-        <select value={email} onChange={(e) => setEmail(e.target.value)}>
+        <select value={emailManager} onChange={(e) => setEmailManager(e.target.value)}>
           <option value="" selected disabled hidden defaultChecked>
             Choisir un·e manager
           </option>
@@ -97,7 +98,7 @@ const Contact = () => {
           ))}
         </select>
         <input
-          disabled={size <= 1000 && email !== "" ? false : true}
+          disabled={size > 1 && size <= 1000 && emailManager !== "" ? false : true}
           type="submit"
           value="Envoyer"
         />
