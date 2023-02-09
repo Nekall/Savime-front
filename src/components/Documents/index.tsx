@@ -297,7 +297,6 @@ const Documents = ({ editMode }: DocumentsProps) => {
       {modalPreview && (
         <Modal setModalOpen={setModalPreview}>
           <div className={styles.__preview_document}>
-            <h2>Aperçu</h2>
             <embed type="application/pdf" src={preview} />
           </div>
         </Modal>

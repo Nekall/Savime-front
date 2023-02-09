@@ -152,7 +152,6 @@ const Settings = () => {
 
   return (
     <div className={styles.__settings}>
-      <h1>Settings</h1>
       <form onSubmit={(e) => updateData(e)}>
         <Input
           icon={avatar}
