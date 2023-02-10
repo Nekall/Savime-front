@@ -12,7 +12,7 @@ const Introduction = ({ title, lead, content, anchor }: Props) => {
   return (
     <div id={anchor} className={styles.__introduction}>
       <h3>{title}</h3>
-      <h5>{lead}</h5>
+      <h4>{lead}</h4>
       <p>{content}</p>
     </div>
   );
