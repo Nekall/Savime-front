@@ -16,9 +16,13 @@ import UsefulInfo from "../UsefulInfo";
 // Style
 import styles from "./styles.module.scss";
 
+// Types
+type ValuePiece = Date | null;
+type Value = ValuePiece | [ValuePiece, ValuePiece];
+
 const Home = () => {
   const firstname = useRecoilValue(userDataState).firstname;
-  const [value, onChange] = useState<Date>(new Date());
+  const [value, onChange] = useState<Value>(new Date());
 
   return (
     <div className={styles.__home}>
@@ -32,7 +36,7 @@ const Home = () => {
         <Calendar
           className={styles.__calendar}
           locale={"fr-FR"}
-          //onChange={onChange}
+          onChange={onChange}
           value={value}
         />
         <News />

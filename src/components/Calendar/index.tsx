@@ -4,8 +4,12 @@ import { Calendar as ReactCalendar } from "react-calendar";
 // Styles
 import styles from "./styles.module.scss";
 
+// Types
+type ValuePiece = Date | null;
+type Value = ValuePiece | [ValuePiece, ValuePiece];
+
 const Calendar = () => {
-  const [value, onChange] = useState(new Date());
+  const [value, onChange] = useState<Value>(new Date());
 
   return (
     <>
@@ -13,7 +17,7 @@ const Calendar = () => {
       <ReactCalendar
         className={styles.__calendar}
         locale={"fr-FR"}
-        //onChange={onChange}
+        onChange={onChange}
         value={value}
       />
     </>
