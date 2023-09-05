@@ -32,7 +32,7 @@ const Home = () => {
         <Calendar
           className={styles.__calendar}
           locale={"fr-FR"}
-          onChange={onChange}
+          //onChange={onChange}
           value={value}
         />
         <News />

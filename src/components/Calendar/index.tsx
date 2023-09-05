@@ -13,7 +13,7 @@ const Calendar = () => {
       <ReactCalendar
         className={styles.__calendar}
         locale={"fr-FR"}
-        onChange={onChange}
+        //onChange={onChange}
         value={value}
       />
     </>
