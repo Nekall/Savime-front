@@ -1,4 +1,6 @@
 <img src="https://i.goopics.net/03v8if.png" alt="logo savime" style="width:200px;"/>
+
+⚠ **BDD off au 24/02/2024** ⚠
       
 ![Savime Version](https://img.shields.io/badge/version-v0.0.1-white)
 
