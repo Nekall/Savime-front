@@ -74,7 +74,7 @@ const Newsletter = ({ title, lead, content, anchor }: Props) => {
             alt="Paper Plane"
           />
         ) : (
-          <button className={styles.__send_button} onClick={() => sendMail()}>
+          <button disabled className={styles.__send_button} onClick={() => sendMail()}>
             Envoyer
           </button>
         )}

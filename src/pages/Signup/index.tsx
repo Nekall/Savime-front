@@ -7,6 +7,7 @@ import Wrapper from "../../components/Wrapper";
 import Header from "../../components/Header";
 import Input from "../../components/Input";
 import Link from "../../components/Link";
+import Tooltip from "../../components/Tooltip";
 
 // Assets
 import avatar from "../../assets/images/icon/avatar.svg";
@@ -58,6 +59,7 @@ const Signup = () => {
 
   return (
     <div className={styles.__signup}>
+      <Tooltip />
       <Header />
       <Wrapper position={"left"}>
         <img className={styles.__avatar} src={avatar} alt="avatar" />
@@ -124,7 +126,7 @@ const Signup = () => {
           <p className={styles.__pwd_details}>
             une majuscule, une minuscule, un chiffre et un caractère spécial.
           </p>
-          <Input type={"submit"} value={"Inscription"} />
+          <Input type={"submit"} value={"Inscription"} disabled />
           <Link name={"J'ai déjà un compte !"} target={"/connexion"} />
         </form>
       </Wrapper>

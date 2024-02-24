@@ -16,6 +16,7 @@ import Wrapper from "../../components/Wrapper";
 import Header from "../../components/Header";
 import Input from "../../components/Input";
 import Link from "../../components/Link";
+import Tooltip from "../../components/Tooltip";
 
 // Atoms
 import { tokenState, userDataState } from "../../atoms/user";
@@ -83,6 +84,7 @@ const Login = () => {
 
   return (
     <div className={styles.__login}>
+      <Tooltip />
       <Header />
       <Wrapper position={"right"}>
         <img className={styles.__avatar} src={avatar} alt="avatar" />
@@ -114,7 +116,7 @@ const Login = () => {
             />
             <label htmlFor="switch"></label>
           </div>
-          <Input type={"submit"} value={"Connexion"} />
+          <Input type={"submit"} value={"Connexion"} disabled />
           <Link name={"Pas encore de compte ?"} target={"/inscription"} />
           <Link
             name={"J'ai perdu mon mot de passe"}

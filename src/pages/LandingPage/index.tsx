@@ -7,6 +7,7 @@ import Navbar from "../../components/_LandingPage/Navbar";
 import Footer from "../../components/_LandingPage/Footer";
 import Banner from "../../components/_LandingPage/Banner";
 import Hero from "../../components/_LandingPage/Hero";
+import Tooltip from "../../components/Tooltip";
 
 import banner1 from "../../assets/images/landingPage/brooke-cagle-unsplash.jpg";
 import banner2 from "../../assets/images/landingPage/john-schnobrich-unsplash.jpg";
@@ -21,6 +22,7 @@ import styles from "../../styles/pages/landing-page.module.scss";
 const LandingPage = () => {
   return (
     <section className={styles.__landing_page}>
+      <Tooltip />
       <Navbar
         links={[
           { target: "#introduction", name: "Introduction" },
