@@ -1,0 +1,17 @@
+.__tooltip {
+    border: #000 3px solid;
+    position: sticky;
+    top: 10px;
+    float: right;
+    margin-right: 10px;
+    margin-bottom: -110px;
+    height: 110px;
+    width: 200px;
+    color: #000;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 10px;
+    font-weight: bold;
+    z-index: 9999;
+    user-select: none;
+}

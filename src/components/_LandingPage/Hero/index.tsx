@@ -28,7 +28,7 @@ const Hero = ({ image, alt, button, title }: Props) => {
         </div>
         <div className={styles.__button}>
           <div>
-            <button onClick={() => setModalIsOpen(true)}>{button}</button>
+            <button disabled onClick={() => setModalIsOpen(true)}>{button}</button>
           </div>
         </div>
       </div>
